@@ -22,11 +22,7 @@ export default class NavBar extends Component {
                             Gomas
                         </Link>
                     </li>
-                    <li className="titulo nav-item ml-5">
-                        <Link to="/" className="nav-link">
-                            El calabres neumaticos
-                        </Link>
-                    </li>
+                   
                 </ul>
 
                 <Link to="/cart" className="ml-auto">
