@@ -10,9 +10,11 @@ export default class PresentationCard extends Component {
                 <div className="py-5">
                     <div className="container">
                         <div className="row">
-                            <div class="rowContainer col-sm">
-                                <h2 className="detailsTitle">{this.props.title}</h2>
-                                <p className="cardDescription">{this.props.description}</p>
+                            <div class="detailsContainer rowContainer col-sm">
+                                <div className="cardDescription">
+                                    <h2 className="detailsTitle">{this.props.title}</h2>
+                                    <p>{this.props.description}</p>
+                                </div>
                             </div>
                             <div class="imgContainer col-sm">
                                 <img class="img-fluid" src={this.props.image} alt="portada" />
@@ -28,18 +30,26 @@ export default class PresentationCard extends Component {
 }
 
 const CardContainer = styled.div`   
-
+    
     .imgContainer{          
-        width: 35rem;
+        width: 25rem;
         margin: 0 auto;
     }
     .rowContainer{         
-        float:right;
+        bottom: 2rem;
         text-align:center;      
 
     }
+    .detailsContainer{
+        
+        text-align: center;
+        height:15rem;
+        top: 5rem;       
+      
+    }
     .cardDescription{             
-        margin-top: 7rem;
-        font-family: Times New Roman;
+        height: 10rem;
+        font-family: Times New Roman;  
+         
     }
 `;

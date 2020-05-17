@@ -37,5 +37,8 @@ const CardContainer = styled.div`
         text-align:center;      
 
     }
+    .py-5{
+        padding-bottom: 0rem!important;
+    }
   
 `;
