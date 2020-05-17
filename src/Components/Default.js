@@ -9,13 +9,13 @@ export default class Default extends Component {
                     <div className="col-10 mx-auto text-center text-title text-ippercase pt-5">
                         <h1 className="display-3">404</h1>
                         <h1>error</h1>
-                        <h2>page not found</h2>
-                        <h3>the requested URL
+                        <h2>no se encontro la pagina o se encuentra en mantenimiento</h2>
+                        <h3>URL solicitada 
                         <span className="text-danger">
                                 {this.props.location.pathname}
                             </span>
                             {" "}
-                         was not found
+                         inexistente
                         </h3>
                     </div>
                 </div>

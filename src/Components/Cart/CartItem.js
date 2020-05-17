@@ -11,11 +11,11 @@ export default function CartItem({ item, value }) {
                     className="img.fluid" alt="product" />
             </div>
             <div className="col-10 mx-auto col-lg-2">
-                <span className="d-lg-none">product : </span>
+                <span className="d-lg-none">producto : </span>
                 {title}
             </div>
             <div className="col-10 mx-auto col-lg-2">
-                <span className="d-lg-none">price : </span>
+                <span className="d-lg-none">precio : </span>
                 {price}
             </div>
             <div className="col-10 mx-auto col-lg-2 my-2 my-lg-0">
@@ -40,7 +40,7 @@ export default function CartItem({ item, value }) {
                 </div>
             </div>
             <div className="col-10 mx-auto col-lg-2">
-                <strong>item total : ${total}</strong>
+                <strong>producto total : ${total}</strong>
             </div>
         </div>
     )

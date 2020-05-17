@@ -11,7 +11,7 @@ export default function CartTotals({ value }) {
                         <Link to="/">
                             <button className="btn btn-outline-danger text-uppercase mb-3 px-5" 
                                     type="button" onClick={()=>clearCart()}>
-                                clear cart
+                                vaciar carrito
                             </button>
                         </Link>
                         <h5>
@@ -22,7 +22,7 @@ export default function CartTotals({ value }) {
                         </h5>
                         <h5>
                             <span className="text.title">
-                                tax :
+                                impuestos :
                             </span>
                             <strong>$ {cartTax}</strong>
                         </h5>

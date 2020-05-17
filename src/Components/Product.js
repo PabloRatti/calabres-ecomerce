@@ -39,7 +39,7 @@ export default class Product extends Component {
                         <p className="align-self-center mb-0">
                             {title}
                         </p>
-                        <div className="text-blue font-italic mb-0">
+                        <div className="price text-blue font-italic mb-0">
                             <span className="mr-1">$</span>
                             {price}
                         </div>
@@ -61,9 +61,13 @@ Product.propTypes = {
 };
 
 const ProductWrapper = styled.div`
+.price{
+    margin-left: 7rem !important;
+}
 .card{
     border-color: transparent;
     transition:all 1s linear;
+    height: 100%
 }
 .card-footer{
     background:transparent;
@@ -115,4 +119,6 @@ const ProductWrapper = styled.div`
     color:var(--mainBlue);
     cursor: pointer;
 }
+
+
 `;
