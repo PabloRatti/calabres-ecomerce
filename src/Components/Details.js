@@ -42,13 +42,21 @@ export default class Details extends Component {
                                         informacion del producto:
                                     </p>
                                     <p className="text-muted lead">
-                                        {info}
+                                        <ul>
+                                            <li>Tipo de vehiculo : </li>
+                                            <li>Ancho : </li>
+                                            <li>Perfil : </li>
+                                            <li>Rodado : </li>
+                                            <li>Marca : </li>
+                                            <li>Modelo : </li>
+                                            <li>Dato : </li>
+                                        </ul>
                                     </p>
                                     {/**Buttons */}
                                     <div>
-                                        <Link to="/">
+                                        <Link to="/llantas">
                                             <ButtonContainer>
-                                                productos
+                                                tienda
                                             </ButtonContainer >
                                         </Link>
                                         <ButtonContainer cart disabled={inCart ? true : false} onClick={() => {

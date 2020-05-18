@@ -9,7 +9,7 @@ export default class HomePage extends Component {
     render() {
         return (
             <HomeContainer>
-                <Carousel />
+                <Carousel className="carousel"/>
                 <PresentationCard image={cardsData[0].img} title={cardsData[0].title} description={cardsData[0].description} />
                 <ImagesGrid image="img/marcas.jpg" image2="img/marcas2.jpg"/>
          
@@ -33,7 +33,9 @@ const HomeContainer = styled.div`
             float:left;
             padding: 2rem;
             max-width: 100%;
-            max-height: 25rem;        
+            max-height: 35rem;        
             display: block; /* remove extra space below image */
     }
+
+    .carousel{}
 `;

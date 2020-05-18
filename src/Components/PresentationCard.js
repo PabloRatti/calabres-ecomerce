@@ -30,26 +30,22 @@ export default class PresentationCard extends Component {
 }
 
 const CardContainer = styled.div`   
-    
+
     .imgContainer{          
         width: 25rem;
         margin: 0 auto;
     }
     .rowContainer{         
-        bottom: 2rem;
-        text-align:center;      
-
+        float:right;
+        text-align:center;   
     }
-    .detailsContainer{
-        
+    .detailsContainer{    
         text-align: center;
-        height:15rem;
-        top: 5rem;       
-      
+        height:15rem;          
     }
     .cardDescription{             
         height: 10rem;
-        font-family: Times New Roman;  
-         
+        font-family: Times New Roman; 
+        margin-top: 2rem;  
     }
 `;
