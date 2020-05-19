@@ -3,7 +3,7 @@ import Product from './Product';
 import Title from './Title';
 import { ProductConsumer } from '../Context';
 import FilterBar from './FilterBar';
-import {storeProducts} from '../data';
+import { storeProducts } from '../data';
 
 export default class ProductList extends Component {
     constructor(props) {
@@ -21,9 +21,9 @@ export default class ProductList extends Component {
             return item.price <= maxPrice;
         });
     }
-    
+
     filterByBrand = (products, brand) => {
-        console.log('In filter by brand , returning' + brand)
+        console.log('In filter by brand , returning ' + brand)
         return products.filter((item) => {
             return item.company == brand;
         });
@@ -43,26 +43,29 @@ export default class ProductList extends Component {
             products = this.filterByWidth(products, this.state.widthFilter);
         }
         if (this.state.brandFilter) {
-            products = this.filterByWidth(products, this.state.brandFilter);
+            products = this.filterByBrand(products, this.state.brandFilter);
+            console.log('Hay brand filter!')
         }
         return products;
     }
 
     handleFilter = (tipo, valor) => {
-        console.log('HandleFilter : '+tipo +'Valor: '+valor)
-        let products = this.state.products;  
+        console.log('HandleFilter : ' + tipo + 'Valor: ' + valor)
+        let products = this.state.products;
+        console.log('Tenemos sin filtrar' + products);
+        let productsFiltered = [];
         switch (tipo) {
-            case 'marcas':                        
-                this.filterByBrand(products,valor);
-                console.log('Filtrando marcas'+this.state.brandFilter);
+            case 'marcas':
+                this.setState({ brandFilter : valor})
                 break;
             case 'medida':
-                this.filterByWidth(products,valor);
-                console.log('Filtrando medidas'+this.state.widthFilter);
+                this.setState({ widthFilter : valor })              
                 break;
+            case 'reset':
+                this.setState({ brandFilter: '', widthFilter:'',priceFilter: ''})
+            break;
         }
-
-        
+               
     }
 
     render() {
@@ -72,12 +75,12 @@ export default class ProductList extends Component {
                 <FilterBar handleFilter={this.handleFilter} />
                 <div className="py-5">
                     <div className="container">
-                        <Title name="Nuestros" title="productos" />
+                        <Title name="Neumaticos" title={this.state.brandFilter} />
                         <div className="row">
                             <ProductConsumer>
-                                {(value) => {
-                                   
-                                    return value.products.map(product => {
+                                {(value) => {                                    
+                                    let products = this.applyFilters(value.products);                                   
+                                    return products.map(product => {
                                         return <Product key={product.id} product={product} />
                                     })
                                 }}

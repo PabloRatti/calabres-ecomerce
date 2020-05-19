@@ -9,7 +9,7 @@ import Default from './Components/Default';
 import HomePage from './Components/HomePage';
 import { Switch,Route } from 'react-router-dom';
 import Modal from './Components/Modal';
-
+import Footer from './Components/Footer';
 function App() {
   return (
     <React.Fragment>
@@ -23,6 +23,7 @@ function App() {
        
       </Switch>       
      <Modal />
+      <Footer />
     </React.Fragment>
   );
 }

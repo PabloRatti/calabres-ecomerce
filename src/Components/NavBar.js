@@ -19,13 +19,20 @@ export default class NavBar extends Component {
                     </li>
                     <li className="nav-item ml-5">
                         <Link to="/gomas" className="nav-link">
-                            Gomas
+                            Neumaticos
                         </Link>
                     </li>
-                   
-                </ul>
+                    <li className="nav-item ml-5">
+                        <Link to="/servicios" className="nav-link">
+                            Servicios
+                        </Link>
+                    </li>
+                    
 
+                </ul>
+                
                 <Link to="/cart" className="ml-auto">
+                   
                     <ButtonContainer>
                         <span className="mr-2">
                             <i className="fas fa-cart-plus" />
@@ -40,10 +47,28 @@ export default class NavBar extends Component {
 
 const NavWrapper = styled.nav`
 background: var(--mainBlue);
+font-family: Trebuchet MS, sans-serif;
+.ahora-logo{    
+    height: 4rem;
+  
+    
+       
+}
+.ahora-img{
+     height: 3.5rem;
+}
 .nav-link{
     color: var(--mainWhite);
     font-size: 1.3rem;
     text-transform: capitalize;
+   
+    border-radius:2rem;
+}
+.nav-link:hover{
+     color: cyan !important;
+    -webkit-transition: color 500ms linear;
+    -ms-transition: color 500ms linear;
+    transition: color 500ms linear;
 }
 
 .navTitle{
@@ -52,10 +77,14 @@ background: var(--mainBlue);
 }
 
 .homeIcon:hover{
-         color: cyan;
+     color: cyan !important;
+    -webkit-transition: color 500ms linear;
+    -ms-transition: color 500ms linear;
+    transition: color 500ms linear;
 }
 
 .titulo{
     margin-left: 14rem !important;
 }
+
 `;

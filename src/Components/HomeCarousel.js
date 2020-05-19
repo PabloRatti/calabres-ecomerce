@@ -48,9 +48,9 @@ const HomeCarouselContainer = styled.div`
   }
 
   @media (max-width: 48em) {
-       max-height: 20rem;  
+       max-height: 15rem;  
   .carouselImg {
-      max-height: 20rem
+      max-height: 15rem
   }
   .row{
       margin: 0 auto;

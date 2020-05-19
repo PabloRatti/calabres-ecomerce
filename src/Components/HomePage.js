@@ -3,18 +3,21 @@ import styled from 'styled-components';
 import PresentationCard from './PresentationCard';
 import { cardsData } from '../cardsData';
 import Carousel from './HomeCarousel';
-import Footer from './Footer';
+import Card from './ServiceCard';
 import ImagesGrid from './ImagesGrid';
+import ThreeCards from './ThreeCards';
 export default class HomePage extends Component {
     render() {
         return (
             <HomeContainer>
                 <Carousel className="carousel"/>
+             
                 <PresentationCard image={cardsData[0].img} title={cardsData[0].title} description={cardsData[0].description} />
+                <ThreeCards />
                 <ImagesGrid image="img/marcas.jpg" image2="img/marcas2.jpg"/>
-         
+
                 <PresentationCard image={cardsData[1].img} title={cardsData[1].title} description={cardsData[1].description} />
-                <Footer />
+                
 
             </HomeContainer>
 
