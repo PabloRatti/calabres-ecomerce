@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-
+import { Image } from 'react-bootstrap';
 export default class PresentationCard extends Component {
 
     render() {
@@ -10,15 +10,17 @@ export default class PresentationCard extends Component {
                 <div className="py-5">
                     <div className="container">
                         <div className="row">
-                            <div class="detailsContainer rowContainer col-sm">
-                                <div className="cardDescription">
-                                    <h2 className="detailsTitle">{this.props.title}</h2>
-                                    <p>{this.props.description}</p>
+                            <div class="col-sm offset-md-1">
+                                <div class="col-sm">
+                                    <Image id="left-img" className="home-image" src={this.props.image} fluid />
                                 </div>
                             </div>
-                            <div class="imgContainer col-sm">
-                                <img class="img-fluid" src={this.props.image} alt="portada" />
+                            <div class="col-sm">
+                                <div class="imgContainer col-sm">
+                                    <Image id="right-img" className="home-image" src={this.props.image2} fluid />
+                                </div>
                             </div>
+                         
                         </div>
 
                     </div>
@@ -30,22 +32,19 @@ export default class PresentationCard extends Component {
 }
 
 const CardContainer = styled.div`   
+   .imgContainer{
+       top: 4rem;
+    }
+    .home-image{
+        max-height: 25rem;
+        margin-top: 2rem;
+        
+    }
 
-    .imgContainer{          
-        width: 25rem;
-        margin: 0 auto;
-    }
-    .rowContainer{         
-        float:right;
-        text-align:center;   
-    }
-    .detailsContainer{    
-        text-align: center;
-        height:15rem;          
-    }
-    .cardDescription{             
-        height: 10rem;
-        font-family: Times New Roman; 
-        margin-top: 2rem;  
-    }
+    @media (max-width: 48em) {
+        .imgContainer{
+             top: 0rem;
+        }
+     }
+   
 `;

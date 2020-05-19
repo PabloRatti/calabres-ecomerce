@@ -51,10 +51,12 @@ export default class Footer extends Component {
 }
 
 const FooterContainer = styled.nav`
+
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,500,300,700);
 
 * {
   font-family: Open Sans;
+	position:relative;
 }
 
 

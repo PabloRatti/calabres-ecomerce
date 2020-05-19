@@ -6,19 +6,17 @@ import Carousel from './HomeCarousel';
 import Card from './ServiceCard';
 import ImagesGrid from './ImagesGrid';
 import ThreeCards from './ThreeCards';
+import {Image} from 'react-bootstrap';
 export default class HomePage extends Component {
     render() {
         return (
             <HomeContainer>
-                <Carousel className="carousel"/>
-             
-                <PresentationCard image={cardsData[0].img} title={cardsData[0].title} description={cardsData[0].description} />
-                <ThreeCards />
-                <ImagesGrid image="img/marcas.jpg" image2="img/marcas2.jpg"/>
-
-                <PresentationCard image={cardsData[1].img} title={cardsData[1].title} description={cardsData[1].description} />
+               {/*<Carousel className="carousel"/>               
                 
-
+                */}
+                <Image className="home-image" src="img/calabres_portada.jpg" fluid />
+                <ThreeCards />
+                <PresentationCard image2="img/IMG-20200519-WA0002.jpg" image="img/IMG-20200519-WA0003.jpg" title="Title" description="descasda" />
             </HomeContainer>
 
         );
@@ -40,5 +38,8 @@ const HomeContainer = styled.div`
             display: block; /* remove extra space below image */
     }
 
-    .carousel{}
+   .card{
+       max-height: 5rem;
+       max-width; 10rem;
+   }
 `;
