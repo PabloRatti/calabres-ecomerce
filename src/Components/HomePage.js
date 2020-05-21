@@ -15,8 +15,11 @@ export default class HomePage extends Component {
                 
                 */}
                 <Image className="home-image" src="img/calabres_portada.jpg" fluid />
-                <ThreeCards />
-                <PresentationCard image2="img/IMG-20200519-WA0002.jpg" image="img/IMG-20200519-WA0003.jpg" title="Title" description="descasda" />
+                <Carousel className="carousel" />
+                <Image className="brands" src="img/banner.png" />
+                <ThreeCards className="cardsContainer"/>
+                <Image className="brands" src="img/marcasCalabres.png"/>
+                <PresentationCard image2="img/ahora12Imagen.png" image="img/IMG-20200519-WA0003.jpg" title="Title" description="descasda" />
             </HomeContainer>
 
         );
@@ -25,21 +28,24 @@ export default class HomePage extends Component {
 
 const HomeContainer = styled.div`  
     height : 100%;
-    .cardsSeparator{       
-        height: 25rem;
+    
+    .cardsContainer{
+        border: 2px solid black;
     }
-    .myImg{  
-           
-            margin-left: 3rem;
-            float:left;
-            padding: 2rem;
-            max-width: 100%;
-            max-height: 35rem;        
-            display: block; /* remove extra space below image */
+    .carousel{
+        max-height: 20rem;
+    }
+    .brands{
+       
+        max-width: 100%;
+        margin-top: 2rem;
     }
 
-   .card{
-       max-height: 5rem;
-       max-width; 10rem;
-   }
+    @media (max-width: 48em) {
+       .brands{
+           margin-top: 0rem;
+       }
+
+    }
+   
 `;

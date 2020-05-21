@@ -4,7 +4,7 @@ import Title from './Title';
 import { ProductConsumer } from '../Context';
 import FilterBar from './FilterBar';
 import { storeProducts } from '../data';
-
+import { animateScroll as scroll } from 'react-scroll';
 export default class ProductList extends Component {
     constructor(props) {
         super(props);
@@ -14,6 +14,10 @@ export default class ProductList extends Component {
             widthFilter: '',
             brandFilter: ''
         }
+    }
+
+    componentDidMount = () => {
+        scroll.scrollToTop();
     }
 
     filterByPrice = (products, maxPrice) => {

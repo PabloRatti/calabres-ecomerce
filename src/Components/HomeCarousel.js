@@ -8,26 +8,25 @@ export default class HomeCarousel extends Component {
     render() {
         return (
             <HomeCarouselContainer>
-                <Carousel interval="2000">
+                <Carousel  fade="true" interval="2200" >
                     <Carousel.Item>
                         <img
                             className="carouselImg d-block w-100"
-                            src={carouselData[0].imgUrl}
+                            src="img/ahora12Portada.png"
                             alt="First slide"
                         />
                     </Carousel.Item>
                     <Carousel.Item>
                         <img
                             className="carouselImg d-block w-100"
-                            src={carouselData[1].imgUrl}
+                            src="img/IMG-20200519-WA0004.jpg"
                             alt="Second slide"
                         />
                     </Carousel.Item>
                     <Carousel.Item>
                         <img
                             className="carouselImg d-block w-100 img-fluid"
-                            src={carouselData[2].imgUrl}
-                            alt="Third slide"
+                            src="img/IMG-20200519-WA0002.jpg"                            alt="Third slide"
                         />
                     </Carousel.Item>
                 </Carousel>
@@ -38,14 +37,16 @@ export default class HomeCarousel extends Component {
 
 
 const HomeCarouselContainer = styled.div` 
-    height: 35rem;
+    height: 25rem;
     width: 100%;  
     max-height: 35rem;    
-    
+    margin-bottom: 3rem;
     .carouselImg{
-        height: 35rem;
+        height: 25rem;
                   
   }
+
+ 
 
   @media (max-width: 48em) {
        max-height: 15rem;  

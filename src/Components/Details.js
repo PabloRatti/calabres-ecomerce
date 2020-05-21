@@ -3,10 +3,16 @@ import { ProductConsumer } from '../Context';
 import { Link } from 'react-router-dom';
 import { ButtonContainer } from './Button';
 import styled from 'styled-components';
+import { animateScroll as scroll } from 'react-scroll';
 export default class Details extends Component {
+
+    componentDidMount = () =>{
+        scroll.scrollToTop();
+    }
+
     render() {
         return (
-            <detailsWraper>
+            <DetailsWraper>
                 <ProductConsumer>
                     {value => {
                         const { id, company, img, info, title, inCart, price, width } = value.detailProduct;
@@ -23,16 +29,11 @@ export default class Details extends Component {
                                 <div className="row">
                                     {/**Product img */}
                                     <div className="col-10 mx-10 col-md-6 my-3">
-                                        <img src={img} className="detailImg img-fluid" alt="product" />
+                                        <img id="detail-img" src={img} className="img-fluid" alt="product" />
                                     </div>
                                     {/**Product txt */}
-                                    <div className="col-10 mx-auto col-md-6 my-3 text-capitalize">
-                                        <h2>modelo : {title}</h2>
-                                        <h4 className="text-title text-uppercase text-muted mt-3 mb-2">
-                                            fabricante : <span className="text-uppercase">
-                                                {company}
-                                            </span>
-                                        </h4>
+                                    <div id="description" className="col-10 mx-auto col-md-6 my-3 text-capitalize">
+                                       
                                         <h4 className="text-blue">
                                             <strong>
                                                 valor : <span>$</span>
@@ -73,16 +74,28 @@ export default class Details extends Component {
                         );
                     }}
                 </ProductConsumer>
-            </detailsWraper>
+            </DetailsWraper>
         );
     }
 }
 
 
 
-const detailsWraper = styled.div`
-   .detailImg{
-       border: 2px solid black !important;
+const DetailsWraper = styled.div`
+  
+   #detail-img{    
+        max-height: 35rem;
    }
+   @media (max-width: 48em) {
+        #detail-img{    
+        max-height: 35rem;
+        margin-left: 3rem !important;
+        #description{
+            text-align: center !important;
+            border: 5px solid violet;
+        }
+    }
+    
+    }
   
 `;

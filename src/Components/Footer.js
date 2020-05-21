@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-
+import {Link} from 'react-router-dom';
 export default class Footer extends Component {
     render() {
         return (
@@ -40,7 +40,8 @@ export default class Footer extends Component {
 
                         <div class="footer-icons">
                             <a href="https://www.facebook.com/ElCalabresNeumaticos"><i class="fa fa-facebook"></i></a>
-                        </div>
+							<Link to="/login" ><i class="fa fa-sign-in" aria-hidden="true"></i></Link>
+					    </div>
 
                     </div>
 

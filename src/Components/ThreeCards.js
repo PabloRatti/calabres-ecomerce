@@ -10,17 +10,17 @@ export default class ThreeCards extends Component {
                         <div className="row">
                             <div class="col-sm">
                                 <div class="col-sm">
-                                    <ServiceCard img="img/frenos.jpg" description="Recambio y reparacion de frenos" title="Frenos" />
+                                    <ServiceCard img="img/FrenosFoto.jpg" description="Venta, colocacion y mantenimiento de llantas y neumaticos" title="Llantas y neumaticos" />
                                 </div>
                             </div>
                             <div class="col-sm">
                                 <div class="col-sm">
-                                    <ServiceCard img="img/recambio.jpg" description="Venta y colocacion de neumaticos/llantas" title="Venta de rodados" />
+                                    <ServiceCard img="img/recambio.jpg" description="Venta y colocacion de frenos" title="Frenos" />
                                 </div>
                             </div>
                             <div class="col-sm">
                                 <div class="col-sm">
-                                    <ServiceCard img="img/alineacion-balanceo.jpg" />
+                                    <ServiceCard img="img/AlineacionBalanceo.jpg" title="Tren delantero" description="Contamos con personal capacitado y las mejores herramientas. Alineacion, balanceo y tren delantero"/>
                                 </div>
                             </div>
                         </div>
