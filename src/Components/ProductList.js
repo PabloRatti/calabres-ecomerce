@@ -79,7 +79,7 @@ export default class ProductList extends Component {
                 <FilterBar handleFilter={this.handleFilter} />
                 <div className="py-5">
                     <div className="container">
-                        <Title name="Neumaticos" title={this.state.brandFilter} />
+                        <Title name="Neumaticos" title={this.state.brandFilter} renderLogo="true"/>
                         <div className="row">
                             <ProductConsumer>
                                 {(value) => {                                    

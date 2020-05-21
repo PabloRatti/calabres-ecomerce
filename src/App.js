@@ -11,6 +11,7 @@ import { Switch,Route } from 'react-router-dom';
 import Modal from './Components/Modal';
 import Footer from './Components/Footer';
 import LoginForm from './Components/LoginForm.js';
+import AdminHomePage from './Components/AdminHomePage';
 function App() {
   return (
     <React.Fragment>
@@ -20,7 +21,8 @@ function App() {
         <Route path="/llantas" component={ProductList} />
         <Route path="/details" component={Details} />
         <Route path="/cart" component={Cart} />     
-        <Route path="/login" component={LoginForm} />    
+        <Route path="/login" component={LoginForm} />  
+        <Route path="/adminHome" component={AdminHomePage} />    
         <Route component={Default} />
        
       </Switch>       

@@ -57,7 +57,7 @@ const FooterContainer = styled.nav`
 
 * {
   font-family: Open Sans;
-	position:relative;
+	
 }
 
 

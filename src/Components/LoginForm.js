@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
 import styled from 'styled-components';
-import { storeProducts } from "../data";
-import { browserHistory } from 'react-router-dom';
 import { Image } from 'react-bootstrap';
+import { animateScroll as scroll } from 'react-scroll';
 
 export default class LoginForm extends Component {
     constructor() {
@@ -15,13 +13,18 @@ export default class LoginForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentDidMount = () => {
+        scroll.scrollToTop();
+    }
+
     handleSubmit = () => {
 
         if (this.state.password == '123' && this.state.user == 'pablo') {
             alert('Bienvenido ! Calabres tienda E-Comerce');
             sessionStorage.setItem('isLoged', true);
-
             //Redireccionar a admin homepage
+            this.props.history.push("/adminHome");     
+
         } else {
             alert('Datos incorrectos intente nuevamente');
         }
@@ -95,6 +98,9 @@ const FormPageContainer = styled.nav`
     }
 .loginImg{
     max-height: 30rem;
+     border: 5px solid var(--mainBlue);
+    border-radius: 2rem;
+    
 }
    
 .form-container{
@@ -110,9 +116,16 @@ const FormPageContainer = styled.nav`
 }
 
 @media (max-width: 48em) {
+    .loginImg{
+        hidden: true;
+        display: none;
+    }
    .form-container{
      max-width: 70%;
-     width: 70%
+     width: 70%;
+     margin: 0 auto;
+     margin-top: 2rem;
+
    }
 
    

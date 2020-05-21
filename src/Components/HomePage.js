@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PresentationCard from './PresentationCard';
-import { cardsData } from '../cardsData';
 import Carousel from './HomeCarousel';
-import Card from './ServiceCard';
-import ImagesGrid from './ImagesGrid';
 import ThreeCards from './ThreeCards';
-import {Image} from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
+import { animateScroll as scroll } from 'react-scroll';
 export default class HomePage extends Component {
+
+    componentDidMount = () => {
+        scroll.scrollToTop();
+    }
+
+    
     render() {
         return (
             <HomeContainer>
-               {/*<Carousel className="carousel"/>               
-                
-                */}
+              
                 <Image className="home-image" src="img/calabres_portada.jpg" fluid />
+               
                 <Carousel className="carousel" />
                 <Image className="brands" src="img/banner.png" />
-                <ThreeCards className="cardsContainer"/>
-                <Image className="brands" src="img/marcasCalabres.png"/>
+                <ThreeCards className="cardsContainer" />
+                <Image className="brands" src="img/marcasCalabres.png" />
                 <PresentationCard image2="img/ahora12Imagen.png" image="img/IMG-20200519-WA0003.jpg" title="Title" description="descasda" />
             </HomeContainer>
 

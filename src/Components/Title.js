@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-export default function Title({ name, title }) {
+export default function Title({ name, title,renderLogo }) {
     return (
         <TitleContainer>
             <div className="row">
@@ -9,9 +9,11 @@ export default function Title({ name, title }) {
                         {name} <strong className="text-blue">{title}</strong>
 
                     </h1>
+                    {renderLogo ? 
                     <div className="img-container col-10 mx-auto my-2 text-center text.title">
                         <img className="ahora-logo" src="img/ahora12.png" />
                     </div>
+                    : null}
                 </div>
             </div>
         </TitleContainer>
