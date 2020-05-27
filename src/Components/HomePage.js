@@ -5,6 +5,7 @@ import Carousel from './HomeCarousel';
 import ThreeCards from './ThreeCards';
 import { Image } from 'react-bootstrap';
 import { animateScroll as scroll } from 'react-scroll';
+import WhatsAppIcon from './WhatsAppIcon';
 export default class HomePage extends Component {
 
     componentDidMount = () => {
@@ -15,7 +16,7 @@ export default class HomePage extends Component {
     render() {
         return (
             <HomeContainer>
-              
+         
                 <Image className="home-image" src="img/calabres_portada.jpg" fluid />
                
                 <Carousel className="carousel" />

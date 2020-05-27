@@ -15,7 +15,8 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
-    width: 55
+    width: 55,
+    type: 'llantas'
   },
   {
     id: 2,
@@ -28,7 +29,8 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
-    width: 50
+    width: 50,
+    type: 'llantas'
   },
   {
     id: 3,
@@ -41,7 +43,8 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
-    width: 55
+    width: 55,
+    type: 'llantas'
   },
   {
     id: 4,
@@ -54,7 +57,8 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
-    width: 55
+    width: 55,
+    type: 'llantas'
   },
   {
     id: 5,
@@ -67,7 +71,8 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
-    width: 55
+    width: 55,
+    type: 'neumaticos'
   },
   {
     id: 6,
@@ -80,7 +85,8 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
-    width: 55
+    width: 55,
+    type: 'neumaticos'
   },
   {
     id: 7,
@@ -93,7 +99,8 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
-    width: 55
+    width: 55,
+    type: 'neumaticos'
   },
   {
     id: 8,
@@ -106,7 +113,8 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
-    width: 80
+    width: 80,
+    type: 'neumaticos'
   },
   {
     id: 9,
@@ -119,7 +127,8 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
-    width: 45
+    width: 45,
+    type: 'neumaticos'
   },
   {
     id: 10,
@@ -132,7 +141,8 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
-    width: 60
+    width: 60,
+    type: 'neumaticos'
   },
   {
     id: 11,
@@ -145,7 +155,8 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
-    width: 10
+    width: 10,
+    type: 'llantas'
   },
   {
     id: 12,
@@ -158,7 +169,8 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
-    width: 21
+    width: 21,
+    type: 'neumaticos'
   },
   {
     id: 13,
@@ -171,7 +183,8 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
-    width: 55
+    width: 55,
+    type: 'llantas'
   }
 ];
 

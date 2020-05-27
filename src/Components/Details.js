@@ -28,7 +28,7 @@ export default class Details extends Component {
                                 {/**Product Info */}
                                 <div className="row">
                                     {/**Product img */}
-                                    <div className="col-10 mx-10 col-md-6 my-3">
+                                    <div id="img-container" className="col-10 mx-10 col-md-6 my-3">
                                         <img id="detail-img" src={img} className="img-fluid" alt="product" />
                                     </div>
                                     {/**Product txt */}
@@ -82,9 +82,17 @@ export default class Details extends Component {
 
 
 const DetailsWraper = styled.div`
-  
+
+  margin: 2px solid red !important;
    #detail-img{    
-        max-height: 35rem;
+        max-height: 25rem;
+        margin-left: 8rem !important;
+        
+   }
+   #img-container{
+  
+       max-height: 25rem;
+       
    }
    @media (max-width: 48em) {
         #detail-img{    

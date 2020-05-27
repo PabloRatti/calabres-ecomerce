@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
 import styled from 'styled-components';
 import { ButtonContainer } from './Button';
-
+import WhatsAppIcon from './WhatsAppIcon';
 export default class NavBar extends Component {
     render() {
         return (
@@ -14,25 +14,15 @@ export default class NavBar extends Component {
                 <ul className="navbar-nav align-items-center">
                     <li className="nav-item ml-5">
                         <Link to="/llantas" className="nav-link">
-                            Llantas
+                            Tienda
                         </Link>
                     </li>
-                    <li className="nav-item ml-5">
-                        <Link to="/gomas" className="nav-link">
-                            Neumaticos
-                        </Link>
-                    </li>
-                    <li className="nav-item ml-5">
-                        <Link to="/servicios" className="nav-link">
-                            Servicios
-                        </Link>
-                    </li>
-                    
+                  
 
                 </ul>
-                
+              
                 <Link to="/cart" className="ml-auto">
-                   
+
                     <ButtonContainer>
                         <span className="mr-2">
                             <i className="fas fa-cart-plus" />
@@ -40,6 +30,7 @@ export default class NavBar extends Component {
                        Carrito
                     </ButtonContainer>
                 </Link>
+                <WhatsAppIcon className="icon" />
             </NavWrapper>
         );
     }
@@ -48,11 +39,11 @@ export default class NavBar extends Component {
 const NavWrapper = styled.nav`
 background: var(--mainBlue);
 font-family: Trebuchet MS, sans-serif;
+.icon{
+    float: right ! important;
+}
 .ahora-logo{    
-    height: 4rem;
-  
-    
-       
+    height: 4rem;      
 }
 .ahora-img{
      height: 3.5rem;

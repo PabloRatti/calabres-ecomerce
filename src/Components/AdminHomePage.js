@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AdminProductsView from './AdminProductsView';
 import styled from 'styled-components';
-
+import AdminUploadProduct from './AdminUploadProduct';
 export default class AdminHomePage extends Component {
 
     componentDidMount = () => {
@@ -16,6 +16,7 @@ export default class AdminHomePage extends Component {
             <AdminHomePageContainer>
                
                 <AdminProductsView />
+                <AdminUploadProduct />
             </AdminHomePageContainer>
         );
     }

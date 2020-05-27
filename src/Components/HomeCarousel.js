@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { carouselData } from '../cardsData';
+
 import Carousel from 'react-bootstrap/Carousel';
-import Image from 'react-bootstrap/Image'
+
 export default class HomeCarousel extends Component {
 
     render() {
@@ -26,7 +26,7 @@ export default class HomeCarousel extends Component {
                     <Carousel.Item>
                         <img
                             className="carouselImg d-block w-100 img-fluid"
-                            src="img/IMG-20200519-WA0002.jpg"                            alt="Third slide"
+                            src="img/neumaticosWide.jpg"                            alt="Third slide"
                         />
                     </Carousel.Item>
                 </Carousel>
@@ -42,11 +42,8 @@ const HomeCarouselContainer = styled.div`
     max-height: 35rem;    
     margin-bottom: 3rem;
     .carouselImg{
-        height: 25rem;
-                  
-  }
-
- 
+        height: 25rem;                  
+  } 
 
   @media (max-width: 48em) {
        max-height: 15rem;  

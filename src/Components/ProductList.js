@@ -12,12 +12,21 @@ export default class ProductList extends Component {
             products: storeProducts,
             priceFilter: '',
             widthFilter: '',
-            brandFilter: ''
+            brandFilter: '',
+            title: 'Todos nuestros productos',
+            productType: 'neumaticos'
         }
     }
 
     componentDidMount = () => {
         scroll.scrollToTop();
+       
+    }
+
+    filterByProduct = (products,type) =>{
+        return products.filter((item) => {
+            return item.type == type;
+        });
     }
 
     filterByPrice = (products, maxPrice) => {
@@ -40,6 +49,10 @@ export default class ProductList extends Component {
     }
 
     applyFilters = (products) => {
+        if (this.state.productType) {
+            products = this.filterByProduct(products, this.state.productType);
+            console.log('Hay Prodcut filter!')
+        }
         if (this.state.priceFilter) {
             products = this.filterByPrice(products, this.state.priceFilter);
         }
@@ -50,6 +63,7 @@ export default class ProductList extends Component {
             products = this.filterByBrand(products, this.state.brandFilter);
             console.log('Hay brand filter!')
         }
+      
         return products;
     }
 
@@ -57,7 +71,7 @@ export default class ProductList extends Component {
         console.log('HandleFilter : ' + tipo + 'Valor: ' + valor)
         let products = this.state.products;
         console.log('Tenemos sin filtrar' + products);
-        let productsFiltered = [];
+      
         switch (tipo) {
             case 'marcas':
                 this.setState({ brandFilter : valor})
@@ -65,8 +79,11 @@ export default class ProductList extends Component {
             case 'medida':
                 this.setState({ widthFilter : valor })              
                 break;
+            case 'productos':
+                this.setState({productType : valor})
+                break;
             case 'reset':
-                this.setState({ brandFilter: '', widthFilter:'',priceFilter: ''})
+                this.setState({ brandFilter: '', widthFilter:'',priceFilter: '',productType: 'neumaticos'})
             break;
         }
                
@@ -79,7 +96,7 @@ export default class ProductList extends Component {
                 <FilterBar handleFilter={this.handleFilter} />
                 <div className="py-5">
                     <div className="container">
-                        <Title name="Neumaticos" title={this.state.brandFilter} renderLogo="true"/>
+                        <Title name={this.state.productType} title={this.state.brandFilter} renderLogo="true"/>
                         <div className="row">
                             <ProductConsumer>
                                 {(value) => {                                    
