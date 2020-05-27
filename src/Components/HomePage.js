@@ -48,6 +48,8 @@ const HomeContainer = styled.div`
     @media (max-width: 48em) {
        .brands{
            margin-top: 0rem;
+           height: 5rem;
+           max-height: 5rem !important;
        }
 
     }

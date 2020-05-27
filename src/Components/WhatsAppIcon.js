@@ -38,7 +38,7 @@ export default class WhatsAppIcon extends Component {
     handleSubmitMobile(e){
        
         console.log("Submited Mobile");    
-        let wspLink = 'https://api.whatsapp.com/send?phone=2235911061';
+        let wspLink = 'https://api.whatsapp.com/send?phone=542235911061';
         window.location = wspLink;
     }
     render() {
