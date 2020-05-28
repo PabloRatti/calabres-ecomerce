@@ -11,8 +11,7 @@ export default class HomePage extends Component {
     componentDidMount = () => {
         scroll.scrollToTop();
     }
-
-    
+        
     render() {
         return (
             <HomeContainer>
