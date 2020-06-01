@@ -56,7 +56,7 @@ export default class LoginForm extends Component {
                         <div className="row">
                             <div class="col-sm offset-md-1">
                                 <div class="col-sm">
-                                    <Image fluid className="loginImg mr-auto" src="img/IMG-20200514-WA0072.jpg" />
+                                    <Image fluid className="loginImg mr-auto" src={require("../calabres-api/images/static/IMG-20200514-WA0072.jpg")} />
                                 </div>
                             </div>
                             <div class="col-sm">

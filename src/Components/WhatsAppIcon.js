@@ -46,8 +46,8 @@ export default class WhatsAppIcon extends Component {
       
         return (
             <WhatsAppContainer  >
-                {isMobile ? <img onClick={() => this.handleSubmitMobile()} className="icon" src="img/whatsApp.png" /> :
-                <img onClick={() => this.openModal()} className="icon" src="img/whatsApp.png" />
+                {isMobile ? <img onClick={() => this.handleSubmitMobile()} className="icon" id="icon" src={require("../calabres-api/images/static/whatsApp.png")} /> :
+                    <img onClick={() => this.openModal()} className="icon" id="icon" src={require("../calabres-api/images/static/whatsApp.png")} />
                 }
                 {mustOpen ? 
                     <form onSubmit={this.handleSubmit} id="whatsapp-txt">
@@ -64,22 +64,18 @@ export default class WhatsAppIcon extends Component {
 
 const WhatsAppContainer = styled.div` 
 
-
-@media screen and (max-width: 300px) {
-#whatsapp-txt{
-display:none;
-}
-}
-
-
 cursor:pointer; 
+
+
 .mySubmit{
  height: 5rem;
  border-radius: 0 1rem  1rem 0 ;
 }
+
 .mySubmit:hover{
     background-color: cyan;
 }
+
 #whatsapp-txt{
     -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
 -moz-animation: fadein 2s; /* Firefox < 16 */
@@ -98,8 +94,8 @@ to   { opacity: 1; }
     width: 25rem;
     border-radius: 1rem;
     position:absolute;
-    right: 2rem;
-    top: 4rem;
+    right: 3rem;
+    top: 5rem;
 }
 
 .w-input{
@@ -110,16 +106,25 @@ to   { opacity: 1; }
     right: 2rem;
     top: 4rem;
 }
-position:relative;
+
    .link{      
        max-width: 100%;
        width: 3rem !important;
        cursor: pointer;
    }
    .icon{
-        max-width: 3rem;          
+        max-width: 3rem; 
+        position:fixed;  
+        z-index: 1;
+        right: 1rem;  
+               
    }
+@media screen and (max-width: 300px) {
+#whatsapp-txt{
+display:none;
+}
 
+}
 `;
 
 

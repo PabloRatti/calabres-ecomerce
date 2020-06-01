@@ -7,7 +7,7 @@ export const storeProducts = [
   {
     id: 1,
     title: "Goma N1",
-    img: "img/Goma1.jpg",
+    img: "img/1590962141525.jpg",
     price: 5000,
     company: "Firestone",
     info:

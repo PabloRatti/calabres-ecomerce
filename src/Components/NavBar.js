@@ -30,7 +30,7 @@ export default class NavBar extends Component {
                        Carrito
                     </ButtonContainer>
                 </Link>
-                <WhatsAppIcon className="icon" />
+               
             </NavWrapper>
         );
     }

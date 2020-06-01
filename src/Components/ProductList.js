@@ -4,26 +4,35 @@ import Title from './Title';
 import { ProductConsumer } from '../Context';
 import FilterBar from './FilterBar';
 import { storeProducts } from '../data';
-import { animateScroll as scroll } from 'react-scroll';
+
+
 export default class ProductList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            products: storeProducts,
+            products: [],
             priceFilter: '',
             widthFilter: '',
             brandFilter: '',
-            title: 'Todos nuestros productos',
-            productType: 'neumaticos'
+            title: '',
+            productType: ''
         }
     }
 
-    componentDidMount = () => {
-        scroll.scrollToTop();
-       
+    componentDidMount() {
+        /*
+        fetch('http://localhost:4000/notes/')
+            .then(response => response.json())
+            .then(json => {
+                this.setState({ products: json });
+                console.log(this.state.products)
+                return json;
+            });
+
+        */
     }
 
-    filterByProduct = (products,type) =>{
+    filterByProduct = (products, type) => {
         return products.filter((item) => {
             return item.type == type;
         });
@@ -49,9 +58,9 @@ export default class ProductList extends Component {
     }
 
     applyFilters = (products) => {
+
         if (this.state.productType) {
-            products = this.filterByProduct(products, this.state.productType);
-            console.log('Hay Prodcut filter!')
+            products = this.filterByProduct(products, this.state.productType);  
         }
         if (this.state.priceFilter) {
             products = this.filterByPrice(products, this.state.priceFilter);
@@ -61,9 +70,8 @@ export default class ProductList extends Component {
         }
         if (this.state.brandFilter) {
             products = this.filterByBrand(products, this.state.brandFilter);
-            console.log('Hay brand filter!')
         }
-      
+
         return products;
     }
 
@@ -71,22 +79,22 @@ export default class ProductList extends Component {
         console.log('HandleFilter : ' + tipo + 'Valor: ' + valor)
         let products = this.state.products;
         console.log('Tenemos sin filtrar' + products);
-      
+
         switch (tipo) {
             case 'marcas':
-                this.setState({ brandFilter : valor})
+                this.setState({ brandFilter: valor })
                 break;
             case 'medida':
-                this.setState({ widthFilter : valor })              
+                this.setState({ widthFilter: valor })
                 break;
             case 'productos':
-                this.setState({productType : valor})
+                this.setState({ productType: valor })
                 break;
             case 'reset':
-                this.setState({ brandFilter: '', widthFilter:'',priceFilter: '',productType: 'neumaticos'})
-            break;
+                this.setState({ brandFilter: '', widthFilter: '', priceFilter: '', productType: '' })
+                break;
         }
-               
+
     }
 
     render() {
@@ -96,11 +104,14 @@ export default class ProductList extends Component {
                 <FilterBar handleFilter={this.handleFilter} />
                 <div className="py-5">
                     <div className="container">
-                        <Title name={this.state.productType} title={this.state.brandFilter} renderLogo="true"/>
+                        <Title name={this.state.productType} title={this.state.brandFilter} renderLogo="true" />
                         <div className="row">
                             <ProductConsumer>
-                                {(value) => {                                    
-                                    let products = this.applyFilters(value.products);                                   
+                                {(value) => {
+                                    console.log('Products provided in consumer : ');
+                                    console.log(value.products)
+                                    let products = this.applyFilters(value.products);
+                                  
                                     return products.map(product => {
                                         return <Product key={product.id} product={product} />
                                     })

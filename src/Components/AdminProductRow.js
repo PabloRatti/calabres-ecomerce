@@ -5,7 +5,8 @@ export default class AdminProductRow extends Component {
 
 
     render() {
-        const {img,brand,price,title,total} = this.props;
+        const { handleOperation } = this.props;
+        const {id,img,brand,price,title,total} = this.props;
         return (
             <AdminProductRowContainer className="container">
                 <div className="row my-2 text-capitalize text-center">
@@ -25,15 +26,20 @@ export default class AdminProductRow extends Component {
                     
                     {/**End */}
                     <div id="trashIcon" className="col-10 mx-auto col-lg-2">
-                        <div className="cart-icon" >
+                        <div className="cart-icon" onClick={()=>{
+                            return handleOperation('delete',id,img);
+                        }}>
                             <i className="fas fa-trash"></i>
                         </div>
                     </div>
                     <div id="input-price" className="col-10 mx-auto col-lg-2">
-                        <input type="text" placeholder="Actualizar precio"/>                       
+                        <input type="text" placeholder={price}/>
+                                           
                     </div>
                     <div id="submit-button" className="col-10 mx-auto col-lg-2">
-                        <button type="submit">Guardar</button>
+                        <button type="submit" onClick={() => {
+                            return handleOperation('update', id);
+                        }}>Actualizar</button>
                     </div>
                     
                 </div>

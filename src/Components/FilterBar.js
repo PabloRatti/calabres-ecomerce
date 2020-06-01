@@ -21,12 +21,12 @@ export default class FilterBar extends Component {
                             <NavDropdown className="drop" title="Productos" id="collasible-nav-dropdown">
 
                                 <NavDropdown.Item className="item" onClick={() => {
-                                    return handleFilter('productos', 'neumaticos');
+                                    return handleFilter('productos', 'neumatico');
                                 }}>
                                     Neumáticos
                                     </NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
-                                    return handleFilter('productos', 'llantas');
+                                    return handleFilter('productos', 'llanta');
                                 }}> Llantas</NavDropdown.Item>                               
 
 
@@ -34,15 +34,15 @@ export default class FilterBar extends Component {
                             <NavDropdown className="drop" title="Marca" id="collasible-nav-dropdown">
                                 
                                 <NavDropdown.Item className="item" onClick={() => {
-                                    return handleFilter('marcas', 'Pirelli');
+                                    return handleFilter('marcas', 'pirelli');
                                 }}>
                                     Pirelli
                                     </NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
-                                     return handleFilter('marcas', 'Firestone');
+                                     return handleFilter('marcas', 'firestone');
                                 }}> Firestone</NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
-                                    return handleFilter('marcas', 'Michellin');
+                                    return handleFilter('marcas', 'michellin');
                                 }}>Michellin</NavDropdown.Item>
 
 

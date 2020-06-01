@@ -12,10 +12,12 @@ import Modal from './Components/Modal';
 import Footer from './Components/Footer';
 import LoginForm from './Components/LoginForm.js';
 import AdminHomePage from './Components/AdminHomePage';
+import WhatsappIcon from './Components/WhatsAppIcon';
 function App() {
   return (
     <React.Fragment>
       <NavBar/>
+      <WhatsappIcon/>
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/llantas" component={ProductList} />

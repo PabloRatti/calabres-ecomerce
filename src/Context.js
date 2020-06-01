@@ -15,12 +15,21 @@ class ProductProvider extends Component {
         modalProduct: detailProduct,
         cartSubtotal: 0,
         cartTax: 0,
-        cartTotal: 0
+        cartTotal: 0,
+        onLoad : true
 
     }
 
     componentDidMount() {
-        this.setProducts();
+        
+        fetch('http://localhost:4000/notes/')
+            .then(response => response.json())
+            .then(json => {
+                this.setState({ products: json });
+              
+                return json;
+            });
+
     }
     //Esto es para tener valores y no referencias
     setProducts = () => {

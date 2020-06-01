@@ -12,21 +12,21 @@ export default class HomeCarousel extends Component {
                     <Carousel.Item>
                         <img
                             className="carouselImg d-block w-100"
-                            src="img/ahora12Portada.png"
+                            src={require("../calabres-api/images/static/ahora12Portada.png")}
                             alt="First slide"
                         />
                     </Carousel.Item>
                     <Carousel.Item>
                         <img
                             className="carouselImg d-block w-100"
-                            src="img/IMG-20200519-WA0004.jpg"
+                            src={require("../calabres-api/images/static/IMG-20200519-WA0004.jpg")}
                             alt="Second slide"
                         />
                     </Carousel.Item>
                     <Carousel.Item>
                         <img
                             className="carouselImg d-block w-100 img-fluid"
-                            src="img/neumaticosWide.jpg"                            alt="Third slide"
+                            src={require("../calabres-api/images/static/neumaticosWide.jpg")} alt="Third slide"
                         />
                     </Carousel.Item>
                 </Carousel>
@@ -41,6 +41,7 @@ const HomeCarouselContainer = styled.div`
     width: 100%;  
     max-height: 35rem;    
     margin-bottom: 3rem;
+    position:relative;
     .carouselImg{
         height: 25rem;                  
   } 

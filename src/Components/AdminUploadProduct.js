@@ -54,8 +54,10 @@ export default class AdminUploadProduct extends Component {
 
         return (
             <DropZoneContainer>
-
-                <form onSubmit={this.submitHandler} action='http://localhost:4000/upload' method="POST" enctype="multipart/form-data">
+                <h1 className="carga-title" >Carga de productos</h1>
+                <br />
+                <br />
+                <form onSubmit={this.submitHandler} action='http://localhost:4000/notes' method="POST" enctype="multipart/form-data">
                     <div className="row my-2 text-capitalize text-center">
                         <div className="col-10 mx-auto col-lg-2">
                             <DropdownButton id="dropdown-basic-button" title="Producto">
@@ -135,19 +137,29 @@ export default class AdminUploadProduct extends Component {
                             <input type="file" name="file" id="file" ref={this.myFile} onChange={this.imageHandler} />
                         </div>
                         <div className="col-10 mx-auto col-lg-2">
-                            <input type="text" name="valorProducto" placeholder="Valor por unidad" />
+                            <input type="text" name="price" placeholder="Valor..." />
                         </div>
                         <div className="col-10 mx-auto col-lg-2">
-                            <input type="text" name="descripcion" id="descripcion" placeholder="Descripcion breve del producto" />
+                            <input type="text" name="info" id="info" placeholder="Descripcion..." />
                         </div>
                         <div className="col-10 mx-auto col-lg-2">
-                            <input type="submit" value="Guardar" />
+                            <input type="text" name="title" id="title" placeholder="Titulo/modelo" />
+                        </div>
+
+                    </div>
+
+                    <div className="row  my-2 text-capitalize text-center">
+                        <div className="col-10 mx-auto  col-lg-2">
+                            <button type="submit" id="submit" class="btn btn-outline-success">Guardar</button>
+                            {/*<input className="submit" type="submit" value="Guardar" />*/}
                         </div>
                     </div>
-                    <input type="text" id="producto" name="producto" value={this.state.producto} hidden="true" />
-                    <input type="text" id="marca" name="marca" value={this.state.marca} hidden="true" />
-                    <input type="text" id="perfil" name="perfil" value={this.state.perfil} hidden="true" />
-                    <input type="text" id="ancho" name="ancho" value={this.state.ancho} hidden="true" />
+                    <div hidden="true">
+                        <input type="text" id="type" name="type" value={this.state.producto} hidden="true" />
+                        <input type="text" id="company" name="company" value={this.state.marca} hidden="true" />
+                        <input type="text" id="perfil" name="perfil" value={this.state.perfil} hidden="true" />
+                        <input type="text" id="width" name="width" value={this.state.ancho} hidden="true" />
+                    </div>
                 </form>
 
             </DropZoneContainer>
@@ -157,11 +169,26 @@ export default class AdminUploadProduct extends Component {
 
 
 const DropZoneContainer = styled.div`
-border: 2px solid red;
-height: 20rem;
+border: 2px solid var(--mainBlue);
+border-radius: 2rem;
+height: 23rem;
+width: 90%;
+margin: 0 auto;
+text-align: center;
+margin-bottom: 2rem;
 #descripcion{
     
     width: 15rem !important;
+}
+#submit{
+    margin-top: 2rem !important;
+   
+}
+.carga-title{
+    margin: 0 auto;
+}
+@media (max-width: 48em) {
+  display: none;
 }
 `;
 
