@@ -7,17 +7,17 @@ export default class WhatsAppIcon extends Component {
         this.state = {
             W_input: 'En que podemos ayudarle?',
             modalOpen: false,
-            
+
         }
         this.changeHandler = this.changeHandler.bind(this);
         this.openModal = this.openModal.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    
+
     }
 
     openModal() {
-        this.setState({modalOpen : this.state.modalOpen ? false : true})
-        console.log('Now modal : '+this.state.modalOpen)
+        this.setState({ modalOpen: this.state.modalOpen ? false : true })
+        console.log('Now modal : ' + this.state.modalOpen)
         ///document.getElementById('whatsapp-txt').removeAttribute("hidden");
     }
 
@@ -25,38 +25,43 @@ export default class WhatsAppIcon extends Component {
         this.setState({ W_input: event.target.value })
     }
 
-    handleSubmit(e){
+    handleSubmit(e) {
         e.preventDefault()
-        console.log("Submited");        
+        console.log("Submited");
         let msg = this.state.W_input;
-        let wspLink = 'https://api.whatsapp.com/send?phone=2235911061&text='+msg;
+        let wspLink = 'https://api.whatsapp.com/send?phone=2235911061&text=' + msg;
         //Agregar validacion para mobile
         window.location = wspLink;
-        
+
     }
 
-    handleSubmitMobile(e){
-       
-        console.log("Submited Mobile");    
+    handleSubmitMobile(e) {
+
+        console.log("Submited Mobile");
         let wspLink = 'https://api.whatsapp.com/send?phone=542235911061';
         window.location = wspLink;
     }
     render() {
         let mustOpen = this.state.modalOpen;
-      
+
         return (
             <WhatsAppContainer  >
                 {isMobile ? <img onClick={() => this.handleSubmitMobile()} className="icon" id="icon" src={require("../calabres-api/images/static/whatsApp.png")} /> :
-                    <img onClick={() => this.openModal()} className="icon" id="icon" src={require("../calabres-api/images/static/whatsApp.png")} />
-                }
-                {mustOpen ? 
-                    <form onSubmit={this.handleSubmit} id="whatsapp-txt">
+                    <div className="container">
+                        <img onClick={() => this.openModal()} className="icon" id="icon" src={require("../calabres-api/images/static/whatsApp.png")} />
+                        {mustOpen ?
+                            <form onSubmit={this.handleSubmit} id="whatsapp-txt">
 
-                        <input onChange={this.changeHandler} className="w-input" type="text" placeholder="En que podemos ayudarle" />
-                        <input className="mySubmit" type="submit" />
-                    </form> : null
-                } 
-                
+                                <input onChange={this.changeHandler} className="w-input" type="text" placeholder="En que podemos ayudarle" />
+                                <input className="mySubmit" type="submit" />
+                            </form> : null
+                        }
+                    </div>
+
+                }
+
+
+
             </WhatsAppContainer>
         );
     }
@@ -66,14 +71,17 @@ const WhatsAppContainer = styled.div`
 
 cursor:pointer; 
 
-
+.container{
+    position:fixed;
+    z-index: 1;
+}
 .mySubmit{
  height: 5rem;
  border-radius: 0 1rem  1rem 0 ;
 }
 
 .mySubmit:hover{
-    background-color: cyan;
+    background-color: var(--mainBlue);
 }
 
 #whatsapp-txt{
@@ -82,8 +90,8 @@ cursor:pointer;
 -ms-animation: fadein 2s; /* Internet Explorer */
 -o-animation: fadein 2s; /* Opera < 12.1 */
 animation: fadein 2s;
-
-
+right: -5rem !important;
+top: 0rem !important;
 @keyframes fadein {
 from { opacity: 0; }
 to   { opacity: 1; }

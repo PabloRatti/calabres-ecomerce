@@ -38,8 +38,9 @@ const HomeContainer = styled.div`
         border: 2px solid black;
     }
     .carousel{
-        max-height: 20rem;
+        max-height: 22rem;
         position:relative;
+        z-index: 0;
     }
     .brands{
        

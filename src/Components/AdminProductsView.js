@@ -25,37 +25,42 @@ export default class AdminProductsView extends Component {
             });
     }
     deletePicture = (param) => {
-        let myPic = param.slice(4);
-        console.log('Deleting picture : '+myPic);
-        fetch('http://localhost:4000/notes/deletePicture/' + myPic, { method: 'POST', })
-            .then(response => response.json())
-            .then(json => {
-                this.getProducts();
-                return json;
-            });
+        try {
+
+            let myPic = param.slice(4);
+            console.log('Deleting picture : ' + myPic);
+            fetch('http://localhost:4000/notes/deletePicture/' + myPic, { method: 'POST', })
+                .then(response => response.json())
+                .then(json => {
+                    this.getProducts();
+                    return json;
+                });
+        } catch (e) {
+            console.log(e.getMessage())
+        }
     }
 
-    deletePublication = (id,aux) => {
+    deletePublication = (id, aux) => {
         //Picture
         this.deletePicture(aux);
         //Data
         fetch('http://localhost:4000/notes/' + id, { method: 'DELETE', })
             .then(response => response.json())
-            .then(json => {                
+            .then(json => {
                 this.getProducts();
                 return json;
             });
 
-            
+
     }
 
     //In aux is the name of the pic to delete in case of delete operation
-    handleOperation = (operation, id,aux) => {
-        console.log('In handle operation aux value for img = '+aux);
+    handleOperation = (operation, id, aux) => {
+        console.log('In handle operation aux value for img = ' + aux);
         //console.log('Delete operation triggered to '+operation+' : '+id);
         switch (operation) {
             case 'delete':
-                this.deletePublication(id,aux);
+                this.deletePublication(id, aux);
                 break;
             case 'update':
 
@@ -70,7 +75,7 @@ export default class AdminProductsView extends Component {
                 <Title name="Controlador de " title="productos" />
 
                 {products.map((item) => {
-                    return <AdminProductRow id={item._id} handleOperation={this.handleOperation} handleFilter={this.handleFilter} brand={item.company} title={item.title} img={item.img} price={item.price} />
+                    return <AdminProductRow type={item.type} id={item._id} handleOperation={this.handleOperation} handleFilter={this.handleFilter} brand={item.company} title={item.title} img={item.img} price={item.price} />
                 })}
 
             </AdminProductsViewContainer>

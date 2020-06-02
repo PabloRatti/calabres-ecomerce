@@ -16,9 +16,8 @@ export default class NavBar extends Component {
                         <Link to="/llantas" className="nav-link">
                             Tienda
                         </Link>
-                    </li>
-                  
-
+                    </li>                 
+                 
                 </ul>
               
                 <Link to="/cart" className="ml-auto">
@@ -30,7 +29,7 @@ export default class NavBar extends Component {
                        Carrito
                     </ButtonContainer>
                 </Link>
-               
+              
             </NavWrapper>
         );
     }
