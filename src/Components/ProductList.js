@@ -3,7 +3,7 @@ import Product from './Product';
 import Title from './Title';
 import { ProductConsumer } from '../Context';
 import FilterBar from './FilterBar';
-import { storeProducts } from '../data';
+
 
 
 export default class ProductList extends Component {
@@ -20,7 +20,7 @@ export default class ProductList extends Component {
     }
 
     componentDidMount() {
-        /*
+        
         fetch('http://localhost:4000/notes/')
             .then(response => response.json())
             .then(json => {
@@ -29,12 +29,12 @@ export default class ProductList extends Component {
                 return json;
             });
 
-        */
+        
     }
 
     filterByProduct = (products, type) => {
         return products.filter((item) => {
-            return item.type == type;
+            return item.type === type;
         });
     }
 
@@ -47,12 +47,12 @@ export default class ProductList extends Component {
     filterByBrand = (products, brand) => {
         console.log('In filter by brand , returning ' + brand)
         return products.filter((item) => {
-            return item.company == brand;
+            return item.company === brand;
         });
     }
     filterByWidth = (products, width) => {
         return products.filter((item) => {
-            return item.width == width;
+            return item.width === width;
         });
 
     }
@@ -93,6 +93,7 @@ export default class ProductList extends Component {
             case 'reset':
                 this.setState({ brandFilter: '', widthFilter: '', priceFilter: '', productType: '' })
                 break;
+            default: break;
         }
 
     }

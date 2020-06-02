@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
 import styled from 'styled-components';
 import { ButtonContainer } from './Button';
-import WhatsAppIcon from './WhatsAppIcon';
+
 export default class NavBar extends Component {
     render() {
         return (

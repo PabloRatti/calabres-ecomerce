@@ -19,7 +19,7 @@ export default class LoginForm extends Component {
 
     handleSubmit = () => {
 
-        if (this.state.password == '123' && this.state.user == 'pablo') {
+        if (this.state.password === '123' && this.state.user === 'pablo') {
             alert('Bienvenido ! Calabres tienda E-Comerce');
             sessionStorage.setItem('isLoged', true);
             //Redireccionar a admin homepage

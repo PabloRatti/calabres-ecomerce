@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { storeProducts } from '../data';
+
 import AdminProductRow from './AdminProductRow';
-import AdminProductsColumns from './AdminProductsColumns';
+
 import Title from './Title';
 export default class AdminProductsView extends Component {
     constructor() {
@@ -65,6 +65,7 @@ export default class AdminProductsView extends Component {
             case 'update':
 
                 break;
+            default : break;
         }
 
     }

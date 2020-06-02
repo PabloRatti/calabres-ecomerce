@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { storeProducts, detailProduct } from './data';
-import { ThemeConsumer } from 'styled-components';
+
 
 const ProductContext = React.createContext();
 //Provider
@@ -16,7 +16,7 @@ class ProductProvider extends Component {
         cartSubtotal: 0,
         cartTax: 0,
         cartTotal: 0,
-        onLoad : true
+        onLoad: true
 
     }
 
@@ -26,7 +26,7 @@ class ProductProvider extends Component {
             .then(response => response.json())
             .then(json => {
                 this.setState({ products: json });
-              
+
                 return json;
             });
 
@@ -127,70 +127,77 @@ class ProductProvider extends Component {
     }
 
 
-removeItem = (id) => {
-    let tempProducts = [...this.state.products];
-    let tempCart = [...this.state.cart];
+    removeItem = (id) => {
+        let tempProducts = [...this.state.products];
+        let tempCart = [...this.state.cart];
 
-    tempCart = tempCart.filter(item => item.id !== id);
-    const index = tempProducts.indexOf(this.getItem(id));
-    let removedProduct = tempProducts[index];
-    removedProduct.inCart = false;
-    removedProduct.count = 0;
-    removedProduct.total = 0;
+        tempCart = tempCart.filter(item => item.id !== id);
+        const index = tempProducts.indexOf(this.getItem(id));
+        let removedProduct = tempProducts[index];
+        removedProduct.inCart = false;
+        removedProduct.count = 0;
+        removedProduct.total = 0;
 
-    this.setState(() => {
-        return {
-            cart: [...tempCart],
-            products: [...tempProducts],
-        }
-    }, () => {
-        this.addTotals();
-    })
-};
+        this.setState(() => {
+            return {
+                cart: [...tempCart],
+                products: [...tempProducts],
+            }
+        }, () => {
+            this.addTotals();
+        })
+    };
 
 
-clearCart = () => {
-    const products = [...this.state.products]
-    this.setState(() => {
-        return { cart: [] };
-    }, () => {
-        this.setProducts();
-        this.addTotals();
-    });
-};
+    clearCart = () => {
+      
+        this.setState(() => {
+            return { cart: [] };
+        }, () => {
+            //this.setProducts();
+            this.addTotals();
+        });
+    };
 
-addTotals = () => {
-    let subTotal = 0;
-    this.state.cart.map(item => (subTotal += item.total));
-    const tempTax = subTotal * 0.0;
-    const tax = parseFloat(tempTax.toFixed(2));
-    const total = subTotal + tax;
-    this.setState(() => {
-        return {
-            cartSubtotal: subTotal,
-            cartTax: tax,
-            cartTotal: total
-        }
-    })
-}
-render() {
-    return (
-        <ProductContext.Provider value={{
-            ...this.state,
-            handleDetail: this.handleDetail,
-            addToCart: this.addToCart,
-            openModal: this.openModal,
-            closeModal: this.closeModal,
-            increment: this.increment,
-            decrement: this.decrement,
-            removeItem: this.removeItem,
-            clearCart: this.clearCart
+    addTotals = () => {
+        let subTotal = 0;
+        this.state.cart.map(item => (subTotal += item.total));
+        const tempTax = subTotal * 0.0;
+        const tax = parseFloat(tempTax.toFixed(2));
+        const total = subTotal + tax;
+        this.setState(() => {
+            return {
+                cartSubtotal: subTotal,
+                cartTax: tax,
+                cartTotal: total
+            }
+        })
+    }
 
-        }}>
-            {this.props.children}
-        </ProductContext.Provider>
-    );
-}
+    creditPay = (e) => {
+        let obj = e;
+        console.log('Trying to pay with credit card an amount of : '+obj);
+        console.log(obj.target.value);
+    }
+    render() {
+        return (
+            <ProductContext.Provider value={{
+                ...this.state,
+                creditPay: this.creditPay,
+                handleDetail: this.handleDetail,
+                addToCart: this.addToCart,
+                openModal: this.openModal,
+                closeModal: this.closeModal,
+                increment: this.increment,
+                decrement: this.decrement,
+                removeItem: this.removeItem,
+                clearCart: this.clearCart
+
+            }}>
+                {this.props.children}
+            </ProductContext.Provider>
+        );
+    }
 }
 
 const ProductConsumer = ProductContext.Consumer;

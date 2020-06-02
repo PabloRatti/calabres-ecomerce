@@ -46,9 +46,9 @@ export default class WhatsAppIcon extends Component {
 
         return (
             <WhatsAppContainer  >
-                {isMobile ? <img onClick={() => this.handleSubmitMobile()} className="icon" id="icon" src={require("../calabres-api/images/static/whatsApp.png")} /> :
+                {isMobile ? <img alt="icon" onClick={() => this.handleSubmitMobile()} className="icon" id="icon" src={require("../calabres-api/images/static/whatsApp.png")} /> :
                     <div className="container">
-                        <img onClick={() => this.openModal()} className="icon" id="icon" src={require("../calabres-api/images/static/whatsApp.png")} />
+                        <img alt="icon" onClick={() => this.openModal()} className="icon" id="icon" src={require("../calabres-api/images/static/whatsApp.png")} />
                         {mustOpen ?
                             <form onSubmit={this.handleSubmit} id="whatsapp-txt">
 

@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Card from 'react-bootstrap/Card';
 import styled from 'styled-components';
 export default class ServiceCard extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+
     render() {
         return (
             <ServiceCardContainer >
                 <Card>
                     <Card.Img variant="top" src={this.props.img} className="card-image" />
-                    <Card.Body className="card-body"y>
+                    <Card.Body className="card-body" >
                         <Card.Title>{this.props.title}</Card.Title>
                         <Card.Text>
                             {this.props.description}

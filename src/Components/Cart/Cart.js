@@ -6,6 +6,7 @@ import { ProductConsumer } from '../../Context';
 import CartList from './CartList';
 import CartTotals from './CartTotals';
 export default class Cart extends Component {
+   
     render() {
         return (
             <section>
@@ -18,15 +19,16 @@ export default class Cart extends Component {
                                     <Title name="Carrito" title="El calabres" />
                                     <CartColumns />
                                     <CartList value={value} />
-                                    <CartTotals value={value}/>
+                                    <CartTotals value={value} />
+
                                 </React.Fragment>
                             )
                         } else {
-                            return  <EmptyCart />
+                            return <EmptyCart />
                         }
                     }}
                 </ProductConsumer>
-               
+
             </section>
         );
     }

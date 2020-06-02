@@ -15,7 +15,7 @@ export default class Details extends Component {
             <DetailsWraper>
                 <ProductConsumer>
                     {value => {
-                        const { id, company, img, info, title, inCart, price, width } = value.detailProduct;
+                        const { id, company, img, title, inCart, price, width } = value.detailProduct;
                         return (
                             <div className="container py-5">
                                 {/**Title start */}
@@ -34,17 +34,10 @@ export default class Details extends Component {
                                     {/**Product txt */}
                                     <div id="description" className="col-10 mx-auto col-md-6 my-3 text-capitalize">
                                        
-                                        <h4 className="text-blue">
-                                            <strong>
-                                                valor : <span>$</span>
-                                                {price}
-                                            </strong>
-                                        </h4>
-                                        <p className="text-capitalize font-weight-bold mt-3 mb-0">
-                                            informacion del producto:
-                                    </p>
-                                        <p className="text-muted lead">
-                                            <ul>
+                                       
+                                     
+                                        <p id="list-wraper" className="text-muted lead">
+                                            <ul className="ul">
                                                 <li>Marca : {company}</li>
                                                 <li>Modelo : {title}</li>
                                                 <li>Ancho : {width}</li>
@@ -84,15 +77,28 @@ export default class Details extends Component {
 const DetailsWraper = styled.div`
 
   margin: 2px solid red !important;
+  text-align: center;
    #detail-img{    
         max-height: 25rem;
-        margin-left: 8rem !important;
+        margin-left: 2rem !important;
         
    }
+   #list-wraper{
+       margin-top: 2rem;
+      
+   }
+   .ul{
+       list-style: none;
+   }
    #img-container{
-  
+
        max-height: 25rem;
        
+   }
+
+   #description{
+       
+
    }
    @media (max-width: 48em) {
         #detail-img{    

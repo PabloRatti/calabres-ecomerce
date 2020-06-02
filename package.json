@@ -12,6 +12,7 @@
     "mdbreact": "^4.26.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
+    "react-credit-cards": "^0.8.2",
     "react-device-detect": "^1.12.1",
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.0.1",
