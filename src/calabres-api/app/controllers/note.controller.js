@@ -11,7 +11,7 @@ exports.create = (req, res) => {
         });
     }
 
-    console.log('Original path : '+ req.file.filename);
+    console.log('Original path : ' + req.file.filename);
     // Create a Note
     const note = new Note({
         title: req.body.title || "Untitled Note",
@@ -42,6 +42,7 @@ exports.create = (req, res) => {
 
 // Retrieve and return all notes from the database.
 exports.findAll = (req, res) => {
+    console.log('Finding all records');
     Note.find()
         .then(notes => {
             res.send(notes);
@@ -54,6 +55,7 @@ exports.findAll = (req, res) => {
 
 // Find a single note with a noteId
 exports.findOne = (req, res) => {
+    console.log('Finding one record')
     Note.findById(req.params.noteId)
         .then(note => {
             if (!note) {
@@ -77,20 +79,26 @@ exports.findOne = (req, res) => {
 
 // Update a note identified by the noteId in the request
 exports.update = (req, res) => {
-    // Validate Request
-    if (!req.body.content) {
-        return res.status(400).send({
-            message: "Note content can not be empty"
-        });
+    /*
+    if (!req.body) {
+        console.log('Error no hay body')
+        return res.send(400);
+    } else {
+        console.log('ID de publicacion : ' + req.params.noteId)
+        console.log('Nuevo precio : '+req.body.price) 
+        return res.send(200);
     }
 
+
+   */
     // Find note and update it with the request body
+    console.log('Update in progress');
     Note.findByIdAndUpdate(req.params.noteId, {
-        title: req.body.title || "Untitled Note",
-        content: req.body.content
+        price: req.body.price
     }, { new: true })
         .then(note => {
             if (!note) {
+                console.log('Error 404');
                 return res.status(404).send({
                     message: "Note not found with id " + req.params.noteId
                 });
@@ -98,6 +106,7 @@ exports.update = (req, res) => {
             res.send(note);
         }).catch(err => {
             if (err.kind === 'ObjectId') {
+                console.log('Error 404');
                 return res.status(404).send({
                     message: "Note not found with id " + req.params.noteId
                 });
@@ -106,17 +115,18 @@ exports.update = (req, res) => {
                 message: "Error updating note with id " + req.params.noteId
             });
         });
+        
 };
 
 //Function to delete de picture of a publication
 //Find img path and delete before delete product from database
 
 exports.deletePicture = (req, res) => {
-   
-    let fileName = req.params.notePath; 
-     console.log('Path a borrar img/'+fileName); 
+
+    let fileName = req.params.notePath;
+    console.log('Path a borrar img/' + fileName);
     var deleteRoute = '../../public/img/' + fileName;
-    var fs = require('fs');   
+    var fs = require('fs');
     fs.unlinkSync(deleteRoute);
 
     return res.send('Ok');

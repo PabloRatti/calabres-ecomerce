@@ -50,10 +50,17 @@ export default class AdminProductsView extends Component {
                 this.getProducts();
                 return json;
             });
+           
 
 
     }
 
+    updatePublication = (id, aux) => {
+        console.log('Id a actualizar : '+id);
+        console.log('Nuevo precio : '+aux)
+        debugger;
+      //Hacer el update
+    }
     //In aux is the name of the pic to delete in case of delete operation
     handleOperation = (operation, id, aux) => {
         console.log('In handle operation aux value for img = ' + aux);
@@ -63,9 +70,9 @@ export default class AdminProductsView extends Component {
                 this.deletePublication(id, aux);
                 break;
             case 'update':
-
+                this.updatePublication(id, aux);
                 break;
-            default : break;
+            default: break;
         }
 
     }
@@ -85,8 +92,6 @@ export default class AdminProductsView extends Component {
 }
 
 const AdminProductsViewContainer = styled.nav`
-
-
 height: 100%;
 margin-bottom: 2rem;
 

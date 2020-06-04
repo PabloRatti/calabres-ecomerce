@@ -2,11 +2,26 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 export default class AdminProductRow extends Component {
+    constructor() {
+        super();
+        this.state = {
+            newPrice: '',
+            id: null
+        }
+    }
+
+
+    priceHandler = (e) => {
+        e.preventDefault();
+        this.setState({ newPrice: e.target.value });
+    }
 
 
     render() {
+
         const { handleOperation } = this.props;
         const { id, img, brand, price, title, type } = this.props;
+
         return (
             <AdminProductRowContainer className="container">
                 <div className="row my-2 text-capitalize text-center">
@@ -15,17 +30,17 @@ export default class AdminProductRow extends Component {
                             className="img-fluid" alt="product" />
                     </div>
                     <div className="col-10 mx-auto col-lg-2">
-                
-                        {type}
+
+                        {title}
                     </div>
                     <div id="product-title" className="col-10 mx-auto col-lg-2">
                         <span className="d-lg-none">producto : </span>
-                        {title}
+                        {type} {brand}
                     </div>
 
                     <div className="col-10 mx-auto col-lg-2">
                         <span className="d-lg-none">precio : </span>
-                        <div id="brand-span">{brand}</div>
+                        ${price}
                     </div>
 
                     {/**End */}
@@ -37,14 +52,17 @@ export default class AdminProductRow extends Component {
                         </div>
                     </div>
                     <div id="input-price" className="col-10 mx-auto col-lg-2">
-                      
-                        
-                        <button id="btn-price" class="btn btn-primary" type="submit" onClick={() => {
-                                return handleOperation('update', id);
-                        }}>  <input id="input-price" type="text" placeholder={price} />Actualizar valor</button>
-                        
+
+                        <form onSubmit={() => {
+                            return handleOperation('update', id, this.state.newPrice);
+                        }} className="form-price" action={this.updateHandler} method="PUT" enctype="application/json">
+                            <input className="input-price" type="number" id="price" name="price" placeholder={price} value={this.state.newPrice} onChange={this.priceHandler} />
+                            <button id="btn-price" class="btn btn-primary" type="submit">Actualizar</button>
+                        </form>
+
+                        <h1>{this.state.newPrice}</h1>
                     </div>
-                  
+
 
                 </div>
             </AdminProductRowContainer>
@@ -54,7 +72,22 @@ export default class AdminProductRow extends Component {
 
 const AdminProductRowContainer = styled.nav`
 
-.input-price{
-    width:1rem !important;
+
+#btn-price{
+    position: relative;
+    border-radius: 0rem 1rem 1rem 0rem;
+}
+#btn-price:hover{
+   background-color: var(--mainBlue);
+}
+.form-price{
+
+    width: 10rem !important;
+    height: 2rem;
+    display: flex; 
+    flex-direction: row;
+    justify-content:center;
+    right: 2rem !important;
+    padding: 0;
 }
 `;
