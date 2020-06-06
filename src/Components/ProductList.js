@@ -27,9 +27,7 @@ export default class ProductList extends Component {
                 this.setState({ products: json });
                 console.log(this.state.products)
                 return json;
-            });
-
-        
+            });        
     }
 
     filterByProduct = (products, type) => {

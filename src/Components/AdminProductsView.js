@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-
 import AdminProductRow from './AdminProductRow';
-
 import Title from './Title';
 export default class AdminProductsView extends Component {
     constructor() {
@@ -45,15 +43,14 @@ export default class AdminProductsView extends Component {
         this.deletePicture(aux);
         //Data
         fetch('http://localhost:4000/notes/' + id, { method: 'DELETE', })
-            .then(response => response.json())
+            .then(response => {
+                return response;
+            })
             .then(json => {
                 this.getProducts();
                 return json;
             });
-           
-
-
-    }
+            }
 
     updatePublication = (id, aux) => {
         console.log('Id a actualizar : '+id);
@@ -83,7 +80,7 @@ export default class AdminProductsView extends Component {
                 <Title name="Controlador de " title="productos" />
 
                 {products.map((item) => {
-                    return <AdminProductRow type={item.type} id={item._id} handleOperation={this.handleOperation} handleFilter={this.handleFilter} brand={item.company} title={item.title} img={item.img} price={item.price} />
+                    return <AdminProductRow profile={item.profile} type={item.type} id={item.id} handleOperation={this.handleOperation} handleFilter={this.handleFilter} brand={item.company} title={item.title} img={item.img} price={item.price} />
                 })}
 
             </AdminProductsViewContainer>

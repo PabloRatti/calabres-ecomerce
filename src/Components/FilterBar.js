@@ -27,51 +27,117 @@ export default class FilterBar extends Component {
                                     </NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('productos', 'llanta');
-                                }}> Llantas</NavDropdown.Item>                               
+                                }}> Llantas</NavDropdown.Item>
 
 
                             </NavDropdown>
                             <NavDropdown className="drop" title="Marca" id="collasible-nav-dropdown">
-                                
+
                                 <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('marcas', 'pirelli');
                                 }}>
                                     Pirelli
                                     </NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
-                                     return handleFilter('marcas', 'firestone');
+                                    return handleFilter('marcas', 'firestone');
                                 }}> Firestone</NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('marcas', 'michellin');
                                 }}>Michellin</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('marcas', 'westlake');
+                                }}>Westlake</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('marcas', 'windforce');
+                                }}>Windforce</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('marcas', 'fate');
+                                }}>Fate O</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('marcas', 'bridgetstone');
+                                }}>Bridgetstone</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('marcas', 'goodyear');
+                                }}>Goodyear</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('marcas', 'nexen');
+                                }}>Nexen</NavDropdown.Item>
 
 
                             </NavDropdown>
 
                             <NavDropdown className="drop" title="Ancho" id="collasible-nav-dropdown">
-                                <NavDropdown.Item className="item" href="#action/3.1">23.22</NavDropdown.Item>
-                                <NavDropdown.Item className="item" href="#action/3.2">40.44</NavDropdown.Item>
-                                <NavDropdown.Item className="item" href="#action/3.3">67.77</NavDropdown.Item>
-
+                                <NavDropdown.Item className="item" onClick={()=>{
+                                    return handleFilter('ancho','31');
+                                }}>31</NavDropdown.Item>
+                                <NavDropdown.Item className="item"  onClick={() => {
+                                    return handleFilter('ancho', '165');
+                                }}>165</NavDropdown.Item>
+                                <NavDropdown.Item className="item"  onClick={() => {
+                                    return handleFilter('ancho', '175');
+                                }}>175</NavDropdown.Item>
+                                <NavDropdown.Item className="item"  onClick={() => {
+                                    return handleFilter('ancho', '185');
+                                }}>185</NavDropdown.Item>
+                                <NavDropdown.Item className="item"  onClick={() => {
+                                    return handleFilter('ancho', '195');
+                                }}>195</NavDropdown.Item>
+                                <NavDropdown.Item className="item"  onClick={() => {
+                                    return handleFilter('ancho', '205');
+                                }}>205</NavDropdown.Item>
+                                <NavDropdown.Item className="item"  onClick={() => {
+                                    return handleFilter('ancho', '215');
+                                }}>215</NavDropdown.Item>
+                                <NavDropdown.Item className="item"  onClick={() => {
+                                    return handleFilter('ancho', '225');
+                                }}>225</NavDropdown.Item>
+                                <NavDropdown.Item className="item"  onClick={() => {
+                                    return handleFilter('ancho', '235');
+                                }}>235</NavDropdown.Item>
+                                <NavDropdown.Item className="item"  onClick={() => {
+                                    return handleFilter('ancho', '245');
+                                }}>245</NavDropdown.Item>
+                                <NavDropdown.Item className="item"  onClick={() => {
+                                    return handleFilter('ancho', '255');
+                                }}>255</NavDropdown.Item>
+                                <NavDropdown.Item className="item"  onClick={() => {
+                                    return handleFilter('ancho', '265');
+                                }}>265</NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown className="drop" title="Perfil" id="collasible-nav-dropdown">
-                                <NavDropdown.Item className="item" href="#action/3.1">23.22</NavDropdown.Item>
-                                <NavDropdown.Item className="item" href="#action/3.2">40.44</NavDropdown.Item>
-                                <NavDropdown.Item className="item" href="#action/3.3">67.77</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('perfil', '10.5');
+                                }} >10.5</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('perfil', '40');
+                                }}>40</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('perfil', '45');
+                                }}>45</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('perfil', '50');
+                                }}>50</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('perfil', '55');
+                                }}>55</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('perfil', '60');
+                                }}>60</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('perfil', '65');
+                                }}>65</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('perfil', '70');
+                                }}>70</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('perfil', '265');
+                                }}>75</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('perfil', '80');
+                                }}>80</NavDropdown.Item>
 
                             </NavDropdown>
-                            <NavDropdown className="drop" title="Precio" id="collasible-nav-dropdown">
-                                <NavDropdown.Item className="item" href="#action/3.1">23.22</NavDropdown.Item>
-                                <NavDropdown.Item className="item" href="#action/3.2">40.44</NavDropdown.Item>
-                                <NavDropdown.Item className="item" href="#action/3.3">67.77</NavDropdown.Item>
 
-                            </NavDropdown>
-                            <NavDropdown className="drop" title="Tipo de vehiculo" id="collasible-nav-dropdown">
-                                <NavDropdown.Item className="item" href="#action/3.1">Auto</NavDropdown.Item>
-                                <NavDropdown.Item className="item" href="#action/3.2">Camioneta</NavDropdown.Item>
-                                <NavDropdown.Item className="item" href="#action/3.3">Pickup</NavDropdown.Item>
-
-                            </NavDropdown>
                         </Nav>
 
                     </Navbar.Collapse>

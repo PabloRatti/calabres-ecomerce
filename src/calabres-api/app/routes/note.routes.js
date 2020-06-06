@@ -12,6 +12,7 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage : storage })
 
+
 module.exports = (app) => {
     const notes = require('../controllers/note.controller.js');
 

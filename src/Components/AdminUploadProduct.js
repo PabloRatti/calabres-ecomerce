@@ -83,32 +83,95 @@ export default class AdminUploadProduct extends Component {
                                 <Dropdown.Item onClick={() => {
                                     return this.marcaHandler('fate o');
                                 }}>Fate O</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.marcaHandler('windforce');
+                                }}>Windforce</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.marcaHandler('westlake');
+                                }}>Westlake</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.marcaHandler('bridgetstone');
+                                }}>Bridgetstone</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.marcaHandler('nexen');
+                                }}>Nexen</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.marcaHandler('goodyear');
+                                }}>Goodyear</Dropdown.Item>
                             </DropdownButton>
                         </div>
                         <div className="col-10 mx-auto col-lg-2">
                             <DropdownButton id="dropdown-basic-button" title="Ancho">
                                 <Dropdown.Item onClick={() => {
-                                    return this.anchoHandler('ancho 1');
-                                }}>Ancho 1</Dropdown.Item>
+                                    return this.anchoHandler('31');
+                                }}>31</Dropdown.Item>
                                 <Dropdown.Item onClick={() => {
-                                    return this.anchoHandler('ancho 2');
-                                }}>Ancho 2</Dropdown.Item>
+                                    return this.anchoHandler('165');
+                                }}>165</Dropdown.Item>
                                 <Dropdown.Item onClick={() => {
-                                    return this.anchoHandler('ancho 3');
-                                }}>Ancho 3</Dropdown.Item>
+                                    return this.anchoHandler('175');
+                                }}>175</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.anchoHandler('185');
+                                }}>185</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.anchoHandler('195');
+                                }}>195</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.anchoHandler('205');
+                                }}>205</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.anchoHandler('215');
+                                }}>215</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.anchoHandler('225');
+                                }}>225</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.anchoHandler('235');
+                                }}>235</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.anchoHandler('245');
+                                }}>245</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.anchoHandler('255');
+                                }}>255</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.anchoHandler('265');
+                                }}>265</Dropdown.Item>
                             </DropdownButton>
                         </div>
                         <div className="col-10 mx-auto col-lg-2">
                             <DropdownButton id="dropdown-basic-button" title="Perfil">
                                 <Dropdown.Item onClick={() => {
-                                    return this.perfilHandler('perfil 1');
-                                }}>Perfil 1</Dropdown.Item>
+                                    return this.perfilHandler('10.5');
+                                }}>10.5</Dropdown.Item>
                                 <Dropdown.Item onClick={() => {
-                                    return this.perfilHandler('perfil 2');
-                                }}>Perfil 2</Dropdown.Item>
+                                    return this.perfilHandler('40');
+                                }}>40</Dropdown.Item>
                                 <Dropdown.Item onClick={() => {
-                                    return this.perfilHandler('perfil 3');
-                                }}>Perfil 3</Dropdown.Item>
+                                    return this.perfilHandler('45');
+                                }}>45</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.perfilHandler('50');
+                                }}>50</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.perfilHandler('55');
+                                }}>55</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.perfilHandler('60');
+                                }}>60</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.perfilHandler('65');
+                                }}>65</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.perfilHandler('70');
+                                }}>70</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.perfilHandler('75');
+                                }}>75</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.perfilHandler('80');
+                                }}>80</Dropdown.Item>
                             </DropdownButton>
                         </div>
 
@@ -157,8 +220,9 @@ export default class AdminUploadProduct extends Component {
                     <div hidden="true">
                         <input type="text" id="type" name="type" value={this.state.producto} hidden="true" />
                         <input type="text" id="company" name="company" value={this.state.marca} hidden="true" />
-                        <input type="text" id="perfil" name="perfil" value={this.state.perfil} hidden="true" />
+                        <input type="text" id="profile" name="profile" value={this.state.perfil} hidden="true" />
                         <input type="text" id="width" name="width" value={this.state.ancho} hidden="true" />
+                        
                     </div>
                 </form>
 
