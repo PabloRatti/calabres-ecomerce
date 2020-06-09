@@ -21,7 +21,7 @@ export default class ProductList extends Component {
     }
 
     componentDidMount() {
-
+        this.resetFilters();
         fetch('http://localhost:4000/notes/')
             .then(response => response.json())
             .then(json => {
@@ -32,6 +32,7 @@ export default class ProductList extends Component {
     }
 
     filterByProduct = (products, type) => {
+       
         return products.filter((item) => {
             return item.type === type;
         });
@@ -82,6 +83,10 @@ export default class ProductList extends Component {
         return products;
     }
 
+    resetFilters = () =>{
+        this.setState({ brandFilter: '', widthFilter: '', priceFilter: '', productType: '', profile: '' })
+    }
+
     handleFilter = (tipo, valor) => {
         console.log('HandleFilter : ' + tipo + 'Valor: ' + valor)
         let products = this.state.products;
@@ -101,7 +106,7 @@ export default class ProductList extends Component {
                 this.setState({ profile: valor })
                 break;
             case 'reset':
-                this.setState({ brandFilter: '', widthFilter: '', priceFilter: '', productType: '',profile: '' })
+               this.resetFilters();
                 break;
             default: break;
         }
@@ -119,8 +124,7 @@ export default class ProductList extends Component {
                         <div className="row">
                             <ProductConsumer>
                                 {(value) => {
-                                    console.log('Products provided in consumer : ');
-                                    console.log(value.products)
+                                    
                                     let products = this.applyFilters(value.products);
 
                                     return products.map(product => {

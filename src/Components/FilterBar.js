@@ -26,13 +26,14 @@ constructor(){
                             <NavDropdown className="drop" title="Productos" id="collasible-nav-dropdown">
 
                                 <NavDropdown.Item className="item" onClick={() => {
+                                    this.setState({ inactive: false })
                                     return handleFilter('productos', 'neumatico');
                                 }}>
                                     Neumáticos
                                     </NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
                                     this.setState({inactive : true})
-                                    return handleFilter('productos', 'llanta');
+                                    return handleFilter('productos', 'llantas');
                                 }}> Llantas</NavDropdown.Item>
 
 

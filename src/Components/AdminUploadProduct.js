@@ -65,7 +65,7 @@ export default class AdminUploadProduct extends Component {
                                     return this.productoHandler('neumatico');
                                 }} name="producto" value="Neumatico" id="producto">Neumatico</Dropdown.Item>
                                 <Dropdown.Item name="producto" onClick={() => {
-                                    return this.productoHandler('llanta');
+                                    return this.productoHandler('llantas');
                                 }} value="Llanta" id="producto">Llanta</Dropdown.Item>
                             </DropdownButton>
                         </div>
