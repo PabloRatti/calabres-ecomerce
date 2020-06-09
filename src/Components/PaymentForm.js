@@ -3,7 +3,7 @@ import Cards from 'react-credit-cards';
 import styled from 'styled-components';
 import Title from './Title';
 import 'react-credit-cards/es/styles-compiled.css';
-
+import { Link } from 'react-router-dom';
 export default class PaymentForm extends React.Component {
     constructor(props) {
         super(props);
@@ -13,13 +13,15 @@ export default class PaymentForm extends React.Component {
             focus: '',
             name: '',
             number: '',
-            aceptedCards: ['mastercard', 'visa'],
+            phone: '',
+            cuotas: '',
+            aceptedCards: ['mastercard', 'visa', 'cabal'],
             total: this.props.total
         };
     }
 
     componentDidMount() {
-        console.log('Inside paymentForm mounted: ' + this.props.formHidden)
+
     }
     handleInputFocus = (e) => {
         this.setState({ focus: e.target.name });
@@ -33,15 +35,15 @@ export default class PaymentForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-       
+
         console.log('Credit Card Request: ')
         console.log('Name : ' + this.state.name);
         console.log('Number : ' + this.state.number);
         console.log('Expiry : ' + this.state.expiry);
         console.log('Code : ' + this.state.cvc);
         console.log('Total : ' + this.state.total);
-       
-      
+
+
     }
 
     render() {
@@ -58,84 +60,158 @@ export default class PaymentForm extends React.Component {
                         number={this.state.number}
                     />
                     <form className="card-form" onSubmit={this.handleSubmit}>
-                        <div className="input-container">
-                            <input
-                                className="form-input"
-                                type="tel"
-                                name="name"
-                                placeholder="Nombre y apellido"
-                                onChange={this.handleInputChange}
-                                onFocus={this.handleInputFocus}
-                            />
-                            <input
-                                className="form-input"
-                                type="tel"
-                                name="number"
-                                placeholder="Numero de tarjeta"
-                                onChange={this.handleInputChange}
-                                onFocus={this.handleInputFocus}
-                            />
-                            <input
-                                className="form-input"
-                                type="tel"
-                                name="expiry"
-                                placeholder="Fecha de vencimiento"
-                                onChange={this.handleInputChange}
-                                onFocus={this.handleInputFocus}
-                            />
-                            <input
-                                className="form-input"
-                                type="tel"
-                                name="cvc"
-                                placeholder="Codigo de seguridad"
-                                onChange={this.handleInputChange}
-                                onFocus={this.handleInputFocus}
-                            />
-                            <br />
-                            <button id="submit-btn" className="btn-primary">Aceptar</button>
+                        <div class="row">
+                            <div class="col">
+                                <input
+                                    className="form-input"
+                                    class="form-control"
+                                    type="tel"
+                                    name="name"
+                                    placeholder="Nombre y apellido"
+                                    onChange={this.handleInputChange}
+                                    onFocus={this.handleInputFocus}
+                                    required
+                                />
+                            </div>
+
+                            <div class="col">
+                                <input
+                                    className="form-input"
+                                    class="form-control"
+                                    type="tel"
+                                    name="number"
+                                    placeholder="Numero de tarjeta"
+                                    onChange={this.handleInputChange}
+                                    onFocus={this.handleInputFocus}
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input
+                                    className="form-input"
+                                    class="form-control"
+                                    type="tel"
+                                    name="expiry"
+                                    placeholder="Fecha de vencimiento"
+                                    onChange={this.handleInputChange}
+                                    onFocus={this.handleInputFocus}
+                                    required
+                                />
+                            </div>
+                            <div class="col">
+                                <input
+                                    className="form-input"
+                                    class="form-control"
+                                    type="tel"
+                                    name="cvc"
+                                    placeholder="Codigo de seguridad"
+                                    onChange={this.handleInputChange}
+                                    onFocus={this.handleInputFocus}
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input
+                                    className="form-input"
+                                    type="tel"
+                                    name="phone"
+                                    class="form-control"
+                                    placeholder="Celular"
+                                    onChange={this.handleInputChange}
+                                    onFocus={this.handleInputFocus}
+                                    required
+                                />
+                            </div>
+                            <div class="col">
+                                <div class="form-control">
+                                    <p> Cuotas :
+                                    <input type="checkbox" id="cuota" name="cuotas" value="3" onChange={this.handleInputChange}
+                                            onFocus={this.handleInputFocus} />
+                                        <label for="cuota"> 3</label>
+                                        <input type="checkbox" id="cuota" name="cuotas" value="6" onChange={this.handleInputChange}
+                                            onFocus={this.handleInputFocus} />
+                                        <label for="cuota"> 6</label>
+                                        <input type="checkbox" id="cuota" name="cuotas" value="12" onChange={this.handleInputChange}
+                                            onFocus={this.handleInputFocus} />
+                                        <label for="cuota"> 12</label>
+                                        <input type="checkbox" id="cuota" name="cuotas" value="18" onChange={this.handleInputChange}
+                                            onFocus={this.handleInputFocus} />
+                                        <label for="cuota"> 18</label></p>
+
+                                </div>
+                            </div>
+
 
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                Total : ${this.state.total}
+                            </div>
+                        </div>
+                        <br />
+
+                        <Link to={{
+                            pathname: '/paymentConfirmation',
+                            state: {
+                                cvc: this.state.cvc,
+                                expiry: this.state.expiry,
+                                name: this.state.name,
+                                number: this.state.number,
+                                phone: this.state.phone,
+                                cuotas: this.state.cuotas,
+                                total: this.state.total
+                            }
+                        }} >
+                            <button type="submit" id="submit-btn" class="btn-primary">Aceptar</button>
+                        </Link>
+
+
 
                     </form>
-                </div>
-            </PaymentFormContainer>
+                </div >
+            </PaymentFormContainer >
         );
     }
 }
 
-const PaymentFormContainer = styled.div` 
-padding: 1rem;
-
+const PaymentFormContainer = styled.div`
+p{
+    float: left;
+}
+label{
+    margin-left: 1rem;
+}
+text-align:center;
+margin: 0 auto;
+#cuota{
+    margin-left: 3rem !important;
+}
 .card-form{
+     padding: 2rem;
   
-    margin: 0 auto;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
-    text-align:center;
-}
-
-#submit-btn{
     margin-top: 2rem;
-}
-.input-container{
-    padding: 2rem;
-    border: 3px solid var(--mainBlue);
-    border-radius: 2rem;
-    width:70%;
-    margin: 0 auto;
-    text-align:center !important;
-}
-
-.form-input{
+    height: 20rem;
 
 }
+.col{
 
-
-@media screen and (max-width: 300px) {
-.form-input{
-    margin-right: rem !important;
-
-}
+margin-top: 1rem;
 
 }
 ` ;
+
+
+/*
+
+
+@media screen and (max-width: 300px) {
+.form - input{
+                        margin - right: rem !important;
+
+}
+
+}*/

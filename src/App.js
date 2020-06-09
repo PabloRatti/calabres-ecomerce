@@ -13,6 +13,7 @@ import Footer from './Components/Footer';
 import LoginForm from './Components/LoginForm.js';
 import AdminHomePage from './Components/AdminHomePage';
 import WhatsappIcon from './Components/WhatsAppIcon';
+import PaymentConfirmation from './Components/PaymentConfirmation';
 function App() {
   return (
     <React.Fragment>
@@ -25,6 +26,7 @@ function App() {
         <Route path="/cart" component={Cart} />     
         <Route path="/login" component={LoginForm} />  
         <Route path="/adminHome" component={AdminHomePage} />    
+        <Route path="/paymentConfirmation" component={PaymentConfirmation} />    
         <Route component={Default} />
        
       </Switch>       

@@ -21,7 +21,7 @@ export default class ProductList extends Component {
     }
 
     componentDidMount() {
-        this.resetFilters();
+      
         fetch('http://localhost:4000/notes/')
             .then(response => response.json())
             .then(json => {
@@ -118,6 +118,7 @@ export default class ProductList extends Component {
         return (
             <React.Fragment>
                 <FilterBar handleFilter={this.handleFilter} />
+                
                 <div className="py-5">
                     <div className="container">
                         <Title name={this.state.productType} title={this.state.brandFilter} width={this.state.widthFilter} profile={this.state.profile} renderLogo="true" />
