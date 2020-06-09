@@ -53,10 +53,28 @@ export default class AdminProductsView extends Component {
             }
 
     updatePublication = (id, aux) => {
-        console.log('Id a actualizar : '+id);
-        console.log('Nuevo precio : '+aux)
-        debugger;
+    
+        let fetchData = {
+            method: "PUT",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                price: aux
+            })
+        }
       //Hacer el update
+        fetch('http://localhost:4000/notes/update/' + id, fetchData)
+            .then(response => {
+                return response;
+            })
+            .then(json => {
+                this.getProducts();
+                return json;
+            });
+
+
     }
     //In aux is the name of the pic to delete in case of delete operation
     handleOperation = (operation, id, aux) => {
@@ -80,7 +98,7 @@ export default class AdminProductsView extends Component {
                 <Title name="Controlador de " title="productos" />
 
                 {products.map((item) => {
-                    return <AdminProductRow profile={item.profile} type={item.type} id={item.id} handleOperation={this.handleOperation} handleFilter={this.handleFilter} brand={item.company} title={item.title} img={item.img} price={item.price} />
+                    return <AdminProductRow key={item.id} profile={item.profile} type={item.type} id={item.id} handleOperation={this.handleOperation} handleFilter={this.handleFilter} brand={item.company} title={item.title} img={item.img} price={item.price} />
                 })}
 
             </AdminProductsViewContainer>

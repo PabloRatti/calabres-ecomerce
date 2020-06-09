@@ -39,14 +39,14 @@ export default class CartTotals extends Component {
                             </button>
 
                             <h5>
-                                <span className="text-title">
+                                <span>
                                     subtotal :
                             </span>
                                 <strong>$ {cartSubtotal}</strong>
                             </h5>
 
                             <h5>
-                                <span className="text-title">
+                                <span>
                                     total :
                             </span>
                                 <strong>$ {cartTotal}</strong>

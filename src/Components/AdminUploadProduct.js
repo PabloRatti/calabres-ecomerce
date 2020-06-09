@@ -57,7 +57,7 @@ export default class AdminUploadProduct extends Component {
                 <h1 className="carga-title" >Carga de productos</h1>
                 <br />
                 <br />
-                <form onSubmit={this.submitHandler} action='http://localhost:4000/notes' method="POST" enctype="multipart/form-data">
+                <form onSubmit={this.submitHandler} action='http://localhost:4000/notes' method="POST" encType="multipart/form-data">
                     <div className="row my-2 text-capitalize text-center">
                         <div className="col-10 mx-auto col-lg-2">
                             <DropdownButton id="dropdown-basic-button" title="Producto">
@@ -217,11 +217,11 @@ export default class AdminUploadProduct extends Component {
                             {/*<input className="submit" type="submit" value="Guardar" />*/}
                         </div>
                     </div>
-                    <div hidden="true">
-                        <input type="text" id="type" name="type" value={this.state.producto} hidden="true" />
-                        <input type="text" id="company" name="company" value={this.state.marca} hidden="true" />
-                        <input type="text" id="profile" name="profile" value={this.state.perfil} hidden="true" />
-                        <input type="text" id="width" name="width" value={this.state.ancho} hidden="true" />
+                    <div hidden={true}>
+                        <input type="text" id="type" name="type" readOnly={true} value={this.state.producto} hidden={true} />
+                        <input type="text" id="company" name="company" value={this.state.marca} hidden={true} />
+                        <input type="text" id="profile" name="profile" value={this.state.perfil} hidden={true} />
+                        <input type="text" id="width" name="width" value={this.state.ancho} hidden={true} />
                         
                     </div>
                 </form>

@@ -3,7 +3,12 @@ import styled from 'styled-components';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 export default class FilterBar extends Component {
-
+constructor(){
+    super();
+    this.state ={
+        inactive : false
+    }
+}
 
     render() {
         const { handleFilter } = this.props;
@@ -26,12 +31,14 @@ export default class FilterBar extends Component {
                                     Neumáticos
                                     </NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
+                                    this.setState({inactive : true})
                                     return handleFilter('productos', 'llanta');
                                 }}> Llantas</NavDropdown.Item>
 
 
                             </NavDropdown>
-                            <NavDropdown className="drop" title="Marca" id="collasible-nav-dropdown">
+                          
+                            <NavDropdown disabled={this.state.inactive} className="drop" title="Marca" id="collasible-nav-dropdown">
 
                                 <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('marcas', 'pirelli');
@@ -66,7 +73,7 @@ export default class FilterBar extends Component {
 
                             </NavDropdown>
 
-                            <NavDropdown className="drop" title="Ancho" id="collasible-nav-dropdown">
+                            <NavDropdown disabled={this.state.inactive} className="drop" title="Ancho" id="collasible-nav-dropdown">
                                 <NavDropdown.Item className="item" onClick={()=>{
                                     return handleFilter('ancho','31');
                                 }}>31</NavDropdown.Item>
@@ -104,7 +111,7 @@ export default class FilterBar extends Component {
                                     return handleFilter('ancho', '265');
                                 }}>265</NavDropdown.Item>
                             </NavDropdown>
-                            <NavDropdown className="drop" title="Perfil" id="collasible-nav-dropdown">
+                            <NavDropdown disabled={this.state.inactive} className="drop" title="Perfil" id="collasible-nav-dropdown">
                                 <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('perfil', '10.5');
                                 }} >10.5</NavDropdown.Item>
@@ -137,7 +144,7 @@ export default class FilterBar extends Component {
                                 }}>80</NavDropdown.Item>
 
                             </NavDropdown>
-
+                           
                         </Nav>
 
                     </Navbar.Collapse>
@@ -153,7 +160,6 @@ const FilterBarContainer = styled.div`
 -ms-animation: fadein 2s; /* Internet Explorer */
 -o-animation: fadein 2s; /* Opera < 12.1 */
 animation: fadein 2s;
-
 
 @keyframes fadein {
 from { opacity: 0; }

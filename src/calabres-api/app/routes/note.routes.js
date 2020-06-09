@@ -30,6 +30,9 @@ module.exports = (app) => {
 
     // Delete a Note with noteId
     app.delete('/notes/:noteId', notes.delete);
-
+    //Delete a picture
     app.post('/notes/deletePicture/:notePath', notes.deletePicture);
+    
+    //Login
+    app.post('/notes/adminLogin', notes.logAdmin);
 }

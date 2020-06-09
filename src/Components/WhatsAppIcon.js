@@ -125,6 +125,7 @@ to   { opacity: 1; }
         position:fixed;  
         z-index: 1;
         right: 1rem;  
+        top: 8rem;
                
    }
 @media screen and (max-width: 300px) {

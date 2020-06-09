@@ -15,7 +15,7 @@ export default class Details extends Component {
             <DetailsWraper>
                 <ProductConsumer>
                     {value => {
-                        const { id, company, img, title, inCart, price, width } = value.detailProduct;
+                        const { id, company, img, title, inCart, price, width,profile } = value.detailProduct;
                         return (
                             <div className="container py-5">
                                 {/**Title start */}
@@ -41,7 +41,7 @@ export default class Details extends Component {
                                                 <li>Marca : {company}</li>
                                                 <li>Modelo : {title}</li>
                                                 <li>Ancho : {width}</li>
-                                                <li>Perfil : </li>
+                                                <li>Perfil : {profile}</li>
                                                 <li>Valor : ${price}</li>
 
                                             </ul>

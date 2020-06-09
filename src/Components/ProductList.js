@@ -15,19 +15,20 @@ export default class ProductList extends Component {
             widthFilter: '',
             brandFilter: '',
             title: '',
-            productType: ''
+            productType: '',
+            profile: ''
         }
     }
 
     componentDidMount() {
-        
+
         fetch('http://localhost:4000/notes/')
             .then(response => response.json())
             .then(json => {
                 this.setState({ products: json });
                 console.log(this.state.products)
                 return json;
-            });        
+            });
     }
 
     filterByProduct = (products, type) => {
@@ -54,11 +55,16 @@ export default class ProductList extends Component {
         });
 
     }
+    filterByProfile = (products, profile) => {
+        return products.filter((item) => {
+            return item.profile === profile;
+        });
+    }
 
     applyFilters = (products) => {
 
         if (this.state.productType) {
-            products = this.filterByProduct(products, this.state.productType);  
+            products = this.filterByProduct(products, this.state.productType);
         }
         if (this.state.priceFilter) {
             products = this.filterByPrice(products, this.state.priceFilter);
@@ -68,6 +74,9 @@ export default class ProductList extends Component {
         }
         if (this.state.brandFilter) {
             products = this.filterByBrand(products, this.state.brandFilter);
+        }
+        if (this.state.profile) {
+            products = this.filterByProfile(products, this.state.profile);
         }
 
         return products;
@@ -82,14 +91,17 @@ export default class ProductList extends Component {
             case 'marcas':
                 this.setState({ brandFilter: valor })
                 break;
-            case 'medida':
+            case 'ancho':
                 this.setState({ widthFilter: valor })
                 break;
             case 'productos':
                 this.setState({ productType: valor })
                 break;
+            case 'perfil':
+                this.setState({ profile: valor })
+                break;
             case 'reset':
-                this.setState({ brandFilter: '', widthFilter: '', priceFilter: '', productType: '' })
+                this.setState({ brandFilter: '', widthFilter: '', priceFilter: '', productType: '',profile: '' })
                 break;
             default: break;
         }
@@ -103,14 +115,14 @@ export default class ProductList extends Component {
                 <FilterBar handleFilter={this.handleFilter} />
                 <div className="py-5">
                     <div className="container">
-                        <Title name={this.state.productType} title={this.state.brandFilter} renderLogo="true" />
+                        <Title name={this.state.productType} title={this.state.brandFilter} width={this.state.widthFilter} profile={this.state.profile} renderLogo="true" />
                         <div className="row">
                             <ProductConsumer>
                                 {(value) => {
                                     console.log('Products provided in consumer : ');
                                     console.log(value.products)
                                     let products = this.applyFilters(value.products);
-                                  
+
                                     return products.map(product => {
                                         return <Product key={product.id} product={product} />
                                     })

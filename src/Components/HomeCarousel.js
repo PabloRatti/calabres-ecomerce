@@ -8,9 +8,10 @@ export default class HomeCarousel extends Component {
     render() {
         return (
             <HomeCarouselContainer>
-                <Carousel  fade="true" interval="2200" >
-                    <Carousel.Item>
+                <Carousel fade="true" interval="2200" >
+                    <Carousel.Item id="firs-slide">
                         <img
+                           
                             className="carouselImg d-block w-100"
                             src={require("../calabres-api/images/static/ahora12Portada.png")}
                             alt="First slide"
@@ -47,12 +48,15 @@ const HomeCarouselContainer = styled.div`
   } 
 
   @media (max-width: 48em) {
-       max-height: 15rem;  
+       max-height: 11rem;  
   .carouselImg {
-      max-height: 15rem
+      max-height: 11rem
   }
   .row{
       margin: 0 auto;
+  }
+  #first-slide{
+      height: 3rem !important;
   }
 }
 `;

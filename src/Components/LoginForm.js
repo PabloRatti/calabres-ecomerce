@@ -16,18 +16,55 @@ export default class LoginForm extends Component {
     componentDidMount = () => {
         scroll.scrollToTop();
     }
-
-    handleSubmit = () => {
-
-        if (this.state.password === '123' && this.state.user === 'pablo') {
-            alert('Bienvenido ! Calabres tienda E-Comerce');
-            sessionStorage.setItem('isLoged', true);
-            //Redireccionar a admin homepage
-            this.props.history.push("/adminHome");     
-
-        } else {
-            alert('Datos incorrectos intente nuevamente');
+    /*
+        handleSubmit = () => {
+    
+            if (this.state.password === '123' && this.state.user === 'pablo') {
+                alert('Bienvenido ! Calabres tienda E-Comerce');
+                sessionStorage.setItem('isLoged', true);
+                //Redireccionar a admin homepage
+                this.props.history.push("/adminHome");     
+    
+            } else {
+                alert('Datos incorrectos intente nuevamente');
+            }
+    
+    
         }
+    */
+    handleSubmit = (e) => {
+        e.preventDefault();
+        let fetchData = {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user: this.state.user,
+                password: this.state.password
+            })
+        }
+        //Hacer el update
+        fetch('http://localhost:4000/notes/adminLogin/', fetchData)
+            .then(response => {
+                console.log(response.status);
+                
+                return response;
+            })
+            .then(json => {
+                if (json.status === 200) {
+                    alert('Bienvenido ! Calabres tienda E-Comerce');
+                    sessionStorage.setItem('isLoged', true);
+                    //Redireccionar a admin homepage
+                    this.props.history.push("/adminHome");
+                } else {
+                    console.log('Incorrect login');
+                    alert('Datos incorrectos, intente nuevamente...');
+                    this.setState({user:'',password: ''})
+                };
+                return json;
+            });
 
 
     }
@@ -66,12 +103,12 @@ export default class LoginForm extends Component {
 
                                         <label className="input-container">
                                             Usuario  <br />
-                                            <input type="text" onChange={this.userHandler} />
+                                            <input type="text" value={this.state.user} onChange={this.userHandler} />
                                         </label>
                                         <br />
                                         <label className="input-container">
                                             Contraseña  <br />
-                                            <input type="password" onChange={this.passwordHandler} />
+                                            <input type="password" value={this.state.password} onChange={this.passwordHandler} />
                                         </label>
                                         <br /><br />
                                         <input type="submit" value="Submit" />

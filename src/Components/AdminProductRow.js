@@ -55,12 +55,12 @@ export default class AdminProductRow extends Component {
 
                         <form onSubmit={() => {
                             return handleOperation('update', id, this.state.newPrice);
-                        }} className="form-price" action={this.updateHandler} method="PUT" enctype="application/json">
+                        }} className="form-price" action={this.updateHandler} method="PUT" encType="application/json">
                             <input className="input-price" type="number" id="price" name="price" placeholder={price} value={this.state.newPrice} onChange={this.priceHandler} />
                             <button id="btn-price" class="btn btn-primary" type="submit">Actualizar</button>
                         </form>
 
-                        <h1>{this.state.newPrice}</h1>
+                      
                     </div>
 
 
