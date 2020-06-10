@@ -16,7 +16,8 @@ export default class PaymentForm extends React.Component {
             phone: '',
             cuotas: '',
             aceptedCards: ['mastercard', 'visa', 'cabal'],
-            total: this.props.total
+            total: this.props.total,
+            products: this.props.cartItems
         };
     }
 
@@ -163,15 +164,14 @@ export default class PaymentForm extends React.Component {
                                 number: this.state.number,
                                 phone: this.state.phone,
                                 cuotas: this.state.cuotas,
-                                total: this.state.total
+                                total: this.state.total,
+                                products: this.state.products
                             }
                         }} >
                             <button type="submit" id="submit-btn" class="btn-primary">Aceptar</button>
                         </Link>
-
-
-
                     </form>
+
                 </div >
             </PaymentFormContainer >
         );

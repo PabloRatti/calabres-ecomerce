@@ -18,7 +18,7 @@ export default class CartTotals extends Component {
 
 
     render() {
-        const { cartSubtotal, cartTotal, clearCart } = this.props.value;
+        const { cartSubtotal, cartTotal, clearCart , cart} = this.props.value;
         return (
 
             <React.Fragment>
@@ -54,7 +54,7 @@ export default class CartTotals extends Component {
                         </div>
                     </div>
                     <div hidden={this.state.formHidden}>
-                        <PaymentForm formHidden={this.state.formHidden} total={cartTotal} />
+                        <PaymentForm cartItems={cart} formHidden={this.state.formHidden} total={cartTotal} />
                     </div>
 
                 </div>

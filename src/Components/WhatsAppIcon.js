@@ -91,7 +91,7 @@ cursor:pointer;
 -o-animation: fadein 2s; /* Opera < 12.1 */
 animation: fadein 2s;
 right: -5rem !important;
-top: 0rem !important;
+top: 5rem !important;
 @keyframes fadein {
 from { opacity: 0; }
 to   { opacity: 1; }
@@ -112,7 +112,7 @@ to   { opacity: 1; }
     border-radius: 1rem 0 0 1rem;
     
     right: 2rem;
-    top: 4rem;
+    top: 8rem;
 }
 
    .link{      
