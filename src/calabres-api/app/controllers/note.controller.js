@@ -168,3 +168,115 @@ exports.delete = (req, res) => {
 
 };
 
+saveSoldProducts = (products, sellId) => {
+    console.log('Saving products');
+    let con = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'calabresdb'
+    });
+
+    products.map((item) => {
+        try {
+            let productCant = item.cant;
+            if (item.cant < 1) productCant = 1;
+            let query = 'INSERT INTO productSold (company,title,width,profile,cant,sellId) values("' + item.company + '","' + item.title + '","' + item.width + '","' + item.profile + '","' + productCant + '",' + sellId + ');';
+            console.log(query);
+            con.connect();
+            con.query(query, (err, response, campos) => {
+                if (err) {
+                    console.log('Error en query products')
+                    console.log(err);
+                } else {
+                    console.log('Item Inserted !')
+
+                }
+            });
+            con.end();
+        } catch (e) {
+            console.log('Error catched : ' + e);
+        }
+    });
+
+
+}
+
+exports.saveVenta = (req, res) => {
+
+    let products = req.body.products;
+
+    let con = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'calabresdb'
+    });
+
+    try {
+        let query = 'INSERT INTO shipingTicket (name,identity_number,userEmail,dir_Remitente,localidad,postalCode,total,phone) values("' + req.body.name + '","' + req.body.identity_number + '","' + req.body.userEmail + '","' + req.body.dir_Remitente + '","' + req.body.localidad + '","' + req.body.postalCode + '","' + req.body.total + '","' + req.body.phone + '");';
+
+        con.connect();
+        con.query(query, (err, response, campos) => {
+            if (err) {
+                console.log('Error en query shippingTicket')
+            } else {
+                console.log('Ticket insertado! ID : ' + response.insertId);
+                saveSoldProducts(products, response.insertId);
+                res.redirect('http://localhost:3000/congrats');
+            }
+        });
+        con.end();
+    } catch (e) {
+        console.log('Error catched : ' + e);
+    }
+
+}
+
+exports.getTickets = (req, res) => {
+
+    let con = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'calabresdb'
+    });
+
+    con.connect();
+    con.query("SELECT * FROM shipingTicket", (err, response, campos) => {
+        if (err) {
+            console.log('ERROR EN QUERY shipping tickets');
+        } else {           
+             res.send(response);
+        }
+    });
+    con.end();
+
+}
+
+exports.getProductsFromTicket = (req,res) => {
+    let con = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'calabresdb'
+    });
+
+    con.connect();
+    let ticketId = req.params.ticketId;
+    console.log('Ticket id  : '+ticketId);
+     con.query("SELECT * FROM productSold WHERE sellId =" + ticketId, (err, response, campos) => {
+        if (err) {
+            console.log('ERROR EN QUERY products from ticket');
+        } else {
+            //Funciona 
+            console.log(response);
+            res.send(response);
+        }
+    });
+
+    con.end();
+
+
+}
+

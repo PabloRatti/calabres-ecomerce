@@ -14,6 +14,7 @@ import LoginForm from './Components/LoginForm.js';
 import AdminHomePage from './Components/AdminHomePage';
 import WhatsappIcon from './Components/WhatsAppIcon';
 import PaymentConfirmation from './Components/PaymentConfirmation';
+import Congrats from './Components/Congrats';
 function App() {
   return (
     <React.Fragment>
@@ -26,7 +27,8 @@ function App() {
         <Route path="/cart" component={Cart} />     
         <Route path="/login" component={LoginForm} />  
         <Route path="/adminHome" component={AdminHomePage} />    
-        <Route path="/paymentConfirmation" component={PaymentConfirmation} />    
+        <Route path="/paymentConfirmation" component={PaymentConfirmation} />  
+        <Route path="/congrats" component={Congrats} />
         <Route component={Default} />
        
       </Switch>       

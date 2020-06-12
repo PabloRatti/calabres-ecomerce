@@ -12,7 +12,7 @@ export default class CartTotals extends Component {
     }
 
     creditFormVisibilityHandler = () => {
-        this.setState({ formHidden: !this.state.formHidden }, this.state.formHidden ? scroll.scrollTo(418) : scroll.scrollToTop)
+        this.setState({ formHidden: !this.state.formHidden }, this.state.formHidden ? scroll.scrollTo(450) : scroll.scrollToTop)
 
     }
 

@@ -35,4 +35,10 @@ module.exports = (app) => {
     
     //Login
     app.post('/notes/adminLogin', notes.logAdmin);
+    //Save sells to send product to client
+    app.post('/notes/guardarVenta', notes.saveVenta);
+    //Get sold tickets to delivery
+    app.get('/notes/getTickets/getAll', notes.getTickets);
+    //Get products for one ticket
+    app.get('/notes/getTicketProducts/:ticketId', notes.getProductsFromTicket);
 }

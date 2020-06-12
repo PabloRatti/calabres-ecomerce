@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Title from './Title';
 import 'react-credit-cards/es/styles-compiled.css';
 import { Link } from 'react-router-dom';
+import { Dropdown, Button } from 'react-bootstrap';
+
 export default class PaymentForm extends React.Component {
     constructor(props) {
         super(props);
@@ -16,14 +18,20 @@ export default class PaymentForm extends React.Component {
             phone: '',
             cuotas: '',
             aceptedCards: ['mastercard', 'visa', 'cabal'],
-            total: this.props.total,
-            products: this.props.cartItems
+            localidad: '',
+            dir_Remitente: '',
+            userEmail: '',
+            continueDisabled: true,
+            valorCuota: '',
+            postalCode: ''
         };
     }
 
     componentDidMount() {
 
     }
+
+
     handleInputFocus = (e) => {
         this.setState({ focus: e.target.name });
     }
@@ -34,6 +42,11 @@ export default class PaymentForm extends React.Component {
         this.setState({ [name]: value });
     }
 
+    componentDidUpdate() {
+
+    }
+
+    
     handleSubmit = (e) => {
         e.preventDefault();
 
@@ -44,10 +57,13 @@ export default class PaymentForm extends React.Component {
         console.log('Code : ' + this.state.cvc);
         console.log('Total : ' + this.state.total);
 
+        this.setState({ continueDisabled: false })
+
 
     }
 
     render() {
+
         return (
             <PaymentFormContainer id="section1" title="section1" ref="test">
 
@@ -128,48 +144,129 @@ export default class PaymentForm extends React.Component {
                                 />
                             </div>
                             <div class="col">
-                                <div class="form-control">
-                                    <p> Cuotas :
-                                    <input type="checkbox" id="cuota" name="cuotas" value="3" onChange={this.handleInputChange}
-                                            onFocus={this.handleInputFocus} />
-                                        <label for="cuota"> 3</label>
-                                        <input type="checkbox" id="cuota" name="cuotas" value="6" onChange={this.handleInputChange}
-                                            onFocus={this.handleInputFocus} />
-                                        <label for="cuota"> 6</label>
-                                        <input type="checkbox" id="cuota" name="cuotas" value="12" onChange={this.handleInputChange}
-                                            onFocus={this.handleInputFocus} />
-                                        <label for="cuota"> 12</label>
-                                        <input type="checkbox" id="cuota" name="cuotas" value="18" onChange={this.handleInputChange}
-                                            onFocus={this.handleInputFocus} />
-                                        <label for="cuota"> 18</label></p>
-
-                                </div>
+                                <input
+                                    className="form-input"
+                                    type="tel"
+                                    name="userEmail"
+                                    class="form-control"
+                                    placeholder="Email"
+                                    onChange={this.handleInputChange}
+                                    onFocus={this.handleInputFocus}
+                                    required
+                                />
                             </div>
-
-
                         </div>
                         <div class="row">
                             <div class="col">
-                                Total : ${this.state.total}
+                                <input
+                                    className="form-input"
+                                    type="tel"
+                                    name="localidad"
+                                    class="form-control"
+                                    placeholder="Provincia / Ciudad"
+                                    onChange={this.handleInputChange}
+                                    onFocus={this.handleInputFocus}
+                                    required
+                                />
+                            </div>
+                            <div class="col">
+                                <input
+                                    className="form-input"
+                                    type="tel"
+                                    name="dir_Remitente"
+                                    class="form-control"
+                                    placeholder="Direccion de sucursal OCA en la que retira"
+                                    onChange={this.handleInputChange}
+                                    onFocus={this.handleInputFocus}
+                                    required
+                                />
                             </div>
                         </div>
-                        <br />
+                        <div class="row">
+                            <div class="col">
+                                <input
+                                    className="form-input"
+                                    type="tel"
+                                    name="postalCode"
+                                    class="form-control"
+                                    placeholder="Codigo Postal"
+                                    onChange={this.handleInputChange}
+                                    onFocus={this.handleInputFocus}
+                                    required
+                                />
+                            </div>
+                            <div class="col">
+                                <input
+                                    className="form-input"
+                                    type="tel"
+                                    name="identity_number"
+                                    class="form-control"
+                                    placeholder="Numero de documento"
+                                    onChange={this.handleInputChange}
+                                    onFocus={this.handleInputFocus}
+                                    required
+                                />
+                            </div>
+                        </div>
 
-                        <Link to={{
-                            pathname: '/paymentConfirmation',
-                            state: {
-                                cvc: this.state.cvc,
-                                expiry: this.state.expiry,
-                                name: this.state.name,
-                                number: this.state.number,
-                                phone: this.state.phone,
-                                cuotas: this.state.cuotas,
-                                total: this.state.total,
-                                products: this.state.products
-                            }
-                        }} >
-                            <button type="submit" id="submit-btn" class="btn-primary">Aceptar</button>
-                        </Link>
+                       
+                    <div class="row">
+                        <div class="col">
+                            Total : ${this.props.total}
+                            <br />
+                                Pagos : {this.state.cuotas}
+                            <br />
+                                Valor de la cuota : ${this.state.valorCuota ? this.state.valorCuota.toFixed(2) : null}
+                            <br />
+
+                        </div>
+                        <div class="col">
+                            <Dropdown className="dropdown-container">
+                                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                    Cuotas
+                                    </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    <Dropdown.Item onClick={() => this.setState({ cuotas: '3', valorCuota: this.props.total / 3 })}>3 (Sin interes)</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => this.setState({ cuotas: '6', valorCuota: (this.props.total * 18) / 100 })}>6 (+18%)</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => this.setState({ cuotas: '12', valorCuota: this.props.total / 12 })}>12 (sin interes)</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+
+                        </div>
+                        <div class="col">
+                            <div >
+                                <Button className="aceptar-btn" type="submit" variant="success">Aceptar</Button>
+
+                                <Link to={{
+                                    pathname: '/paymentConfirmation',
+                                    state: {
+                                        cvc: this.state.cvc,
+                                        expiry: this.state.expiry,
+                                        name: this.state.name,
+                                        number: this.state.number,
+                                        phone: this.state.phone,
+                                        cuotas: this.state.cuotas,
+                                        total: this.props.total,
+                                        products: this.props.cartItems,
+                                        localidad: this.state.localidad,
+                                        dir_Remitente: this.state.dir_Remitente,
+                                        userEmail: this.state.userEmail,
+                                        postalCode: this.state.postalCode,
+                                        identity_number: this.state.identity_number
+                                    }
+                                }} >
+                                    <Button disabled={this.state.continueDisabled} variant="success">Continuar</Button>
+                                </Link>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <br />
+
+
                     </form>
 
                 </div >
@@ -179,14 +276,25 @@ export default class PaymentForm extends React.Component {
 }
 
 const PaymentFormContainer = styled.div`
+
+text-align:center;
+margin: 0 auto;
+
+.aceptar-btn{
+    margin-right: 2rem;
+}
+.dropdown-container{
+    margin: 0 auto;
+    width: 40% !important;
+}
+
 p{
     float: left;
 }
 label{
     margin-left: 1rem;
 }
-text-align:center;
-margin: 0 auto;
+
 #cuota{
     margin-left: 3rem !important;
 }
@@ -194,7 +302,7 @@ margin: 0 auto;
      padding: 2rem;
   
     margin-top: 2rem;
-    height: 20rem;
+    height: 100%;
 
 }
 .col{
