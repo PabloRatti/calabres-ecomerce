@@ -38,6 +38,16 @@ export default class NavBar extends Component {
 const NavWrapper = styled.nav`
 background: var(--mainBlue);
 font-family: Trebuchet MS, sans-serif;
+
+
+
+ position:fixed;
+ z-index: 1;
+ width: 100%;
+
+
+
+
 .icon{
     float: right ! important;
 }

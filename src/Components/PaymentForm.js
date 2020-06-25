@@ -27,9 +27,7 @@ export default class PaymentForm extends React.Component {
         };
     }
 
-    componentDidMount() {
 
-    }
 
 
     handleInputFocus = (e) => {
@@ -42,11 +40,28 @@ export default class PaymentForm extends React.Component {
         this.setState({ [name]: value });
     }
 
-    componentDidUpdate() {
+    //Esto es por si una vez seleccionadas las cuotas el usuario decide sumar el numero de items, el valor de las cuotas debe actualziarse
+    //acorde al valor total que se pasa por props
+    componentWillReceiveProps(nextProps) {
+        let valor = '';
+        if (this.state.cuotas) {
+            switch (this.state.cuotas) {
+                case '3':
+                    valor = nextProps.total / 3;
+                    break;
+                case '6':
+                    valor = (nextProps.total * 18) / 100;
+                    break;
+                case '12':
+                    valor = nextProps.total / 12;
+                    break;
+            }
 
+            this.setState({ valorCuota: valor })
+        }
     }
 
-    
+
     handleSubmit = (e) => {
         e.preventDefault();
 
@@ -68,6 +83,7 @@ export default class PaymentForm extends React.Component {
             <PaymentFormContainer id="section1" title="section1" ref="test">
 
                 <Title name="Pago con " title="Credito bancario" />
+
                 <div id="PaymentForm">
                     <Cards acceptedCards={this.state.aceptedCards}
                         cvc={this.state.cvc}
@@ -209,62 +225,62 @@ export default class PaymentForm extends React.Component {
                             </div>
                         </div>
 
-                       
-                    <div class="row">
-                        <div class="col">
-                            Total : ${this.props.total}
-                            <br />
+
+                        <div class="row">
+                            <div class="col">
+                                Total : ${this.props.total}
+                                <br />
                                 Pagos : {this.state.cuotas}
-                            <br />
+                                <br />
                                 Valor de la cuota : ${this.state.valorCuota ? this.state.valorCuota.toFixed(2) : null}
-                            <br />
-
-                        </div>
-                        <div class="col">
-                            <Dropdown className="dropdown-container">
-                                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                    Cuotas
-                                    </Dropdown.Toggle>
-
-                                <Dropdown.Menu>
-                                    <Dropdown.Item onClick={() => this.setState({ cuotas: '3', valorCuota: this.props.total / 3 })}>3 (Sin interes)</Dropdown.Item>
-                                    <Dropdown.Item onClick={() => this.setState({ cuotas: '6', valorCuota: (this.props.total * 18) / 100 })}>6 (+18%)</Dropdown.Item>
-                                    <Dropdown.Item onClick={() => this.setState({ cuotas: '12', valorCuota: this.props.total / 12 })}>12 (sin interes)</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-
-                        </div>
-                        <div class="col">
-                            <div >
-                                <Button className="aceptar-btn" type="submit" variant="success">Aceptar</Button>
-
-                                <Link to={{
-                                    pathname: '/paymentConfirmation',
-                                    state: {
-                                        cvc: this.state.cvc,
-                                        expiry: this.state.expiry,
-                                        name: this.state.name,
-                                        number: this.state.number,
-                                        phone: this.state.phone,
-                                        cuotas: this.state.cuotas,
-                                        total: this.props.total,
-                                        products: this.props.cartItems,
-                                        localidad: this.state.localidad,
-                                        dir_Remitente: this.state.dir_Remitente,
-                                        userEmail: this.state.userEmail,
-                                        postalCode: this.state.postalCode,
-                                        identity_number: this.state.identity_number
-                                    }
-                                }} >
-                                    <Button disabled={this.state.continueDisabled} variant="success">Continuar</Button>
-                                </Link>
+                                <br />
 
                             </div>
+                            <div class="col">
+                                <Dropdown className="dropdown-container">
+                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                        Cuotas
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item onClick={() => this.setState({ cuotas: '3', valorCuota: this.props.total / 3 })}>3 (Sin interes)</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ cuotas: '6', valorCuota: (this.props.total * 18) / 100 })}>6 (+18%)</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ cuotas: '12', valorCuota: this.props.total / 12 })}>12 (sin interes)</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+
+                            </div>
+                            <div class="col">
+                                <div >
+                                    <Button className="aceptar-btn" type="submit" variant="success">Aceptar</Button>
+
+                                    <Link to={{
+                                        pathname: '/paymentConfirmation',
+                                        state: {
+                                            cvc: this.state.cvc,
+                                            expiry: this.state.expiry,
+                                            name: this.state.name,
+                                            number: this.state.number,
+                                            phone: this.state.phone,
+                                            cuotas: this.state.cuotas,
+                                            total: this.props.total,
+                                            products: this.props.cartItems,
+                                            localidad: this.state.localidad,
+                                            dir_Remitente: this.state.dir_Remitente,
+                                            userEmail: this.state.userEmail,
+                                            postalCode: this.state.postalCode,
+                                            identity_number: this.state.identity_number
+                                        }
+                                    }} >
+                                        <Button disabled={this.state.continueDisabled} variant="success">Continuar</Button>
+                                    </Link>
+
+                                </div>
 
 
+                            </div>
                         </div>
-                    </div>
-                    <br />
+                        <br />
 
 
                     </form>

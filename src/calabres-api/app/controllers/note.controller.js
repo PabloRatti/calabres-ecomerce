@@ -176,14 +176,14 @@ saveSoldProducts = (products, sellId) => {
         password: '',
         database: 'calabresdb'
     });
-
+    con.connect();
     products.map((item) => {
         try {
-            let productCant = item.cant;
-            if (item.cant < 1) productCant = 1;
-            let query = 'INSERT INTO productSold (company,title,width,profile,cant,sellId) values("' + item.company + '","' + item.title + '","' + item.width + '","' + item.profile + '","' + productCant + '",' + sellId + ');';
+            let productCant = item.count;
+            if (productCant < 1) productCant = 1;
+            let query = 'INSERT INTO productSold (company,title,width,profile,cant,sellId) values("' + item.company + '","' + item.title + '","' + item.width + '","' + item.profile + '",' + productCant + ',' + sellId + ');';
             console.log(query);
-            con.connect();
+
             con.query(query, (err, response, campos) => {
                 if (err) {
                     console.log('Error en query products')
@@ -193,12 +193,14 @@ saveSoldProducts = (products, sellId) => {
 
                 }
             });
-            con.end();
+
         } catch (e) {
             console.log('Error catched : ' + e);
+            con.end();
         }
-    });
 
+    });
+    con.end();
 
 }
 
@@ -246,15 +248,16 @@ exports.getTickets = (req, res) => {
     con.query("SELECT * FROM shipingTicket", (err, response, campos) => {
         if (err) {
             console.log('ERROR EN QUERY shipping tickets');
-        } else {           
-             res.send(response);
+        } else {
+            res.send(response);
         }
     });
     con.end();
 
 }
 
-exports.getProductsFromTicket = (req,res) => {
+exports.getProductsFromTicket = (req, res) => {
+
     let con = mysql.createConnection({
         host: 'localhost',
         user: 'root',
@@ -264,8 +267,8 @@ exports.getProductsFromTicket = (req,res) => {
 
     con.connect();
     let ticketId = req.params.ticketId;
-    console.log('Ticket id  : '+ticketId);
-     con.query("SELECT * FROM productSold WHERE sellId =" + ticketId, (err, response, campos) => {
+    console.log('Ticket id  : ' + ticketId);
+    con.query("SELECT * FROM productSold", (err, response, campos) => {
         if (err) {
             console.log('ERROR EN QUERY products from ticket');
         } else {
@@ -280,3 +283,46 @@ exports.getProductsFromTicket = (req,res) => {
 
 }
 
+exports.deleteProductsFromTicket = (req, res) => {
+    let con = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'calabresdb'
+    });
+
+    con.connect();
+    let ticketId = req.params.ticketId;
+    console.log('Ticket id  : ' + ticketId);
+    con.query("DELETE FROM productSold WHERE sellId = " + ticketId, (err, response, campos) => {
+        if (err) {
+            console.log('ERROR EN QUERY products from ticket');
+        } else {
+            res.send(200);
+        }
+    });
+
+    con.end();
+}
+
+exports.deleteTicket = (req, res) => {
+    let con = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'calabresdb'
+    });
+
+    con.connect();
+    let ticketId = req.params.ticketId;
+    console.log('Ticket id  : ' + ticketId);
+    con.query("DELETE FROM shipingTicket WHERE id = " + ticketId, (err, response, campos) => {
+        if (err) {
+            console.log('ERROR EN QUERY products from ticket');
+        } else {
+            res.send(200);
+        }
+    });
+
+    con.end();
+}

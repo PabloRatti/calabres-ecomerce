@@ -91,7 +91,7 @@ cursor:pointer;
 -o-animation: fadein 2s; /* Opera < 12.1 */
 animation: fadein 2s;
 right: -5rem !important;
-top: 5rem !important;
+top: 8rem !important;
 @keyframes fadein {
 from { opacity: 0; }
 to   { opacity: 1; }

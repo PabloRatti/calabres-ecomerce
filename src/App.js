@@ -14,14 +14,19 @@ import LoginForm from './Components/LoginForm.js';
 import AdminHomePage from './Components/AdminHomePage';
 import WhatsappIcon from './Components/WhatsAppIcon';
 import PaymentConfirmation from './Components/PaymentConfirmation';
+import ProductsSoldList from './Components/ProductsSoldList';
 import Congrats from './Components/Congrats';
+
 function App() {
   return (
     <React.Fragment>
+ 
+    
       <NavBar/>
       <WhatsappIcon/>
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route path="/productsSoldList" component={ProductsSoldList} />
         <Route path="/llantas" component={ProductList} />
         <Route path="/details" component={Details} />
         <Route path="/cart" component={Cart} />     
@@ -34,6 +39,7 @@ function App() {
       </Switch>       
      <Modal />
       <Footer />
+    
     </React.Fragment>
   );
 }

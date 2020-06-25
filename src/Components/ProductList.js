@@ -3,7 +3,7 @@ import Product from './Product';
 import Title from './Title';
 import { ProductConsumer } from '../Context';
 import FilterBar from './FilterBar';
-
+import styled from 'styled-components';
 
 
 export default class ProductList extends Component {
@@ -21,7 +21,7 @@ export default class ProductList extends Component {
     }
 
     componentDidMount() {
-      
+
         fetch('http://localhost:4000/notes/')
             .then(response => response.json())
             .then(json => {
@@ -32,7 +32,7 @@ export default class ProductList extends Component {
     }
 
     filterByProduct = (products, type) => {
-       
+
         return products.filter((item) => {
             return item.type === type;
         });
@@ -83,7 +83,7 @@ export default class ProductList extends Component {
         return products;
     }
 
-    resetFilters = () =>{
+    resetFilters = () => {
         this.setState({ brandFilter: '', widthFilter: '', priceFilter: '', productType: '', profile: '' })
     }
 
@@ -106,7 +106,7 @@ export default class ProductList extends Component {
                 this.setState({ profile: valor })
                 break;
             case 'reset':
-               this.resetFilters();
+                this.resetFilters();
                 break;
             default: break;
         }
@@ -116,27 +116,36 @@ export default class ProductList extends Component {
     render() {
 
         return (
-            <React.Fragment>
-                <FilterBar handleFilter={this.handleFilter} />
-                
-                <div className="py-5">
-                    <div className="container">
-                        <Title name={this.state.productType} title={this.state.brandFilter} width={this.state.widthFilter} profile={this.state.profile} renderLogo="true" />
-                        <div className="row">
-                            <ProductConsumer>
-                                {(value) => {
-                                    
-                                    let products = this.applyFilters(value.products);
+            <ProductListContainer>
+                <React.Fragment>
+                    <FilterBar handleFilter={this.handleFilter} />
 
-                                    return products.map(product => {
-                                        return <Product key={product.id} product={product} />
-                                    })
-                                }}
-                            </ProductConsumer>
+                    <div className="py-5">
+                        <div className="container">
+                            <Title name={this.state.productType} title={this.state.brandFilter} width={this.state.widthFilter} profile={this.state.profile} renderLogo="true" />
+                            <div className="row">
+                                <ProductConsumer>
+                                    {(value) => {
+
+                                        let products = this.applyFilters(value.products);
+
+                                        return products.map(product => {
+                                            return <Product key={product.id} product={product} />
+                                        })
+                                    }}
+                                </ProductConsumer>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </React.Fragment>
+                </React.Fragment>
+            </ProductListContainer>
         );
     }
 }
+
+const ProductListContainer = styled.div`
+.container{ 
+    margin-top: 5rem !important;
+}
+
+`;

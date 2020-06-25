@@ -126,7 +126,9 @@ export default class LoginForm extends Component {
 
 
 const FormPageContainer = styled.nav`
-    padding: 1rem;
+    padding: 3rem;
+    
+
     .input-container{
         margin-top: 1rem;
     }

@@ -47,7 +47,8 @@ export default class PaymentConfirmation extends React.Component {
                 postalCode: postalCode,
                 phone: phone,
                 products: products,
-                identity_number: identity_number
+                identity_number: identity_number,
+                
 
             })
         }
@@ -69,7 +70,7 @@ export default class PaymentConfirmation extends React.Component {
     }
 
     render() {
-        const { number, cvc, expiry, name, phone, cuotas, total, products, userEmail, dir_Remitente, localidad, postalCode } = this.props.location.state;
+        const { number, cvc, expiry, name, phone, cuotas, total, products, userEmail, dir_Remitente, localidad, postalCode,identity_number } = this.props.location.state;
         return (
             <PaymentConfirmationContainer>
                 <Title name="Confirmar " title="pago" />
@@ -96,15 +97,16 @@ export default class PaymentConfirmation extends React.Component {
 
                     <div id="card-container" >
                         <h3>Datos de la compra</h3>
-                        <div>Numero : {number}</div>
-                        <div>Vencimiento : {expiry}</div>
+                        <div>Numero de tarjeta : {number}</div>
+                        <div>Vencimiento : {expiry}</div>     
                         <div>Titular : {name}</div>
-                        <div>Cuotas : {cuotas}</div>
+                        <div>DNI : {identity_number}</div>
                         <div>Contacto del titular : {phone}</div>
                         <div>Email del titular : {userEmail}</div>
                         <div>Localidad : {localidad}</div>
                         <div>Codigo postal : {postalCode}</div>
                         <div>Sucursal a recibir : {dir_Remitente}</div>
+                        <div>Cuotas : {cuotas}</div>
                         <div>Total : ${total}</div>
                     </div>
 
@@ -151,6 +153,7 @@ margin: 0 auto;
 #card-container{
     border: 5px solid var(--mainBlue) !important;
     width: 20rem;
+    height: 100%;
     margin: 0 auto;
     margin-top: 2rem;
     border-radius: 2rem ;
@@ -163,10 +166,10 @@ margin: 0 auto;
     
     padding: 2rem;
     margin-bottom: 2rem;
-    width: 50%; 
+    width: 100%; 
     margin: 0 auto;
     text-align:center;  
-
+    max-width: 100%;
     
 }
 .img-container{

@@ -30,15 +30,25 @@ module.exports = (app) => {
 
     // Delete a Note with noteId
     app.delete('/notes/:noteId', notes.delete);
+
+    // Delete products from ticket
+    app.delete('/notes/deleteProductsFromTicket/:ticketId', notes.deleteProductsFromTicket);
+
+    // Delete Ticket
+    app.delete('/notes/deleteTicket/:ticketId', notes.deleteTicket);
+
     //Delete a picture
     app.post('/notes/deletePicture/:notePath', notes.deletePicture);
     
     //Login
     app.post('/notes/adminLogin', notes.logAdmin);
+
     //Save sells to send product to client
     app.post('/notes/guardarVenta', notes.saveVenta);
+
     //Get sold tickets to delivery
     app.get('/notes/getTickets/getAll', notes.getTickets);
+
     //Get products for one ticket
-    app.get('/notes/getTicketProducts/:ticketId', notes.getProductsFromTicket);
+    app.get('/notes/getTicketsProducts/getAll', notes.getProductsFromTicket);
 }

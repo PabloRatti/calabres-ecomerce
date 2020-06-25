@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import { ButtonContainer } from './Button';
 import styled from 'styled-components';
 import { animateScroll as scroll } from 'react-scroll';
+import FichaTecnicaDetails from './FichaTecnicaDetails';
 export default class Details extends Component {
 
-    componentDidMount = () =>{
+    componentDidMount = () => {
         scroll.scrollToTop();
     }
 
@@ -15,13 +16,15 @@ export default class Details extends Component {
             <DetailsWraper>
                 <ProductConsumer>
                     {value => {
-                        const { id, company, img, title, inCart, price, width,profile } = value.detailProduct;
+                        const { id, type, company, img, title, inCart, price, width, profile,info } = value.detailProduct;
+                        let cuotas = price/12;
+                        let priceStriked = price + ((price*20)/100);
                         return (
                             <div className="container py-5">
                                 {/**Title start */}
                                 <div className="row">
                                     <div className="col-10 mx-auto text-center text-slanted text-blue my-5">
-                                        <h1>{title}</h1>
+                                       {/* <h1>{title}</h1>*/}
                                     </div>
                                 </div>
                                 {/**Title end */}
@@ -33,19 +36,12 @@ export default class Details extends Component {
                                     </div>
                                     {/**Product txt */}
                                     <div id="description" className="col-10 mx-auto col-md-6 my-3 text-capitalize">
-                                       
-                                       
-                                     
-                                        <p id="list-wraper" className="text-muted lead">
-                                            <ul className="ul">
-                                                <li>Marca : {company}</li>
-                                                <li>Modelo : {title}</li>
-                                                <li>Ancho : {width}</li>
-                                                <li>Perfil : {profile}</li>
-                                                <li>Valor : ${price}</li>
 
-                                            </ul>
-                                        </p>
+                                        <h1 id="title">{type} &nbsp;{company}&nbsp;{title}</h1>
+                                        <h2>&nbsp;{width}/{profile}</h2>
+                                        <h2><strike id="striked">${priceStriked}</strike>&nbsp;&nbsp;${price}</h2>
+                                        <h4>12 cuotas sin interes de ${cuotas.toFixed(2)}&nbsp; solo para bancos</h4>
+                                        <FichaTecnicaDetails className="ficha-tecnica" detailProduct={value.detailProduct}/>
                                         {/**Buttons */}
                                         <div>
                                             <Link to="/llantas">
@@ -76,39 +72,52 @@ export default class Details extends Component {
 
 const DetailsWraper = styled.div`
 
-  margin: 2px solid red !important;
   text-align: center;
-   #detail-img{    
+
+  .ficha-tecnica{
+      margin : 0 auto;
+  }
+  #striked{
+      color:gray;
+  }
+   #detail-img{           
         max-height: 25rem;
-        margin-left: 2rem !important;
-        
+        margin-left: 2rem !important;  
+             
    }
    #list-wraper{
-       margin-top: 2rem;
-      
+       margin-top: 2rem; 
    }
    .ul{
        list-style: none;
    }
    #img-container{
-
-       max-height: 25rem;
-       
+       max-height: 25rem;       
    }
 
-   #description{
+  #description{
        
-
-   }
+       
+    }
+#title{
+    font-size: 2rem !important;   
+    color: var(--mainBlue);
+    font-family: 'Futura Bold';
+    line-height: 28px;
+    font-weight: 800;
+}
+#numbers{
+    font-weight: 600;
+     font-family: 'Futura Bold';
+    line-height: 28px;
+}
+    
    @media (max-width: 48em) {
         #detail-img{    
         max-height: 35rem;
-        margin-left: 3rem !important;
-        #description{
-            text-align: center !important;
-            border: 5px solid violet;
-        }
+        margin-left: 3rem !important;       
     }
+     
     
     }
   

@@ -5,7 +5,7 @@ import { ProductConsumer } from '../Context';
 import PropTypes from 'prop-types';
 export default class Product extends Component {
     render() {
-        const { id, title, img, price, inCart } = this.props.product;
+        const { id, title, img, price, inCart, company } = this.props.product;
         return (
             <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
                 <div className="card">
@@ -36,14 +36,16 @@ export default class Product extends Component {
                     </ProductConsumer>
                     {/*Card footer*/}
                     <div className="card-footer d-flex justify-content.between">
-                        <p className="align-self-center mb-0">
-                            {title}
+                        <p className="align-self-center ">
+                            {company.toUpperCase()} {title}
                         </p>
-                        <div className="price text-blue font-italic mb-0">
+                      
+                        <div className="price text-blue font-italic ">                           
                             <span className="mr-1">$</span>
                             {price}
-                        </div>
+                        </div>        
                     </div>
+                  
                 </div>
             </ProductWrapper>
         );
@@ -61,8 +63,10 @@ Product.propTypes = {
 };
 
 const ProductWrapper = styled.div`
+color: var(--mainBlue);
 .price{
-    margin-left: 7rem !important;
+  margin-left: 2rem !important;
+  color: green;
 }
 .card{
     border-color: transparent;

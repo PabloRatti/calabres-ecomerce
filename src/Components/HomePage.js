@@ -33,7 +33,10 @@ export default class HomePage extends Component {
 
 const HomeContainer = styled.div`  
     height : 100%;
-    
+
+   .home-image{
+       margin-top:2rem !important;
+   }
     .cardsContainer{
         border: 2px solid black;
     }
