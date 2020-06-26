@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+
 
 
 export default class ProductSold extends React.Component {
@@ -55,14 +55,15 @@ export default class ProductSold extends React.Component {
                             return (
                                 <div key={product.id} className="prod-container">
                                     <h4>Producto : {count = count + 1}</h4>
-                                   
+
                                         Marca : {product.company}<br />
                                         Modelo : {product.title}<br />
                                         Ancho : {product.width}<br />
                                         Perfil : {product.profile}<br />
+                                        Rodado : {product.rodado}<br />
                                         Cantidad : {product.cant}<br />
 
-                                    
+
                                 </div>
                             );
                         })}

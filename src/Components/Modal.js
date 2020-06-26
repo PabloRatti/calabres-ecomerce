@@ -10,34 +10,34 @@ export default class Modal extends Component {
             <ProductConsumer>
                 {(value) => {
                     const { modalOpen, closeModal } = value;
-                    const { img, title, price } = value.modalProduct;
+                    const { img, title, price,company } = value.modalProduct;
                     if (!modalOpen) {
                         return null;
                     } else {
                         return (
-                        <ModalContainer>
-                            <div className="container">
-                                <div className="row">
-                                    <div id="modal" className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5">
-                                        <h5>Producto agregado al carrito</h5>
-                                        <img src={img} className="img-fluid" alt="product"></img>
-                                        <h5>{title}</h5>
-                                        <h5 className="text-muted">valor : ${price}</h5>
-                                    <Link to="/llantas">
-                                        <ButtonContainer onClick={()=> closeModal()}>
-                                            Tienda
+                            <ModalContainer>
+                                <div className="container">
+                                    <div className="row">
+                                        <div id="modal" className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5">
+                                            <h5 className="title">Producto agregado al carrito</h5>
+                                            <img src={img} className="img-fluid" alt="product"></img>
+                                            <h5>{company}&nbsp;{title}</h5>
+                                            <h5 className="text-muted">valor : ${price}</h5>
+                                            <Link to="/llantas">
+                                                <ButtonContainer onClick={() => closeModal()}>
+                                                    Tienda
                                         </ButtonContainer>
-                                    </Link>
-                                        <Link to="/cart">
-                                            <ButtonContainer cart onClick={() => closeModal()}>
+                                            </Link>
+                                            <Link to="/cart">
+                                                <ButtonContainer cart onClick={() => closeModal()}>
 
-                                               al carrito
+                                                    al carrito
                                         </ButtonContainer>
-                                        </Link>
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </ModalContainer>
+                            </ModalContainer>
                         );
                     }
 
@@ -51,17 +51,31 @@ export default class Modal extends Component {
 }
 
 const ModalContainer = styled.div`
+
+
     position: fixed;
-    top:0;
+ 
+    padding: 10rem;
+    height: 100%;
     left:0;
     right:0;
     bottom: 0;
+    z-index : 1;
     background: rgba(0,0,0,0.3);
     display:flex;
     align-items:center;
     justify-content:center;
-    #modal{
-        background: var(--mainWhite);
+    .title{
+        color : var(--mainBlue);
     }
+    .container{       
+       margin: 0 auto;      
+    }
+
+    #modal{
+        background: var(--mainWhite)           
+    }
+
+   
 }
 `;

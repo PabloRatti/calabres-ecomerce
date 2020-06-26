@@ -4,7 +4,7 @@ import Title from './Title';
 import { ProductConsumer } from '../Context';
 import FilterBar from './FilterBar';
 import styled from 'styled-components';
-
+import { animateScroll as scroll } from 'react-scroll';
 
 export default class ProductList extends Component {
     constructor(props) {
@@ -16,12 +16,13 @@ export default class ProductList extends Component {
             brandFilter: '',
             title: '',
             productType: '',
-            profile: ''
+            profile: '',
+            rodado: ''
         }
     }
 
     componentDidMount() {
-
+        scroll.scrollToTop();
         fetch('http://localhost:4000/notes/')
             .then(response => response.json())
             .then(json => {
@@ -62,6 +63,12 @@ export default class ProductList extends Component {
         });
     }
 
+    filterByRodado = (products, rodado) => {
+        return products.filter((item) => {
+            return item.rodado === rodado;
+        });
+    }
+
     applyFilters = (products) => {
 
         if (this.state.productType) {
@@ -79,12 +86,15 @@ export default class ProductList extends Component {
         if (this.state.profile) {
             products = this.filterByProfile(products, this.state.profile);
         }
+        if (this.state.rodado) {
+            products = this.filterByRodado(products, this.state.rodado);
+        }
 
         return products;
     }
 
     resetFilters = () => {
-        this.setState({ brandFilter: '', widthFilter: '', priceFilter: '', productType: '', profile: '' })
+        this.setState({ brandFilter: '', widthFilter: '', priceFilter: '', productType: '', profile: '',rodado:'' })
     }
 
     handleFilter = (tipo, valor) => {
@@ -105,6 +115,9 @@ export default class ProductList extends Component {
             case 'perfil':
                 this.setState({ profile: valor })
                 break;
+            case 'rodado':
+                this.setState({ rodado: valor })
+                break;
             case 'reset':
                 this.resetFilters();
                 break;
@@ -122,7 +135,7 @@ export default class ProductList extends Component {
 
                     <div className="py-5">
                         <div className="container">
-                            <Title name={this.state.productType} title={this.state.brandFilter} width={this.state.widthFilter} profile={this.state.profile} renderLogo="true" />
+                            <Title name={this.state.productType} title={this.state.brandFilter} width={this.state.widthFilter} profile={this.state.profile} rodado={this.state.rodado} renderLogo="true" />
                             <div className="row">
                                 <ProductConsumer>
                                     {(value) => {

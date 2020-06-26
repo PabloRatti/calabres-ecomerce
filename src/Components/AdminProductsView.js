@@ -98,7 +98,7 @@ export default class AdminProductsView extends Component {
                 <Title name="Controlador de " title="productos" />
 
                 {products.map((item) => {
-                    return <AdminProductRow key={item.id} profile={item.profile} type={item.type} id={item.id} handleOperation={this.handleOperation} handleFilter={this.handleFilter} brand={item.company} title={item.title} img={item.img} price={item.price} />
+                    return <AdminProductRow key={item.id}  id={item.id} handleOperation={this.handleOperation} handleFilter={this.handleFilter} item={item} />
                 })}
 
             </AdminProductsViewContainer>

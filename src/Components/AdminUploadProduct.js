@@ -14,6 +14,7 @@ export default class AdminUploadProduct extends Component {
             producto: '',
             perfil: '',
             ancho: '',
+            rodado: '',
             marca: ''
 
         }
@@ -48,6 +49,11 @@ export default class AdminUploadProduct extends Component {
     perfilHandler = (e) => {
         console.log('Inside marca handler: ' + e)
         this.setState({ perfil: e })
+    }
+
+    rodadoHandler = (e) => {
+        console.log('Inside rodado handler: ' + e)
+        this.setState({ rodado: e })
     }
 
     render() {
@@ -174,7 +180,35 @@ export default class AdminUploadProduct extends Component {
                                 }}>80</Dropdown.Item>
                             </DropdownButton>
                         </div>
+                        <div className="col-10 mx-auto col-lg-2">
+                            <DropdownButton id="dropdown-basic-button" title="Rodado">
+                                <Dropdown.Item onClick={() => {
+                                    return this.rodadoHandler('13');
+                                }}>13</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.rodadoHandler('14');
+                                }}>14</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.rodadoHandler('15');
+                                }}>15</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.rodadoHandler('15C');
+                                }}>15C</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.rodadoHandler('16');
+                                }}>16</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.rodadoHandler('16C');
+                                }}>16C</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.rodadoHandler('17C');
+                                }}>17C</Dropdown.Item>
+                                <Dropdown.Item onClick={() => {
+                                    return this.rodadoHandler('18C');
+                                }}>18C</Dropdown.Item>
 
+                            </DropdownButton>
+                        </div>
 
 
                     </div>
@@ -193,6 +227,9 @@ export default class AdminUploadProduct extends Component {
                         <div className="col-10 mx-auto col-lg-2">
                             {this.state.perfil}
                         </div>
+                        <div className="col-10 mx-auto col-lg-2">
+                            {this.state.rodado}
+                        </div>
 
                     </div>
                     <div className="row mt-5 my-2 text-capitalize text-center">
@@ -203,26 +240,31 @@ export default class AdminUploadProduct extends Component {
                             <input type="text" name="price" placeholder="Valor..." />
                         </div>
                         <div className="col-10 mx-auto col-lg-2">
-                            <input type="text" name="info" id="info" placeholder="Descripcion..." />
-                        </div>
-                        <div className="col-10 mx-auto col-lg-2">
                             <input type="text" name="title" id="title" placeholder="Titulo/modelo" />
                         </div>
 
                     </div>
 
-                    <div className="row  my-2 text-capitalize text-center">
-                        <div className="col-10 mx-auto  col-lg-2">
+                    <div id="last-row" className="row mt-5 my-2">
+                            <div id="info-container" className="col-10 mx-auto col-lg-2">
+                                <textarea type="text" name="info" id="info" placeholder="Descripcion..." ></textarea>
+                            </div>                        
+
                             <button type="submit" id="submit" class="btn btn-outline-success">Guardar</button>
                             {/*<input className="submit" type="submit" value="Guardar" />*/}
-                        </div>
+                        
                     </div>
+                    <div className="col-10 mx-auto col-lg-2"  >
+                    </div>
+                  
+
+
                     <div hidden={true}>
                         <input type="text" id="type" name="type" readOnly={true} value={this.state.producto} hidden={true} />
                         <input type="text" id="company" name="company" value={this.state.marca} hidden={true} />
                         <input type="text" id="profile" name="profile" value={this.state.perfil} hidden={true} />
                         <input type="text" id="width" name="width" value={this.state.ancho} hidden={true} />
-                        
+                        <input type="text" id="rodado" name="rodado" value={this.state.rodado} hidden={true} />
                     </div>
                 </form>
 
@@ -235,19 +277,41 @@ export default class AdminUploadProduct extends Component {
 const DropZoneContainer = styled.div`
 border: 2px solid var(--mainBlue);
 border-radius: 2rem;
-height: 23rem;
+height: 25rem;
 width: 90%;
 margin: 0 auto;
 text-align: center;
 margin-bottom: 2rem;
-#descripcion{
-    
+
+#last-row{   
+    height: 7rem;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.btn-container{    
+    width: 50%;  
+    margin-right: 0rem;
+    margin-left: 0rem;     
+}
+
+#info-container{   
+    width: 40%;
+    margin: 0 auto;    
+}
+
+#info{
+   width: 15rem;    
+}
+
+#descripcion{    
     width: 15rem !important;
 }
 #submit{
-    margin-top: 2rem !important;
-   
+    margin: 0 auto;
+    height: 50%;   
 }
+
 .carga-title{
     margin: 0 auto;
 }

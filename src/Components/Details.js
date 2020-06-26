@@ -16,15 +16,15 @@ export default class Details extends Component {
             <DetailsWraper>
                 <ProductConsumer>
                     {value => {
-                        const { id, type, company, img, title, inCart, price, width, profile,info } = value.detailProduct;
-                        let cuotas = price/12;
-                        let priceStriked = price + ((price*20)/100);
+                        const { id, type, company, img, title, inCart, price, width, profile, info, rodado } = value.detailProduct;
+                        let cuotas = price / 12;
+                        let priceStriked = price + ((price * 20) / 100);
                         return (
                             <div className="container py-5">
                                 {/**Title start */}
                                 <div className="row">
                                     <div className="col-10 mx-auto text-center text-slanted text-blue my-5">
-                                       {/* <h1>{title}</h1>*/}
+                                        {/* <h1>{title}</h1>*/}
                                     </div>
                                 </div>
                                 {/**Title end */}
@@ -38,10 +38,10 @@ export default class Details extends Component {
                                     <div id="description" className="col-10 mx-auto col-md-6 my-3 text-capitalize">
 
                                         <h1 id="title">{type} &nbsp;{company}&nbsp;{title}</h1>
-                                        <h2>&nbsp;{width}/{profile}</h2>
+                                        <h2>&nbsp;{width}/{profile}/{rodado}</h2>
                                         <h2><strike id="striked">${priceStriked}</strike>&nbsp;&nbsp;${price}</h2>
-                                        <h4>12 cuotas sin interes de ${cuotas.toFixed(2)}&nbsp; solo para bancos</h4>
-                                        <FichaTecnicaDetails className="ficha-tecnica" detailProduct={value.detailProduct}/>
+                                        <h4 className="price-container">  12 cuotas sin interes de ${cuotas.toFixed(2)}</h4>
+                                        <FichaTecnicaDetails className="ficha-tecnica" detailProduct={value.detailProduct} />
                                         {/**Buttons */}
                                         <div>
                                             <Link to="/llantas">
@@ -73,7 +73,9 @@ export default class Details extends Component {
 const DetailsWraper = styled.div`
 
   text-align: center;
-
+.price-container{
+    color:green;
+}
   .ficha-tecnica{
       margin : 0 auto;
   }
@@ -102,7 +104,7 @@ const DetailsWraper = styled.div`
 #title{
     font-size: 2rem !important;   
     color: var(--mainBlue);
-    font-family: 'Futura Bold';
+    
     line-height: 28px;
     font-weight: 800;
 }

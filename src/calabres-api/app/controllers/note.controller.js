@@ -11,7 +11,7 @@ exports.create = (req, res) => {
     });
 
     con.connect();
-    let query = 'INSERT INTO product (title,img,price,company,info,inCart,count,total,type,width,profile) values("' + req.body.title + '","img/' + req.file.filename + '",' + req.body.price + ',"' + req.body.company + '","' + req.body.info + '",' + false + ',' + 0 + ',' + 0 + ',"' + req.body.type + '","' + req.body.width + '","' + req.body.profile + '");';
+    let query = 'INSERT INTO product (title,img,price,company,info,inCart,count,total,type,width,profile,rodado) values("' + req.body.title + '","img/' + req.file.filename + '",' + req.body.price + ',"' + req.body.company + '","' + req.body.info + '",' + false + ',' + 0 + ',' + 0 + ',"' + req.body.type + '","' + req.body.width + '","' + req.body.profile + '","'+req.body.rodado+'");';
     console.log(query);
     con.query(query,
         (err, response, campos) => {
@@ -181,7 +181,7 @@ saveSoldProducts = (products, sellId) => {
         try {
             let productCant = item.count;
             if (productCant < 1) productCant = 1;
-            let query = 'INSERT INTO productSold (company,title,width,profile,cant,sellId) values("' + item.company + '","' + item.title + '","' + item.width + '","' + item.profile + '",' + productCant + ',' + sellId + ');';
+            let query = 'INSERT INTO productSold (company,title,width,profile,cant,sellId,rodado) values("' + item.company + '","' + item.title + '","' + item.width + '","' + item.profile + '",' + productCant + ',' + sellId + ',"'+item.rodado+'");';
             console.log(query);
 
             con.query(query, (err, response, campos) => {

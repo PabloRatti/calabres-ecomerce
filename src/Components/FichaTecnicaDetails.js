@@ -10,7 +10,7 @@ export default class FichaTecnicaDetails extends React.Component {
         }
     }
     render() {
-        const { id, type, company, img, title, inCart, price, width, profile, info} = this.props.detailProduct
+        const { id, type, company, img, title, inCart, price, width, profile, info, rodado} = this.props.detailProduct
         return (
             <Container>
             
@@ -36,7 +36,7 @@ export default class FichaTecnicaDetails extends React.Component {
                         <div>Marca : {company}</div>
                         <div>Modelo : {title}</div>
                         <div>Ancho :  {width}</div>
-                        <div>Rodado : </div>
+                        <div>Rodado : {rodado}</div>
                         <div>Perfil : {profile}</div>
                     </div>
                 </div>

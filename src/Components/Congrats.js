@@ -9,7 +9,7 @@ export default class Congrats extends React.Component {
     }
     render() {
         return (
-            <CongratsContainer class="">
+            <CongratsContainer >
                 <div className="text-container">
                     <h1>Su pedido a sido registrado</h1>
                     <br /><br />
@@ -25,17 +25,20 @@ export default class Congrats extends React.Component {
 }
 
 const CongratsContainer = styled.div`
-height: 28rem;
+height: 40rem;
 text-align:center;
+border: 2px solid red;
+
 .text-container{
-     margin: 0 auto;
+   
+    margin: 0 auto;
     border: 2px solid var(--mainBlue);
-    margin-top: 3rem;
+    margin-top: 5rem;
     margin-bottom: 2rem;
     font-family: monospace;
     border-radius: 0rem;
     width: 40%;
-    height: 80%;
+    height: 50%;
     box-shadow: 5px 10px #888888;
 }
 h1{
@@ -44,5 +47,6 @@ h1{
 }
 .brands{
     max-width:100%;
+    
 }
 `;

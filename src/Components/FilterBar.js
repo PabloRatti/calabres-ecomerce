@@ -18,6 +18,7 @@ constructor(){
             <FilterBarContainer>
                 <Navbar collapseOnSelect expand="lg" variant="dark">
                     <Navbar.Brand className="nav-reset" onClick={() => {
+                        this.setState({inactive: false})
                         return handleFilter('reset', 'all');
                     }}>Reset </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -145,7 +146,33 @@ constructor(){
                                 }}>80</NavDropdown.Item>
 
                             </NavDropdown>
-                           
+                            <NavDropdown disabled={this.state.inactive} className="drop" title="Rodado" id="collasible-nav-dropdown">
+                                <NavDropdown.Item className="item" onClick={() => { 
+                                    return handleFilter('rodado', '13');
+                                }}>13</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('rodado', '14');
+                                }}>14</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('rodado', '15');
+                                }}>15</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('rodado', '15C');
+                                }}>15C</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('rodado', '16');
+                                }}>16</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('rodado', '16C');
+                                }}>16C</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('rodado', '17');
+                                }}>17C</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('rodado', '18');
+                                }}>18C</NavDropdown.Item>
+
+                            </NavDropdown>
                         </Nav>
 
                     </Navbar.Collapse>
