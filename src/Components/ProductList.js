@@ -135,7 +135,7 @@ export default class ProductList extends Component {
 
                     <div className="py-5">
                         <div className="container">
-                            <Title name={this.state.productType} title={this.state.brandFilter} width={this.state.widthFilter} profile={this.state.profile} rodado={this.state.rodado} renderLogo="true" />
+                            <Title name={this.state.productType} title={this.state.brandFilter} width={this.state.widthFilter} profile={this.state.profile} rodado={this.state.rodado} renderLogo="true"/>
                             <div className="row">
                                 <ProductConsumer>
                                     {(value) => {

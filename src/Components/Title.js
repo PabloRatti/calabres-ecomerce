@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 export default function Title({ name, title,renderLogo,width,profile,rodado }) {
+    
     return (
         <TitleContainer>
             <div className="row">

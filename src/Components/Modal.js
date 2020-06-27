@@ -11,6 +11,7 @@ export default class Modal extends Component {
                 {(value) => {
                     const { modalOpen, closeModal } = value;
                     const { img, title, price,company } = value.modalProduct;
+                 //  modalOpen = true;
                     if (!modalOpen) {
                         return null;
                     } else {
@@ -31,7 +32,7 @@ export default class Modal extends Component {
                                             <Link to="/cart">
                                                 <ButtonContainer cart onClick={() => closeModal()}>
 
-                                                    al carrito
+                                                     carrito
                                         </ButtonContainer>
                                             </Link>
                                         </div>
@@ -55,25 +56,38 @@ const ModalContainer = styled.div`
 
     position: fixed;
  
-    padding: 10rem;
-    height: 100%;
+    padding: 1rem;
+    max-height: 100%;
     left:0;
+    top:0;
     right:0;
     bottom: 0;
     z-index : 1;
     background: rgba(0,0,0,0.3);
-    display:flex;
+     width: 100%;
     align-items:center;
     justify-content:center;
+.img-fluid{
+    max-height: 15rem;
+}
     .title{
         color : var(--mainBlue);
     }
-    .container{       
-       margin: 0 auto;      
+   
+    
+     .container{    
+        
+       width: 100%;
+       max-height: 35rem;
+           
     }
-
     #modal{
-        background: var(--mainWhite)           
+        background: var(--mainWhite);
+        margin-top: 1rem;
+        width: 80%;
+        
+        
+                
     }
 
    

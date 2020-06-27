@@ -20,7 +20,7 @@ export default class AdminProductRow extends Component {
     render() {
 
         const { handleOperation } = this.props;
-        const { id, img, brand, price, title, type, width, profile, rodado } = this.props.item;
+        const { id, img,company,  price, title, type, width, profile, rodado } = this.props.item;
 
         return (
             <AdminProductRowContainer className="container">
@@ -33,13 +33,20 @@ export default class AdminProductRow extends Component {
                     </div>
                     <div className="col-10 mx-auto col-lg-2">
 
-                        {title}
+                        {company}
                     </div>
+                    
                     <div id="product-title" className="col-10 mx-auto col-lg-2">
                         <span className="d-lg-none">producto : </span>
-                        {type} {brand}
+                        {title}
                     </div>
 
+                   
+                    
+                    <div className="col-10 mx-auto col-lg-2">
+                        <span className="d-lg-none">Medidas : </span>
+                        {width}/{profile}/{rodado}
+                    </div>
                     <div className="col-10 mx-auto col-lg-2">
                         <div className="cart-icon" onClick={() => {
                             return handleOperation('delete', id, img);
@@ -47,12 +54,6 @@ export default class AdminProductRow extends Component {
                             <i className="fas fa-trash"></i>
                         </div>
                     </div>
-                    
-                    <div className="col-10 mx-auto col-lg-2">
-                        <span className="d-lg-none">Medidas : </span>
-                        {width}/{profile}/{rodado}
-                    </div>
-
                     {/**End */}
                    
                     <div id="form-container" className="col-10 mx-auto col-lg-2">

@@ -23,7 +23,9 @@ export default class PaymentForm extends React.Component {
             userEmail: '',
             continueDisabled: true,
             valorCuota: '',
-            postalCode: ''
+            postalCode: '',
+            isBank: false,
+            valorConRecargo: '2500'
         };
     }
 
@@ -44,21 +46,40 @@ export default class PaymentForm extends React.Component {
     //acorde al valor total que se pasa por props
     componentWillReceiveProps(nextProps) {
         let valor = '';
-        if (this.state.cuotas) {
+        let interes = '';
+        let totalConIntereses = '';
+        if (this.state.isBank) {
+
             switch (this.state.cuotas) {
                 case '3':
                     valor = nextProps.total / 3;
                     break;
                 case '6':
-                    valor = (nextProps.total * 18) / 100;
+                    interes = (nextProps.total * 18) / 100;
+                    totalConIntereses = parseFloat(nextProps.total) + parseFloat(interes);
+                    valor = totalConIntereses / 6;
                     break;
                 case '12':
                     valor = nextProps.total / 12;
                     break;
             }
 
-            this.setState({ valorCuota: valor })
+        } else {
+            switch (this.state.cuotas) {
+                case '3':
+                    interes = (nextProps.total * 25) / 100;
+                    totalConIntereses = parseFloat(nextProps.total) + parseFloat(interes);
+                    valor = totalConIntereses / 3;
+                    break;
+                case '6':
+                    interes = (nextProps.total * 45) / 100;
+                    totalConIntereses = parseFloat(nextProps.total) + parseFloat(interes);
+                    valor = totalConIntereses / 6;
+                    break;
+            }
         }
+        this.setState({ valorCuota: valor })
+
     }
 
 
@@ -226,62 +247,107 @@ export default class PaymentForm extends React.Component {
                         </div>
 
 
-                        <div class="row">
-                            <div class="col">
-                                Total : ${this.props.total}
-                                <br />
-                                Pagos : {this.state.cuotas}
-                                <br />
-                                Valor de la cuota : ${this.state.valorCuota ? this.state.valorCuota.toFixed(2) : null}
-                                <br />
-
-                            </div>
-                            <div class="col">
+                        <div id="btn-row" class="row">
+                            <div id="btn-col" class="col">
                                 <Dropdown className="dropdown-container">
                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                        Cuotas
+                                        Entidades
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
-                                        <Dropdown.Item onClick={() => this.setState({ cuotas: '3', valorCuota: this.props.total / 3 })}>3 (Sin interes)</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ cuotas: '6', valorCuota: (this.props.total * 18) / 100 })}>6 (+18%)</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ cuotas: '12', valorCuota: this.props.total / 12 })}>12 (sin interes)</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: '' })}>Naranja (Plan Z)</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: '' })}>Naranja Visa</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: '' })}>Fava</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: '' })}>Fava Cabal</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: '' })}>Clipper Cabal</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: '' })}>Cencosud Mastercard</Dropdown.Item>
+
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: '' })}>Tarjeta de banco</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
 
                             </div>
-                            <div class="col">
-                                <div >
-                                    <Button className="aceptar-btn" type="submit" variant="success">Aceptar</Button>
+                            <div id="btn-col" class="col">
 
-                                    <Link to={{
-                                        pathname: '/paymentConfirmation',
-                                        state: {
-                                            cvc: this.state.cvc,
-                                            expiry: this.state.expiry,
-                                            name: this.state.name,
-                                            number: this.state.number,
-                                            phone: this.state.phone,
-                                            cuotas: this.state.cuotas,
-                                            total: this.props.total,
-                                            products: this.props.cartItems,
-                                            localidad: this.state.localidad,
-                                            dir_Remitente: this.state.dir_Remitente,
-                                            userEmail: this.state.userEmail,
-                                            postalCode: this.state.postalCode,
-                                            identity_number: this.state.identity_number
-                                        }
-                                    }} >
-                                        <Button disabled={this.state.continueDisabled} variant="success">Continuar</Button>
-                                    </Link>
-
-                                </div>
-
+                                <Dropdown className="dropdown-container">
+                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                        Cuotas
+                                    </Dropdown.Toggle>
+                                    {this.state.isBank ?
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item onClick={() => this.setState({ cuotas: '3', valorConRecargo: this.props.total, valorCuota: this.props.total / 3 })}>3 Sin interes</Dropdown.Item>
+                                            <Dropdown.Item onClick={() => {
+                                                let intereses = (this.props.total * 18) / 100;
+                                                let totalConIntereses = parseFloat(this.props.total) + parseFloat(intereses);
+                                                console.log('Total con intereses : ' + totalConIntereses);
+                                                this.setState({ cuotas: '6', valorConRecargo: totalConIntereses, valorCuota: totalConIntereses / 6 });
+                                            }}>6 Cuotas fijas</Dropdown.Item>
+                                            <Dropdown.Item onClick={() => this.setState({ cuotas: '12', valorConRecargo: this.props.total, valorCuota: this.props.total / 12 })}>12 Sin interes</Dropdown.Item>
+                                        </Dropdown.Menu>
+                                        :
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item onClick={() => {
+                                                let intereses = (this.props.total * 25) / 100;
+                                                let totalConIntereses = parseFloat(this.props.total) + parseFloat(intereses);
+                                                this.setState({ cuotas: '3', valorConRecargo: totalConIntereses, valorCuota: totalConIntereses / 3 })
+                                            }}>3 (Cuotas fijas)</Dropdown.Item>
+                                            <Dropdown.Item onClick={() => {
+                                                let intereses = (this.props.total * 45) / 100;
+                                                let totalConIntereses = parseFloat(this.props.total) + parseFloat(intereses);
+                                                this.setState({ cuotas: '6', valorConRecargo: totalConIntereses, valorCuota: totalConIntereses / 6 })
+                                            }}>6 (Cuotas fijas)</Dropdown.Item>
+                                        </Dropdown.Menu>}
+                                </Dropdown>
 
                             </div>
+
+
+                            <div id="btn-col" class="col">
+                                <Button type="submit" variant="success">Validar datos</Button>
+                            </div>
+
+
                         </div>
                         <br />
+                        <div className="row">
+                            <div id="totales-col" class="col">
+                                Medio de pago : {this.state.isBank ? 'Credito bancario' : 'Otros'}
+                                <br />
+                                Total : ${this.state.valorConRecargo}
+                                <br />
+                                Pagos : {this.state.cuotas}
+                                <br />
 
+                                Valor de la cuota : ${this.state.valorCuota !== '' ? this.state.valorCuota.toFixed(2) : null}
+                                <br />
+                                <div id="btn-continue">
+                                <Link  to={{
+                                    pathname: '/paymentConfirmation',
+                                    state: {
+                                        cvc: this.state.cvc,
+                                        expiry: this.state.expiry,
+                                        name: this.state.name,
+                                        number: this.state.number,
+                                        phone: this.state.phone,
+                                        cuotas: this.state.cuotas,
+                                        total: this.state.valorConRecargo,
+                                        products: this.props.cartItems,
+                                        localidad: this.state.localidad,
+                                        dir_Remitente: this.state.dir_Remitente,
+                                        userEmail: this.state.userEmail,
+                                        postalCode: this.state.postalCode,
+                                        identity_number: this.state.identity_number
+                                    }
+                                }} >
+                                    <Button disabled={this.state.continueDisabled} variant="success">Continuar</Button>
+                                </Link>
+                                </div>
+                            </div>  
+                            
+                           
+       
+                           
+                        </div>
 
                     </form>
 
@@ -298,10 +364,6 @@ margin: 0 auto;
 
 .aceptar-btn{
     margin-right: 2rem;
-}
-.dropdown-container{
-    margin: 0 auto;
-    width: 40% !important;
 }
 
 p{
@@ -326,16 +388,30 @@ label{
 margin-top: 1rem;
 
 }
+#btn-continue{
+    margin-top: 1rem;
+    
+}
+ @media (max-width: 48em) {
+        #btn-col{       
+       
+         padding: 0.5rem;
+         width: 30%;
+
+        }
+#btn-row{
+  
+    text-align:center;
+    
+}
+.aceptar-btn{
+     margin-right: 0rem;
+}
+#totales-col{
+  
+    width:30%;
+}
+}
 ` ;
 
 
-/*
-
-
-@media screen and (max-width: 300px) {
-.form - input{
-                        margin - right: rem !important;
-
-}
-
-}*/

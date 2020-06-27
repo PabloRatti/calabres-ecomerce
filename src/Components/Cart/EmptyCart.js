@@ -20,7 +20,7 @@ export default function EmptyCart() {
 
 const EmptyCartContainer = styled.div`  
     
-    height: 25rem;
+    height: 30rem;
     text-align:center;
     marign: 0 auto;
     border:2px solid blue;
@@ -35,7 +35,7 @@ const EmptyCartContainer = styled.div`
        padding: 2rem;
        margin: 0 auto;
        text-align:center;
-       top: 5rem;
+       margin-top: 2rem;
        position:relative;
       box-shadow: 10px 5px 5px black;
    }
@@ -46,6 +46,7 @@ const EmptyCartContainer = styled.div`
   @media (max-width: 48em) {
      #container{
          top: 0rem;
+         
      }
 }
 `;

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 export default class Product extends Component {
     render() {
         const { id, title, img, price, inCart, company } = this.props.product;
+        const cuotas = price/12;
         return (
             <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
                 <div className="card">
@@ -16,7 +17,7 @@ export default class Product extends Component {
                             }
                             }>
                                 <Link to="/details">
-                                    <img src={img} alt="product" className="card-img-top" />
+                                    <img src={img} alt="product" id="cardImg" className="card-img-top" />
                                 </Link>
                                 <button className="cart-btn" disabled={inCart ? true : false} onClick={() => {
                                     value.addToCart(id);
@@ -36,16 +37,20 @@ export default class Product extends Component {
                     </ProductConsumer>
                     {/*Card footer*/}
                     <div className="card-footer d-flex justify-content.between">
-                        <p className="align-self-center ">
+                        <p className="title align-self-center ">
                             {company.toUpperCase()} {title}
                         </p>
-                      
-                        <div className="price text-blue font-italic ">                           
-                            <span className="mr-1">$</span>
-                            {price}
-                        </div>        
+
+                        <div className="price text-blue font-italic">
+                            <p className="title align-self-center ">${price}</p>
+                            
+                        </div>                 
                     </div>
-                  
+
+                    <div className="cuotas text-blue font-italic">
+                                    <p className="title align-self-center ">12 cuotas sin interes de ${cuotas.toFixed()}</p>
+
+                    </div> 
                 </div>
             </ProductWrapper>
         );
@@ -63,20 +68,41 @@ Product.propTypes = {
 };
 
 const ProductWrapper = styled.div`
+
 color: var(--mainBlue);
+#cardImg{
+  
+    min-height: 80%;
+     max-height: 85%;
+    
+}
 .price{
-  margin-left: 2rem !important;
-  color: green;
+    margin-left: 3rem;
+   color: green; 
+   height: 25%;
+}
+.title{
+    
+}
+.cuotas{
+   
+   text-align:center;
 }
 .card{
+   
     border-color: transparent;
     transition:all 1s linear;
     height: 100%
+   
 }
+
 .card-footer{
+   
+
     background:transparent;
     border-top: transparent;
     transition:all 1s linear;
+     
 }
 &:hover{
     .card{
@@ -89,6 +115,8 @@ color: var(--mainBlue);
 }
 
 .img-container{
+     
+    height:80%;
     position:relative;
     overflow:hidden;
 }
