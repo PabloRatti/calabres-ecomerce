@@ -8,18 +8,19 @@ export default class NavBar extends Component {
     render() {
         return (
             <NavWrapper className="navbar navbar-expand-sm  navbar-dark px-sm-5">
+                
                 <Link to='/'>
-                    <HomeIcon className="homeIcon" color="primary" />
+                    <HomeIcon className="homeIcon" color="primary"/>
                 </Link>
                 <ul className="navbar-nav align-items-center">
                     <li className="nav-item ml-5">
                         <Link to="/llantas" className="nav-link">
                             Tienda
                         </Link>
-                    </li>                 
-                 
+                    </li>
+
                 </ul>
-              
+
                 <Link to="/cart" className="ml-auto">
 
                     <ButtonContainer>
@@ -29,7 +30,7 @@ export default class NavBar extends Component {
                        Carrito
                     </ButtonContainer>
                 </Link>
-              
+
             </NavWrapper>
         );
     }

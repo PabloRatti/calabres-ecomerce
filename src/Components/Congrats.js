@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Image } from 'react-bootstrap';
 import { animateScroll as scroll } from 'react-scroll';
 export default class Congrats extends React.Component {
+
+    
     componentDidMount = () => {
        
         scroll.scrollToTop();
@@ -25,15 +27,16 @@ export default class Congrats extends React.Component {
 }
 
 const CongratsContainer = styled.div`
-height: 40rem;
+
 text-align:center;
-border: 2px solid red;
+
+border: 2px solid transparent;
 
 .text-container{
    
     margin: 0 auto;
-    border: 2px solid var(--mainBlue);
-    margin-top: 5rem;
+    margin-top: 5rem !important;
+    border: 2px solid var(--mainBlue); 
     margin-bottom: 2rem;
     font-family: monospace;
     border-radius: 0rem;
@@ -47,6 +50,12 @@ h1{
 }
 .brands{
     max-width:100%;
-    
+        
+}
+
+@media (max-width: 48em) {
+.text-container{
+    width: 90%;
+}
 }
 `;

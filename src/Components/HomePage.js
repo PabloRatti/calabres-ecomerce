@@ -20,14 +20,13 @@ export default class HomePage extends Component {
                 <Image className="home-image" src={require("../calabres-api/images/static/calabres_portada.jpg")} fluid />
                 <Carousel className="carousel" />               
                 <div id="firstCard">
-                    <PresentationCard image2={require("../calabres-api/images/static/ahora12Imagen.png")} image={require("../calabres-api/images/static/neumaticosCalabresTypo.jpg")} />
+                    <PresentationCard image2={require("../calabres-api/images/static/ahora12Imagen.png")} image={require("../calabres-api/images/static/neumaticos.jpg")} />
 
 
                 </div>
 
                 <Image className="brands" src={require("../calabres-api/images/static/MarcasCalabres.png")} />
                 <HorizontalGallery />
-                <PresentationCard  details2="Nuestros productos" image2={require("../calabres-api/images/static/nexendark.jpg")} image={require("../calabres-api/images/static/gomasHD.jpg")}/>
 
 
 
@@ -70,9 +69,7 @@ top: 0rem;
            height: 4rem;
            max-height: 4rem !important;
        }
-       .home-image{
-       
-   }
+
    
 
     }

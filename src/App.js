@@ -7,7 +7,7 @@ import ProductList from './Components/ProductList';
 import Cart from './Components/Cart';
 import Default from './Components/Default';
 import HomePage from './Components/HomePage';
-import { Switch,Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Modal from './Components/Modal';
 import Footer from './Components/Footer';
 import LoginForm from './Components/LoginForm.js';
@@ -16,30 +16,32 @@ import WhatsappIcon from './Components/WhatsAppIcon';
 import PaymentConfirmation from './Components/PaymentConfirmation';
 import ProductsSoldList from './Components/ProductsSoldList';
 import Congrats from './Components/Congrats';
+import { red } from '@material-ui/core/colors';
 
 function App() {
   return (
     <React.Fragment>
- 
-    
-      <NavBar/>
-      <WhatsappIcon/>
+
+   
+      <NavBar/>     
+
+      <WhatsappIcon />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/productsSoldList" component={ProductsSoldList} />
         <Route path="/llantas" component={ProductList} />
         <Route path="/details" component={Details} />
-        <Route path="/cart" component={Cart} />     
-        <Route path="/login" component={LoginForm} />  
-        <Route path="/adminHome" component={AdminHomePage} />    
-        <Route path="/paymentConfirmation" component={PaymentConfirmation} />  
+        <Route path="/cart" component={Cart} />
+        <Route path="/login" component={LoginForm} />
+        <Route path="/adminHome" component={AdminHomePage} />
+        <Route path="/paymentConfirmation" component={PaymentConfirmation} />
         <Route path="/congrats" component={Congrats} />
         <Route component={Default} />
-       
-      </Switch>       
-     <Modal />
+
+      </Switch>
+      <Modal />
       <Footer />
-    
+
     </React.Fragment>
   );
 }

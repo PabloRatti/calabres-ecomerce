@@ -37,7 +37,7 @@ export default class Product extends Component {
                     </ProductConsumer>
                     {/*Card footer*/}
                     <div className="card-footer d-flex justify-content.between">
-                        <p className="title align-self-center ">
+                        <p id="company" className="title align-self-center ">
                             {company.toUpperCase()} {title}
                         </p>
 
@@ -81,9 +81,7 @@ color: var(--mainBlue);
    color: green; 
    height: 25%;
 }
-.title{
-    
-}
+
 .cuotas{
    
    text-align:center;
@@ -95,12 +93,16 @@ color: var(--mainBlue);
     height: 100%
    
 }
-
+#company{
+   
+    width: 100%;
+}
 .card-footer{
    
 
     background:transparent;
     border-top: transparent;
+    border-bottom: 2px solid black;
     transition:all 1s linear;
      
 }

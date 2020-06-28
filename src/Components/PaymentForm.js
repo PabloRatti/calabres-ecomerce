@@ -262,7 +262,9 @@ export default class PaymentForm extends React.Component {
                                         <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: '' })}>Clipper Cabal</Dropdown.Item>
                                         <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: '' })}>Cencosud Mastercard</Dropdown.Item>
 
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: '' })}>Tarjeta de banco</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: '' })}>Banco Frances</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: '' })}>Banco Provincia</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: '' })}>Otros bancos</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
 

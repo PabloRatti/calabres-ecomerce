@@ -8,10 +8,11 @@ export default class PaymentConfirmation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
             name: this.props.location.state.name,
             total: this.props.location.state.total,
-            products: this.props.location.state.products
+            products: this.props.location.state.products,
+            tokenResponse: '',
+            tokenRequestKeySandbox: '41cbc74acc604a109157bb8394561d27'
         }
 
     }
@@ -21,15 +22,12 @@ export default class PaymentConfirmation extends React.Component {
         //scroll.scrollTo(800)
     }
 
-
-    submitHandler = () => {
-
+    guardarVenta = () => {
         const { number, cvc,
             expiry, name, phone,
             cuotas, total, products,
             userEmail, dir_Remitente,
             localidad, postalCode, identity_number } = this.props.location.state;
-
 
         let fetchData = {
             method: "POST",
@@ -48,7 +46,7 @@ export default class PaymentConfirmation extends React.Component {
                 phone: phone,
                 products: products,
                 identity_number: identity_number,
-                
+
 
             })
         }
@@ -66,11 +64,84 @@ export default class PaymentConfirmation extends React.Component {
                 };
                 return json;
             });
+    }
+
+
+    ejecutarPago = () => {
+        this.solicitarToken();
+    }
+
+    generarTokenRequest = () => {
+        const { number, cvc,
+            expiry, name, phone,
+            cuotas, total, products,
+            userEmail, dir_Remitente,
+            localidad, postalCode, identity_number } = this.props.location.state;
+
+        let expirationMonth = expiry.slice(0, 2);
+        let expirationYear = expiry.slice(2, 4);
+        console.log('Expitation : ' + expiry);
+        console.log('Expiration month : ' + expirationMonth);
+        console.log('Expiration year : ' + expirationYear);
+        let cardHolderId = {
+            type: "dni",
+            number: "35043330"
+        }
+        let fetchData = {
+            mode: 'cors',
+            method: "POST",
+            headers: {
+                "apiKey": this.state.tokenRequestKeySandbox,
+                "Content-Type": "application/json",
+                "Cache-Control": "no-cache",
+            },
+            body: JSON.stringify({
+
+                card_number: "4540730098765665",
+                card_expiration_month: "07",
+                card_expiration_year: "25",
+                security_code: "223",
+                card_holder_name: "Ratti Pablo",
+                card_holder_identification: cardHolderId
+                /*
+                card_number: number,
+                card_expiration_month: expirationMonth,
+                card_expiration_year: expirationYear,
+                security_code: cvc,
+                card_holder_name: name,
+                card_holder_identification: cardHolderId  */
+            })
+        }
+
+        return fetchData;
+    }
+    solicitarToken = () => {
+
+        let tokenRequest = this.generarTokenRequest();
+        console.log('Request generated for request token ');
+        console.log(tokenRequest);
+        //Hacer el update
+        fetch('https://developers.decidir.com/api/v2/tokens', tokenRequest)
+            .then(function (res) {
+                return res.json()
+            })
+            .then(function (data) {
+                console.log(data);
+            }).catch(function (err) {
+                console.log(err)
+            })
+
 
     }
 
+    submitHandler = () => {
+
+        this.ejecutarPago();
+        //guardarVenta();//Guarda el ticket en el BE para luego despacharlo
+    }
+
     render() {
-        const { number, cvc, expiry, name, phone, cuotas, total, products, userEmail, dir_Remitente, localidad, postalCode,identity_number } = this.props.location.state;
+        const { number, cvc, expiry, name, phone, cuotas, total, products, userEmail, dir_Remitente, localidad, postalCode, identity_number } = this.props.location.state;
         return (
             <PaymentConfirmationContainer>
                 <Title name="Confirmar " title="pago" />
@@ -84,9 +155,9 @@ export default class PaymentConfirmation extends React.Component {
                                 <Card id="my-card" style={{ width: '14rem', margin: '0 auto', display: 'inline-block' }}>
                                     <Card.Img variant="top" src={item.img} />
                                     <Card.Body>
-                                        <Card.Title>{item.type.toUpperCase()} {item.company.toUpperCase()} {item.title}</Card.Title>
+                                        <Card.Title>{item.company.toUpperCase()} {item.title}</Card.Title>
                                         <Card.Title>Unidades : {item.count}</Card.Title>
-                                        <Card.Title>Valor : ${item.price}</Card.Title>
+                                        <Card.Title>Valor : ${item.total}</Card.Title>
 
                                     </Card.Body>
                                 </Card>
@@ -98,7 +169,7 @@ export default class PaymentConfirmation extends React.Component {
                     <div id="card-container" >
                         <h3>Datos de la compra</h3>
                         <div>Numero de tarjeta : {number}</div>
-                        <div>Vencimiento : {expiry}</div>     
+                        <div>Vencimiento : {expiry}</div>
                         <div>Titular : {name}</div>
                         <div>DNI : {identity_number}</div>
                         <div>Contacto del titular : {phone}</div>
@@ -113,11 +184,11 @@ export default class PaymentConfirmation extends React.Component {
 
 
                     <div id="submit-btn-container" class="container">
-                        <Link to="/congrats">
-                            <button type="submit" className="submit-btn" class="btn-primary mr-2 mt-3" onClick={() => this.submitHandler()}>Aceptar</button>
 
-                        </Link>
-                        <Link to="/llantas">
+                        <button type="submit" className="submit-btn" class="btn-primary mr-2 mt-3" onClick={() => this.submitHandler()}>Aceptar</button>
+
+
+                        <Link to="/cart">
                             <button type="submit" className="submit-btn" class="btn-danger mr-2 mt-3 ">Cancelar</button>
                         </Link>
 

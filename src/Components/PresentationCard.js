@@ -23,10 +23,10 @@ export default class PresentationCard extends Component {
                             </div>
 
                             <div class="col-sm">
-                                <div class="imgContainer col-sm">
+                                <div id="secondImg" class="imgContainer col-sm">
                                     <Link to="/llantas">
                                     <Image id="right-img" className="home-image" src={this.props.image2} fluid />
-                                    
+                                  
                                     </Link>
                                 </div>
                             </div>
@@ -60,13 +60,11 @@ const CardContainer = styled.div`
     }
   
     @media (max-width: 48em) {
-        .home-image{
-     
-      
-        min-width: 100%;
-        
-        
-    }
+       
+        #right-img{
+            margin-left: 1rem;
+           
+        }
      }
    
 `;
