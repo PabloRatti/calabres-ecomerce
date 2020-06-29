@@ -8,7 +8,7 @@ export default class Product extends Component {
         const { id, title, img, price, inCart, company } = this.props.product;
         const cuotas = price/12;
         return (
-            <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
+            <ProductWrapper className="col-9 col-xs-5 col-sm-3 mx-auto col-md-5 col-lg-3 my-3">
                 <div className="card">
                     <ProductConsumer>
                         {value => (

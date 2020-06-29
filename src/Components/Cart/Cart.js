@@ -5,8 +5,12 @@ import EmptyCart from './EmptyCart';
 import { ProductConsumer } from '../../Context';
 import CartList from './CartList';
 import CartTotals from './CartTotals';
+import { animateScroll as scroll } from 'react-scroll';
+
 export default class Cart extends Component {
-   
+   componentDidMount(){
+       scroll.scrollToTop();
+   }
     render() {
         return (
             <section>

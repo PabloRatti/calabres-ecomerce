@@ -62,7 +62,7 @@ const CardContainer = styled.div`
     @media (max-width: 48em) {
        
         #right-img{
-            margin-left: 1rem;
+            
            
         }
      }

@@ -94,7 +94,7 @@ const DetailsWraper = styled.div`
        list-style: none;
    }
    #img-container{
-       max-height: 25rem;       
+       max-height: 80%;    
    }
 
   #description{
@@ -116,8 +116,8 @@ const DetailsWraper = styled.div`
     
    @media (max-width: 48em) {
         #detail-img{    
-        max-height: 35rem;
-        margin-left: 3rem !important;       
+        max-height: 100%
+        
     }
      
     

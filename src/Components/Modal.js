@@ -83,7 +83,7 @@ const ModalContainer = styled.div`
     }
     #modal{
         background: var(--mainWhite);
-        margin-top: 1rem;
+        margin-top: 4rem;
         width: 80%;
         
         

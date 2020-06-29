@@ -130,8 +130,6 @@ export default class PaymentConfirmation extends React.Component {
             }).catch(function (err) {
                 console.log(err)
             })
-
-
     }
 
     submitHandler = () => {

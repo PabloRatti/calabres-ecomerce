@@ -16,15 +16,14 @@ import WhatsappIcon from './Components/WhatsAppIcon';
 import PaymentConfirmation from './Components/PaymentConfirmation';
 import ProductsSoldList from './Components/ProductsSoldList';
 import Congrats from './Components/Congrats';
-import { red } from '@material-ui/core/colors';
+import Aviso from './Components/Aviso';
+
 
 function App() {
   return (
-    <React.Fragment>
-
-   
+    <React.Fragment>   
       <NavBar/>     
-
+   
       <WhatsappIcon />
       <Switch>
         <Route exact path="/" component={HomePage} />
@@ -40,6 +39,7 @@ function App() {
 
       </Switch>
       <Modal />
+     
       <Footer />
 
     </React.Fragment>
