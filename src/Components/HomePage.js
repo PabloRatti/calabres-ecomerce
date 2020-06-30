@@ -21,15 +21,10 @@ export default class HomePage extends Component {
                 <Carousel className="carousel" />               
                 <div id="firstCard">
                     <PresentationCard image2={require("../calabres-api/images/static/ahora12Imagen.png")} image={require("../calabres-api/images/static/neumaticos.jpg")} />
-
-
                 </div>
 
                 <Image className="brands" src={require("../calabres-api/images/static/MarcasCalabres.png")} />
                 <HorizontalGallery />
-
-
-
                 <Image className="banner" src={require("../calabres-api/images/static/banner.png")} />
                
             </HomeContainer>
@@ -54,6 +49,7 @@ top: 0rem;
 .carousel{
         max-height: 21rem;
         position:relative;
+        padding: 1rem;
         z-index: 0;
 }
     .brands{

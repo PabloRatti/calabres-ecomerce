@@ -18,7 +18,7 @@ export default class HomeCarousel extends Component {
                         />
                     </Carousel.Item>
                     <Carousel.Item>
-                        <img
+                        <img class="img-fluid"
                             className="carouselImg d-block w-100"
                             src={require("../calabres-api/images/static/IMG-20200519-WA0004.jpg")}
                             alt="Second slide"
@@ -38,25 +38,28 @@ export default class HomeCarousel extends Component {
 
 
 const HomeCarouselContainer = styled.div` 
-    height: 25rem;
-    width: 100%;  
-    max-height: 35rem;    
+
+   height: 27rem;
+    
     margin-bottom: 3rem;
     position:relative;
+    border : 2px solid red;
     .carouselImg{
         height: 25rem;                  
   } 
 
   @media (max-width: 48em) {
-       max-height: 11rem;  
+        
   .carouselImg {
-      max-height: 11rem
+  
   }
   .row{
       margin: 0 auto;
   }
   #first-slide{
       height: 3rem !important;
+       max-height: 100%;  
+  
   }
 }
 `;
