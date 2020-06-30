@@ -20,7 +20,7 @@ export default class AdminProductRow extends Component {
     render() {
 
         const { handleOperation } = this.props;
-        const { id, img,company,  price, title, type, width, profile, rodado } = this.props.item;
+        const { id, img,company,  price, title, width, profile, rodado } = this.props.item;
 
         return (
             <AdminProductRowContainer className="container">
@@ -105,14 +105,3 @@ const AdminProductRowContainer = styled.nav`
 
 
 
-{/**
-
-                    <div id="trashIcon" className="col-10 mx-auto col-lg-2">
-                        <div className="cart-icon" onClick={() => {
-                            return handleOperation('delete', id, img);
-                        }}>
-                            <i className="fas fa-trash"></i>
-                        </div>
-
-                    </div>
-*/}

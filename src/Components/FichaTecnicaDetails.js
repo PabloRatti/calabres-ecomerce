@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import { ButtonContainer } from './Button';
+
 export default class FichaTecnicaDetails extends React.Component {
     constructor(props) {
         super(props);
@@ -10,7 +10,7 @@ export default class FichaTecnicaDetails extends React.Component {
         }
     }
     render() {
-        const { id, type, company, img, title, inCart, price, width, profile, info, rodado} = this.props.detailProduct
+        const {  company,  title,  width, profile, info, rodado} = this.props.detailProduct
         return (
             <Container>
             

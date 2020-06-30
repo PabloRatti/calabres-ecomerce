@@ -16,7 +16,7 @@ export default class Details extends Component {
             <DetailsWraper>
                 <ProductConsumer>
                     {value => {
-                        const { id, type, company, img, title, inCart, price, width, profile, info, rodado } = value.detailProduct;
+                        const { id, type, company, img, title, inCart, price, width, profile,  rodado } = value.detailProduct;
                         let cuotas = price / 12;
                         let priceStriked = price + ((price * 20) / 100);
                         return (

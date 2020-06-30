@@ -16,7 +16,6 @@ import WhatsappIcon from './Components/WhatsAppIcon';
 import PaymentConfirmation from './Components/PaymentConfirmation';
 import ProductsSoldList from './Components/ProductsSoldList';
 import Congrats from './Components/Congrats';
-import Aviso from './Components/Aviso';
 
 
 function App() {

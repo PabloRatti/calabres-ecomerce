@@ -62,6 +62,8 @@ export default class PaymentForm extends React.Component {
                 case '12':
                     valor = nextProps.total / 12;
                     break;
+                default:
+                    valor='';
             }
 
         } else {
@@ -76,6 +78,8 @@ export default class PaymentForm extends React.Component {
                     totalConIntereses = parseFloat(nextProps.total) + parseFloat(interes);
                     valor = totalConIntereses / 6;
                     break;
+                default:
+                    valor = '';
             }
         }
         this.setState({ valorCuota: valor })

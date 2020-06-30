@@ -1,7 +1,7 @@
 import React from 'react';
 import Title from './Title';
 import styled from 'styled-components';
-import { Card, Button } from 'react-bootstrap';
+import { Card} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll';
 export default class PaymentConfirmation extends React.Component {
@@ -23,8 +23,7 @@ export default class PaymentConfirmation extends React.Component {
     }
 
     guardarVenta = () => {
-        const { number, cvc,
-            expiry, name, phone,
+        const { name, phone,
             cuotas, total, products,
             userEmail, dir_Remitente,
             localidad, postalCode, identity_number } = this.props.location.state;
@@ -72,11 +71,8 @@ export default class PaymentConfirmation extends React.Component {
     }
 
     generarTokenRequest = () => {
-        const { number, cvc,
-            expiry, name, phone,
-            cuotas, total, products,
-            userEmail, dir_Remitente,
-            localidad, postalCode, identity_number } = this.props.location.state;
+        const { 
+            expiry } = this.props.location.state;
 
         let expirationMonth = expiry.slice(0, 2);
         let expirationYear = expiry.slice(2, 4);
@@ -139,7 +135,7 @@ export default class PaymentConfirmation extends React.Component {
     }
 
     render() {
-        const { number, cvc, expiry, name, phone, cuotas, total, products, userEmail, dir_Remitente, localidad, postalCode, identity_number } = this.props.location.state;
+        const { number,  expiry, name, phone, cuotas, total, products, userEmail, dir_Remitente, localidad, postalCode, identity_number } = this.props.location.state;
         return (
             <PaymentConfirmationContainer>
                 <Title name="Confirmar " title="pago" />
