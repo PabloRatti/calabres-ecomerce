@@ -1,7 +1,7 @@
 import React from 'react';
 import Title from './Title';
 import styled from 'styled-components';
-import { Card} from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll';
 export default class PaymentConfirmation extends React.Component {
@@ -11,8 +11,11 @@ export default class PaymentConfirmation extends React.Component {
             name: this.props.location.state.name,
             total: this.props.location.state.total,
             products: this.props.location.state.products,
-            tokenResponse: '',
-            tokenRequestKeySandbox: '41cbc74acc604a109157bb8394561d27'
+            token: '',
+            tokenRequestKeySandbox: '41cbc74acc604a109157bb8394561d27',
+            tokenForPaymentSandbox: '1fb6dc55c0a1489db411a8ee8f9c9707',
+            tokenForConfirmacionPagoSandbox: '1fb6dc55c0a1489db411a8ee8f9c9707'
+
         }
 
     }
@@ -66,12 +69,9 @@ export default class PaymentConfirmation extends React.Component {
     }
 
 
-    ejecutarPago = () => {
-        this.solicitarToken();
-    }
 
     generarTokenRequest = () => {
-        const { 
+        const {
             expiry } = this.props.location.state;
 
         let expirationMonth = expiry.slice(0, 2);
@@ -93,7 +93,7 @@ export default class PaymentConfirmation extends React.Component {
             },
             body: JSON.stringify({
 
-                card_number: "4540730098765665",
+                card_number: "4507990000004905",
                 card_expiration_month: "07",
                 card_expiration_year: "25",
                 security_code: "223",
@@ -116,16 +116,116 @@ export default class PaymentConfirmation extends React.Component {
         let tokenRequest = this.generarTokenRequest();
         console.log('Request generated for request token ');
         console.log(tokenRequest);
+        let tokenId = '';
         //Hacer el update
         fetch('https://developers.decidir.com/api/v2/tokens', tokenRequest)
             .then(function (res) {
+                console.log('Loading /token.....')
                 return res.json()
             })
             .then(function (data) {
-                console.log(data);
+
+                tokenId = data.id;
+
             }).catch(function (err) {
                 console.log(err)
             })
+
+        setTimeout(() => {
+            this.setState({ token: tokenId });
+        }, 3000)
+    }
+
+    generarPaymentRequest = () => {
+    
+        let request = {
+            mode: 'cors',
+            method: "POST",
+            headers: {
+                "apiKey": this.state.tokenForPaymentSandbox,
+                "Content-Type": "application/json",
+                "Cache-Control": "no-cache",
+            },
+            body: JSON.stringify({
+                site_transaction_id: '43212212',
+                token: this.state.token,
+                payment_method_id: 1,
+                bin: '450799',
+                amount: 2000,
+                currency: "ARS",
+                installments: 4,
+                description: "",
+                payment_type: "single",
+                sub_payments: []
+            })
+        }
+        return request;
+
+    }
+
+    ejecucionPreAutorizacion = () => {
+        let paymentId = '';
+        this.solicitarToken();
+        setTimeout(() => {
+            let paymentRequest = this.generarPaymentRequest();
+            console.log('PaymentRequest');
+            console.log(paymentRequest);
+            console.log('Token : ' + this.state.token);
+            fetch('https://developers.decidir.com/api/v2/payments', paymentRequest)
+                .then(function (res) {
+                    console.log('Loading /payments.....')
+                    return res.json()
+                })
+                .then(function (data) {
+                    console.log('Data from payment endpoint:');
+                    console.log(data.id)
+                    paymentId = data.id;
+
+                }).catch(function (err) {
+                    console.log(err)
+                })
+            setTimeout(() => {
+                this.setState({ paymentId: paymentId })
+                console.log('Payment Id ' + paymentId);
+            }, 4000);
+
+        }, 5000);
+        return null;
+    }
+    ejecutarPago = () => {
+        this.ejecucionPreAutorizacion();
+
+
+        setTimeout(() => {
+            let paymentConfirmationRequest = {
+                mode: 'cors',
+                method: "PUT",
+                headers: {
+                    "apiKey": this.state.tokenForConfirmacionPagoSandbox,
+                    "Content-Type": "application/json",
+                    "Cache-Control": "no-cache",
+                },
+                body: JSON.stringify({
+                    amount: 2100
+                })
+            }
+            fetch('https://developers.decidir.com/api/v2/payments/' + this.state.paymentId, paymentConfirmationRequest)
+                .then(function (res) {
+                    console.log('Loading /payments Confirmation .....')
+                    return res.json()
+                })
+                .then(function (data) {
+                    console.log('Data from payment confirmation PUT endpoint:');
+                    console.log(data)
+                    console.log('Finalizando el flujo');
+
+                }).catch(function (err) {
+                    console.log(err)
+                })
+
+        }, 10000);
+
+
     }
 
     submitHandler = () => {
@@ -135,7 +235,7 @@ export default class PaymentConfirmation extends React.Component {
     }
 
     render() {
-        const { number,  expiry, name, phone, cuotas, total, products, userEmail, dir_Remitente, localidad, postalCode, identity_number } = this.props.location.state;
+        const { number, expiry, name, phone, cuotas, total, products, userEmail, dir_Remitente, localidad, postalCode, identity_number } = this.props.location.state;
         return (
             <PaymentConfirmationContainer>
                 <Title name="Confirmar " title="pago" />
