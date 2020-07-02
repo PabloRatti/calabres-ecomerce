@@ -219,9 +219,9 @@ export default class PaymentConfirmation extends React.Component {
             .then(function (res) {
                 console.log('Procesando pago final....')
                 console.log(res);
-                if (res.status == '400') {
+                if (res.status === '400') {
                     console.log('Arrojando exepcion');
-                    throw "Exception 400";
+                    throw res;
                 }
                 return res.json()
             })
