@@ -19,6 +19,10 @@ export default class Details extends Component {
                         const { id, type, company, img, title, inCart, price, width, profile,  rodado } = value.detailProduct;
                         let cuotas = price / 12;
                         let priceStriked = price + ((price * 20) / 100);
+                        console.log('Price : '+price);
+                       
+                        let totalTransferencia = price - ((price*20)/100);
+                        console.log('Total en transferencia bancaria : '+totalTransferencia)
                         return (
                             <div className="container py-5">
                                 {/**Title start */}
@@ -41,6 +45,7 @@ export default class Details extends Component {
                                         <h2>&nbsp;{width}/{profile}/{rodado}</h2>
                                         <h2><strike id="striked">${priceStriked}</strike>&nbsp;&nbsp;${price}</h2>
                                         <h4 className="price-container">  12 cuotas sin interes de ${cuotas.toFixed(2)}</h4>
+                                        <h4 style={{color:'red'}} className="price-container">Transferencia bancaria -20% ${totalTransferencia.toFixed(2)}</h4>
                                         <FichaTecnicaDetails className="ficha-tecnica" detailProduct={value.detailProduct} />
                                         {/**Buttons */}
                                         <div>
@@ -72,35 +77,30 @@ export default class Details extends Component {
 
 const DetailsWraper = styled.div`
 
-  text-align: center;
-.price-container{
-    color:green;
-}
-  .ficha-tecnica{
-      margin : 0 auto;
-  }
-  #striked{
-      color:gray;
-  }
-   #detail-img{           
-        max-height: 25rem;
-        margin-left: 2rem !important;  
-             
-   }
-   #list-wraper{
-       margin-top: 2rem; 
-   }
-   .ul{
-       list-style: none;
-   }
-   #img-container{
-       max-height: 80%;    
-   }
+text-align: center;
 
-  #description{
-       
-       
-    }
+.price-container{
+    color:blue;
+}
+.ficha-tecnica{
+     margin : 0 auto;
+}
+#striked{
+    color:gray;
+}
+#detail-img{           
+     max-height: 25rem;
+     margin-left: 2rem !important;  
+}
+#list-wraper{
+       margin-top: 2rem; 
+}
+.ul{
+       list-style: none;
+}
+#img-container{
+    max-height: 80%;    
+}
 #title{
     font-size: 2rem !important;   
     color: var(--mainBlue);
@@ -109,18 +109,16 @@ const DetailsWraper = styled.div`
     font-weight: 800;
 }
 #numbers{
-    font-weight: 600;
+     font-weight: 600;
      font-family: 'Futura Bold';
-    line-height: 28px;
+     line-height: 28px;
 }
     
-   @media (max-width: 48em) {
-        #detail-img{    
-        max-height: 100%
-        
-    }
-     
+@media (max-width: 48em) {
+    #detail-img{    
+        max-height: 100%        
+    }   
     
-    }
+}
   
 `;

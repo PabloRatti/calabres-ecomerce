@@ -20,7 +20,9 @@ export default class ProductList extends Component {
             rodado: ''
         }
     }
-
+    componentDidUpdate(){
+        scroll.scrollToTop();
+    }
     componentDidMount() {
         scroll.scrollToTop();
         fetch('http://localhost:4000/notes/')

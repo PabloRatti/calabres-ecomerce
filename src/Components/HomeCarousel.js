@@ -38,19 +38,24 @@ export default class HomeCarousel extends Component {
 
 
 const HomeCarouselContainer = styled.div` 
-    height: 100%;
+    height: 25rem;
+    
     width: 100%;  
-    max-height: 35rem;    
-    margin-bottom: 3rem;
+     
+  
+    
     position:relative;
     .carouselImg{
         height: 25rem;                  
   } 
 
   @media (max-width: 48em) {
-       max-height: 11rem;  
+       max-height: 13rem;  
   .carouselImg {
       max-height: 11rem
+  }
+  #firs-slide {
+      max-height: 8rem
   }
   .row{
       margin: 0 auto;

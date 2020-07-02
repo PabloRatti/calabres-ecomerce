@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PaymentForm from '../PaymentForm';
-import { animateScroll as scroll } from 'react-scroll';
+
 export default class CartTotals extends Component {
     constructor(props) {
         super(props);
@@ -11,14 +10,12 @@ export default class CartTotals extends Component {
 
     }
 
-    creditFormVisibilityHandler = () => {
-        this.setState({ formHidden: !this.state.formHidden }, this.state.formHidden ? scroll.scrollTo(450) : scroll.scrollToTop)
+ 
 
-    }
 
 
     render() {
-        const { cartSubtotal, cartTotal, clearCart , cart} = this.props.value;
+        const { cartSubtotal, cartTotal, clearCart, cart } = this.props.value;
         return (
 
             <React.Fragment>
@@ -32,12 +29,19 @@ export default class CartTotals extends Component {
                             </button>
                             </Link>
 
-
-                            <button className="btn btn-outline-success text-uppercase mb-3 px-5"
-                                type="submit" onClick={() => this.creditFormVisibilityHandler()}>
-                                Pagar con tarjeta
+                            <Link to={{
+                                pathname: '/paymentForm',
+                                state: {
+                                    total: cartTotal,
+                                    cart: cart
+                                }
+                            }}
+                            >
+                                <button className="btn btn-outline-success text-uppercase mb-3 px-5"
+                                    type="submit">
+                                    Pagar con tarjeta
                             </button>
-
+                            </Link>
                             <h5>
                                 <span>
                                     subtotal :
@@ -53,9 +57,10 @@ export default class CartTotals extends Component {
                             </h5>
                         </div>
                     </div>
+                    {/*}
                     <div hidden={this.state.formHidden}>
                         <PaymentForm cartItems={cart} formHidden={this.state.formHidden} total={cartTotal} />
-                    </div>
+        </div>*/}
 
                 </div>
             </React.Fragment>

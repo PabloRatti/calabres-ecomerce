@@ -17,7 +17,7 @@ export default class HomePage extends Component {
     render() {
         return (
             <HomeContainer>
-                <Image className="home-image" src={require("../calabres-api/images/static/portadaAjustada.png")} fluid />
+                <Image className="home-image" src={require("../calabres-api/images/static/redCar.jpg")} fluid />
                 <Carousel className="carousel" />               
                 <div id="firstCard">
                     <PresentationCard image2={require("../calabres-api/images/static/ahora12Imagen.png")} image={require("../calabres-api/images/static/neumaticos.jpg")} />
@@ -36,14 +36,17 @@ export default class HomePage extends Component {
 const HomeContainer = styled.div`  
  height : 100%;
 .banner{ 
-    width:100%;
+    width:100%; 
     margin-bottom: 2rem;
 }
 #firstCard{
 top: 0rem;
 }
 .home-image{
-    margin-top:3.3rem !important;
+    margin-top:4rem !important;
+    width:100%;
+   
+  
 }
    
 .carousel{
@@ -52,10 +55,8 @@ top: 0rem;
         padding: 1rem;
         z-index: 0;
 }
-    .brands{
-       
-        max-width: 100%;
-       
+    .brands{       
+        max-width: 100%;       
         margin-top: 2rem;
     }
 
@@ -64,9 +65,7 @@ top: 0rem;
            margin-top: 0rem;
            height: 4rem;
            max-height: 4rem !important;
-       }
-
-   
+       }      
 
     }
    

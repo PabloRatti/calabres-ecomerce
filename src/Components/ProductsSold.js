@@ -51,26 +51,6 @@ export default class ProductSold extends React.Component {
                 </div>
                 <div class="row">
                     <div id="col" class="col">
-                        {this.props.products.map((product) => {
-                            return (
-                                <div key={product.id} className="prod-container">
-                                    <h4>Producto : {count = count + 1}</h4>
-
-                                        Marca : {product.company}<br />
-                                        Modelo : {product.title}<br />
-                                        Ancho : {product.width}<br />
-                                        Perfil : {product.profile}<br />
-                                        Rodado : {product.rodado}<br />
-                                        Cantidad : {product.cant}<br />
-
-
-                                </div>
-                            );
-                        })}
-
-                    </div>
-
-                    <div id="col" class="col">
 
                         <div id="ticket-container">
                             Titular : {name} <br />
@@ -90,10 +70,32 @@ export default class ProductSold extends React.Component {
                         </div>
 
                     </div>
-                    <div class="col">
+                </div>
+                <div id="productsList">
+                  
+                                {this.props.products.map((product) => {
+                                    return (
+                                        <div key={product.id} className="prod-container">
+                                            <h4>Producto  {count = count + 1}</h4>
+
+                                        Marca : {product.company}<br />
+                                        Modelo : {product.title}<br />
+                                        Ancho : {product.width}<br />
+                                        Perfil : {product.profile}<br />
+                                        Rodado : {product.rodado}<br />
+                                        Cantidad : {product.cant}<br />
+
+
+                                        </div>
+                                    );
+                                })}
+
+                          
+                  
+              
                         <div className="dispatched-container">
                             <h1 className="dispatched" hidden={!this.state.dispatched}>DESPACHADO</h1>
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -110,12 +112,21 @@ border-style: outset;
 
 padding: 1rem;
 margin-bottom: 5rem;
-height: 30rem;
+height: 100%;
 position:relative;
 margin: 0 auto;
-#col{
-    
-    text-align: center;
+
+#productsList{
+    text-align:center;
+
+margin-top: 1rem;
+
+height:15rem;
+}
+.col{
+    margin:0 auto;
+}
+
 }
 .dispatched-container{
    
@@ -125,7 +136,6 @@ margin: 0 auto;
     margin-top: 2rem;
     left: 2rem;
 }
-
 .dispatched{
    color:red;
     
@@ -136,13 +146,14 @@ margin: 0 auto;
     margin-bottom: 2rem;
 }
 .prod-container{
-   border: 2px solid black;
-   padding: 1rem;
-    width: 70%;
-    margin-right: 0 !important;
+     border: 2px solid black;
+     padding: 1rem;   
+     width:20%;
+     display:inline-block;
+       margin: 0 auto !important;
 }
 #ticket-container{
-    
+   
     width: 100%;
     text-align: center;
     max-height: 100% ;

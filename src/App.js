@@ -16,7 +16,7 @@ import WhatsappIcon from './Components/WhatsAppIcon';
 import PaymentConfirmation from './Components/PaymentConfirmation';
 import ProductsSoldList from './Components/ProductsSoldList';
 import Congrats from './Components/Congrats';
-
+import PaymentForm from './Components/PaymentForm';
 
 function App() {
   return (
@@ -33,6 +33,7 @@ function App() {
         <Route path="/login" component={LoginForm} />
         <Route path="/adminHome" component={AdminHomePage} />
         <Route path="/paymentConfirmation" component={PaymentConfirmation} />
+        <Route path="/paymentForm" component={PaymentForm} />
         <Route path="/congrats" component={Congrats} />
         <Route component={Default} />
 

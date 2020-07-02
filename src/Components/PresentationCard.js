@@ -60,7 +60,9 @@ const CardContainer = styled.div`
     }
   
     @media (max-width: 48em) {
-       
+       #left-img{
+           margin-bot:1rem !imortant;
+       }
         #right-img{
             
            

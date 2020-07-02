@@ -8,7 +8,7 @@ export default function EmptyCart() {
             <div className="container mt-5">
                 <div className="row">
                     <div id="container" className="col-10 mx-auto text-center text-title">
-                        <h1 id="mensajeVacio" className="text-capitalize font-weight-bold">Su carrito se encuentra vacio!</h1>
+                        <h1 id="mensajeVacio" className="text-capitalize font-weight-bold">Su carrito se encuentra vacio</h1>
                         <Link className="link-back" to="/llantas">Volver a la tienda</Link>
                     </div>
 
@@ -25,8 +25,7 @@ const EmptyCartContainer = styled.div`
     marign: 0 auto;
     border:2px solid blue;
    .link-back{
-       font-family: Courier;
-       
+       font-family: Courier;       
    }
 
    #container{
@@ -35,7 +34,7 @@ const EmptyCartContainer = styled.div`
        padding: 2rem;
        margin: 0 auto;
        text-align:center;
-       margin-top: 2rem;
+       margin-top: 8rem;
        position:relative;
       box-shadow: 10px 5px 5px black;
    }
@@ -45,7 +44,7 @@ const EmptyCartContainer = styled.div`
 
   @media (max-width: 48em) {
      #container{
-         top: 0rem;
+         margin-top: 2rem;
          
      }
 }

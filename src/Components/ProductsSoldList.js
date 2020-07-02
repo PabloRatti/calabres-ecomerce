@@ -95,14 +95,14 @@ export default class ProductsSoldList extends React.Component {
                             color="#00BFFF"
                             height={100}
                             width={100}
-                            timeout={0} //3 secs
+                            timeout={0} 
                         />
                     </div>
 
                 </div>
                 <div hidden={this.state.loading} class="productContainer">
                     {this.state.fullTickets.map((item) => {
-                        return <ProductsSold key={item.id} ticket={item.ticket} products={item.products} />
+                        return <div className="product-container"><ProductsSold key={item.id} ticket={item.ticket} products={item.products} /></div>
                     })}
                     <div className="warning">
                        
@@ -126,8 +126,11 @@ min-height: 30rem;
 
 .warning{
     margin: 0 auto;
-    text-align:Center;
-   
+    text-align:Center;   
+}
+.product-container{
+    height:100%;
+  
 }
 #back{
     margin-top: 3rem;
