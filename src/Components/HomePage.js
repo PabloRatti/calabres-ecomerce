@@ -17,7 +17,7 @@ export default class HomePage extends Component {
     render() {
         return (
             <HomeContainer>
-                <Image className="home-image" src={require("../calabres-api/images/static/redCar.jpg")} fluid />
+                <Image className="home-image" src={require("../calabres-api/images/static/yellowCar.jpg")} fluid />
                 <Carousel className="carousel" />               
                 <div id="firstCard">
                     <PresentationCard image2={require("../calabres-api/images/static/ahora12Imagen.png")} image={require("../calabres-api/images/static/neumaticos.jpg")} />
