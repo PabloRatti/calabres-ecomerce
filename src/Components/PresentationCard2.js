@@ -14,22 +14,13 @@ export default class PresentationCard extends Component {
                 <div class="row">
                     <div class="col">
 
-                        <div id="imgContainer">
-                            <Link to="/llantas">
-                                <img id="home-image" class="img-fluid" src={this.props.image} />
-
-                            </Link>
-
+                        <div className="imgContainer">                  
+                                <img id="home-image" class="img-fluid" src={this.props.image} />                     
                         </div>
                     </div>
-
-
                     <div class="col">
-                        <div id="imgContainer">
-                            <Link to="/llantas">
+                        <div className="imgContainer">
                                 <img id="home-image" class="img-fluid" src={this.props.image2} />
-
-                            </Link>
                         </div>
                     </div>
                 </div>
@@ -50,33 +41,32 @@ margin-bottom:2rem;
 margin-top:2rem;
 height :30rem;
 
-
+padding:1rem;
 #home-image{
-    width:70% !important;   
-    height:95%;
+   height:100%;
     margin-bottom:0rem !important;
+    border-radius:2rem;
 }
-#imgContainer{
+.imgContainer{
     text-align:center;
-    height:30rem;
- 
+    height:30rem; 
     margin-top:1rem;
 }
 
 #home-image:hover{
-  filter: opacity(.5);
+    cursor:pointer;
+   
 }
+
 @media (max-width: 48em) {
  margin-top:0rem !important;
-    height :12rem !important;
+    height :15rem !important;
 
- #home-image{
-     width:70% !important;   
-     height:80% !important; 
+ #home-image{ 
 
      margin-top:1rem;
     }
-    #imgContainer{
+    .imgContainer{
         height:12rem;
     }
 }

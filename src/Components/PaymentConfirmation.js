@@ -25,6 +25,7 @@ export default class PaymentConfirmation extends React.Component {
             buttonDisabled: false,
             paymentMethodId: '',
             error: ''
+           
         }
 
     }
@@ -108,7 +109,7 @@ export default class PaymentConfirmation extends React.Component {
             },
             body: JSON.stringify({
 
-                card_number: number,//'4507990000004905',
+                card_number: '4507990000004905',
                 card_expiration_month: expirationMonth,
                 card_expiration_year: expirationYear,
                 security_code: cvc,
@@ -167,7 +168,7 @@ export default class PaymentConfirmation extends React.Component {
                 site_transaction_id: transactionId.toString(), //Cambiar esto por id del ticket, desarrollar
                 token: this.state.token,
                 payment_method_id: 1,
-                bin: bin, //-------------------------->
+                bin: '450799', //-------------------------->
                 amount: totalAmount, //La API espera un numero 
                 currency: "ARS",
                 installments: parseInt(cuotas), //La API espera un numero no string
@@ -248,7 +249,7 @@ export default class PaymentConfirmation extends React.Component {
                         console.log('Data del pago final:');
                         console.log(data)
                         console.log('Pago realizado con exito')
-                        this.setState({ loadingTransaction: false, paymentAproved: true, displayMsg: true, message: 'Pago realizado exitosamente!' })
+                        this.setState({ loadingTransaction: false, paymentAproved: true, displayMsg: true, message: 'Pago realizado exitosamente!', buttonDisabled: true })
                     } else {
                         throw 'Tarjeta de credito rechazada';
                     }
@@ -302,7 +303,7 @@ export default class PaymentConfirmation extends React.Component {
 
     submitHandler = () => {
         scroll.scrollToTop();
-        this.setState({ buttonDisabled: false })
+       
         //this.guardarVenta();
 
         this.solicitarToken(() => {
@@ -319,18 +320,53 @@ export default class PaymentConfirmation extends React.Component {
         const { number, expiry, name, phone, cuotas, total, products, userEmail, dir_Remitente, localidad, postalCode, identity_number } = this.props.location.state;
         return (
             <PaymentConfirmationContainer>
-                <Title name="Confirmar " title="pago" />
+
                 {!this.state.loadingTransaction ?
                     <div className="info-container">
 
 
                         <div class="product-container">
+                            <div id="card-container" >
+
+                                <h3>Datos de la compra</h3>
+                                <div>Numero de tarjeta : {number}</div>
+                                <div>Vencimiento : {expiry}</div>
+                                <div>Titular : {name}</div>
+                                <div>DNI : {identity_number}</div>
+                                <div>Contacto del titular : {phone}</div>
+                                <div>Email del titular : {userEmail}</div>
+                                <div>Localidad : {localidad}</div>
+                                <div>Codigo postal : {postalCode}</div>
+                                <div>Sucursal a recibir : {dir_Remitente}</div>
+                                <div>Cuotas : {cuotas}</div>
+                                <div>Total : ${total}</div>
+                                {this.state.displayMsg ? <h5 className="msg" >{this.state.message}&nbsp;{this.state.error}</h5> : null}
+
+                                <div id="submit-btn-container" class="container">
+
+                                    <button disabled={this.state.buttonDisabled} type="submit" className="submit-btn" class="btn-primary mr-2 mt-3" onClick={() => this.submitHandler()}>Aceptar</button>
+
+                                    {this.state.paymentAproved ?
+                                        <Link to="/">
+                                            <button type="submit" className="submit-btn" class="btn-danger mr-2 mt-3 ">Finalizar</button>
+                                        </Link>
+                                        :
+                                        <Link to="/cart">
+                                            <button type="submit" className="submit-btn" class="btn-danger mr-2 mt-3 ">Volver</button>
+                                        </Link>
+                                    }
+
+
+
+                                </div>
+                            </div>
+
 
                             {products.map((item) => {
                                 return (
                                     <Card id="my-card" style={{ width: '14rem', margin: '0 auto', display: 'inline-block' }}>
-                                        <Card.Img variant="top" src={item.img} />
-                                        <Card.Body>
+                                        <Card.Img id="card-img" variant="top" src={item.img} />
+                                        <Card.Body id="card-body">
                                             <Card.Title>{item.company.toUpperCase()} {item.title}</Card.Title>
                                             <Card.Title>Unidades : {item.count}</Card.Title>
                                             <Card.Title>Valor : ${item.total}</Card.Title>
@@ -341,59 +377,21 @@ export default class PaymentConfirmation extends React.Component {
                                 );
                             })}
                         </div>
+                    </div>
+                    : <div className="spinner">
+                        <div id="loader">
+                            <Loader
+                                type="Grid"
+                                color="#00BFFF"
+                                height={100}
+                                width={100}
+                                timeout={0}
 
-                        <div id="card-container" >
-
-                            <h3>Datos de la compra</h3>
-                            <div>Numero de tarjeta : {number}</div>
-                            <div>Vencimiento : {expiry}</div>
-                            <div>Titular : {name}</div>
-                            <div>DNI : {identity_number}</div>
-                            <div>Contacto del titular : {phone}</div>
-                            <div>Email del titular : {userEmail}</div>
-                            <div>Localidad : {localidad}</div>
-                            <div>Codigo postal : {postalCode}</div>
-                            <div>Sucursal a recibir : {dir_Remitente}</div>
-                            <div>Cuotas : {cuotas}</div>
-                            <div>Total : ${total}</div>
-
+                            />
                         </div>
-
-                        {this.state.displayMsg ? <h5 className="msg" >{this.state.message}&nbsp;{this.state.error}</h5> : null}
-
-                        <div id="submit-btn-container" class="container">
-
-                            <button disabled={this.state.buttonDisabled} type="submit" className="submit-btn" class="btn-primary mr-2 mt-3" onClick={() => this.submitHandler()}>Aceptar</button>
-
-                            {this.state.paymentAproved ?
-                                <Link to="/">
-                                    <button type="submit" className="submit-btn" class="btn-danger mr-2 mt-3 ">Finalizar</button>
-                                </Link>
-                                :
-                                <Link to="/cart">
-                                    <button type="submit" className="submit-btn" class="btn-danger mr-2 mt-3 ">Volver</button>
-                                </Link>
-                            }
-
-
-
-                        </div>
-
-
 
                     </div>
-
-
-
-                    : <div className="spinner">
-                        <Loader
-                            type="Grid"
-                            color="#00BFFF"
-                            height={100}
-                            width={100}
-                            timeout={0}
-                        />
-                    </div>}
+                }
 
 
             </PaymentConfirmationContainer >
@@ -405,59 +403,73 @@ export default class PaymentConfirmation extends React.Component {
 const PaymentConfirmationContainer = styled.div`
 
 width: 100%;
-margin-bottom: 3rem;
 text-align:center;
-margin: 0 auto;
-min-height:25rem;
-.msg{
+height: 100%;
 
-    margin-top:2rem;
+.msg{   
     color:red;
 }
 .spinner{
-    margin-top:5rem;
+   border:2px solid white;
+   height:25rem;
+}
+#loader{
+   
+    margin-top:10rem;
 }
 #submit-btn-container{
-    margin: 0 auto;
+    margin-bottom: 1rem !important;
     text-align: center;    
-    padding:2rem;
+    margin:0 auto;
 }
 #card-container{
     border: 5px solid var(--mainBlue) !important;
     width: 20rem;
-    height: 100%;
-    margin: 0 auto;
-    margin-top: 2rem;
+
+    margin-top: 3rem;
     border-radius: 2rem ;
     box-shadow: 5px 10px #888888;
-    text-align:center;
+    float:left;
+    display:inline-block;
     
 }
 
 .product-container{
     
-    padding: 2rem;
-    margin-bottom: 2rem;
-    width: 100%; 
+    padding: 2rem;  
     margin: 0 auto;
     text-align:center;  
-    max-width: 100%;
+  
     
 }
-.img-container{
-    border: 2px solid red;
-    width:30%;
-float:right;
+#my-card{
+    border:2px solid white;
+    margin-left: 1rem !important;
+    min-height: 50%;
+    max-height: 50%;  
+    margin-top: 4rem !important;
+      
 }
-.product-description{
-    border: 2px solid blue;
-    width: 25%;
+#card-img{     
+     max-height:13rem;
+     min-height:13rem;
 }
-.img{
-    width: 30%;
+#card-body{
+     border: 2px solid white;
+     max-height:10rem;
+     min-height:10rem;
 }
 @media (max-width: 48em) {
-
-
+   height:100%;
+    #my-card{
+        margin-top: 3rem !important;
+        margin-left: 0rem !important;
+        min-width: 50%;
+        max-width: 50%;  
+    }
+    #card-container{
+        margin-left: 0.7rem;
+    }
+}
  }
 `;

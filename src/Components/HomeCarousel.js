@@ -8,26 +8,32 @@ export default class HomeCarousel extends Component {
     render() {
         return (
             <HomeCarouselContainer class="shadow p-3 mb-5 bg-white rounded">
-                <Carousel fade="true" interval="2200" >
+                <Carousel fade="true" interval="2200" pause="false">
                     <Carousel.Item id="firs-slide">
-                        <img
-                           
+                        <img                           
                             className="carouselImg d-block w-100"
-                            src={require("../calabres-api/images/static/ahora12Portada.png")}
+                            src={require("../calabres-api/images/static/ahora12Cover.jpeg")}
                             alt="First slide"
                         />
                     </Carousel.Item>
                     <Carousel.Item>
                         <img
                             className="carouselImg d-block w-100"
-                            src={require("../calabres-api/images/static/IMG-20200519-WA0004.jpg")}
+                            src={require("../calabres-api/images/static/EnviosAtodos.jpeg")}
+                            alt="Second slide"
+                        />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            className="carouselImg d-block w-100"
+                            src={require("../calabres-api/images/static/coverGomas.jpeg")}
                             alt="Second slide"
                         />
                     </Carousel.Item>
                     <Carousel.Item>
                         <img
                             className="carouselImg d-block w-100 img-fluid"
-                            src={require("../calabres-api/images/static/neumaticosWide.jpg")} alt="Third slide"
+                            src={require("../calabres-api/images/static/coverCalabres.jpeg")} alt="Third slide"
                         />
                     </Carousel.Item>
                 </Carousel>
@@ -38,28 +44,22 @@ export default class HomeCarousel extends Component {
 
 
 const HomeCarouselContainer = styled.div` 
-    height: 25rem;
-    
-    width: 100%;  
-     
-  
-    
+    height: 30rem;
+ 
+    width: 100%;     
     position:relative;
-    .carouselImg{
-        height: 25rem;                  
-  } 
-
+.carouselImg{
+    height:30rem;        
+} 
+.carousel{
+    padding:0rem !important;
+}
   @media (max-width: 48em) {
        max-height: 13rem;  
   .carouselImg {
       max-height: 11rem
   }
-  #firs-slide {
-      max-height: 8rem
-  }
-  .row{
-      margin: 0 auto;
-  }
+ 
   
 }
 `;
