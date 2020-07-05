@@ -5,7 +5,7 @@ import Carousel from './HomeCarousel';
 
 import { Image } from 'react-bootstrap';
 import { animateScroll as scroll } from 'react-scroll';
-import HorizontalGallery from './HorizontalGallery';
+
 import PresentationCard2 from './PresentationCard2';
 export default class HomePage extends Component {
 

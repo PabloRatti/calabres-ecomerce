@@ -1,5 +1,5 @@
 import React from 'react';
-import Title from './Title';
+
 import styled from 'styled-components';
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -86,7 +86,7 @@ export default class PaymentConfirmation extends React.Component {
 
 
     generarTokenRequest = () => {
-        const { name, identity_number, number, expiry, cvc } = this.props.location.state;
+        const { name, identity_number,  expiry, cvc } = this.props.location.state;
 
         this.setState({ loadingTransaction: true })
         let expirationMonth = expiry.slice(0, 2);
@@ -151,9 +151,9 @@ export default class PaymentConfirmation extends React.Component {
     }
 
     generarPaymentRequest = () => {
-        const { cuotas, number, total } = this.props.location.state;
+        const { cuotas, total } = this.props.location.state;
         let totalAmount = parseInt(total);
-        let bin = number.slice(0, 6);
+        //let bin = number.slice(0, 6);
 
         let transactionId = Math.floor(Math.random() * (99999999 - 1) + 1);
         let request = {
@@ -251,7 +251,7 @@ export default class PaymentConfirmation extends React.Component {
                         console.log('Pago realizado con exito')
                         this.setState({ loadingTransaction: false, paymentAproved: true, displayMsg: true, message: 'Pago realizado exitosamente!', buttonDisabled: true })
                     } else {
-                        throw 'Tarjeta de credito rechazada';
+                        throw data;
                     }
 
                 }).catch((err) => {
@@ -272,6 +272,8 @@ export default class PaymentConfirmation extends React.Component {
             case 'expired card':
                 translatedError = 'Tarjeta vencida';
                 break;
+            default:
+                return null;
         }
         this.setState({ error: translatedError })
         return translatedError;

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Image } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+
 export default class PresentationCard extends Component {
 
     render() {
@@ -15,12 +14,12 @@ export default class PresentationCard extends Component {
                     <div class="col">
 
                         <div className="imgContainer">                  
-                                <img id="home-image" class="img-fluid" src={this.props.image} />                     
+                                <img id="home-image" class="img-fluid" src={this.props.image} alt="home"/>                     
                         </div>
                     </div>
                     <div class="col">
                         <div className="imgContainer">
-                                <img id="home-image" class="img-fluid" src={this.props.image2} />
+                            <img id="home-image" class="img-fluid" src={this.props.image2} alt="home" />
                         </div>
                     </div>
                 </div>
