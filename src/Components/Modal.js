@@ -83,13 +83,14 @@ const ModalContainer = styled.div`
     }
     #modal{
         background: var(--mainWhite);
-        margin-top: 4rem;
-        width: 80%;
-        
-        
-                
+        margin-top: 2.5rem;
+        width: 80%;      
     }
-
+@media (max-width: 48em) {
+     #modal{
+    margin-top: 4rem;
+     }
+}
    
 }
 `;

@@ -45,7 +45,7 @@ export default class ProductSold extends React.Component {
             <ProductSoldContainer>
                 <div class="row">
                     <div className="titulo">
-                        <h2 >Solicitud de : {name}</h2>
+                        <h2 >Solicitud de  {name}</h2>
 
                     </div>
                 </div>
@@ -118,10 +118,9 @@ margin: 0 auto;
 
 #productsList{
     text-align:center;
-
-margin-top: 1rem;
-
-height:15rem;
+    
+    margin-top: 1rem;
+    height:100%;
 }
 .col{
     margin:0 auto;
@@ -133,8 +132,9 @@ height:15rem;
     position:absolute;
     border-radius: 1rem;
     margin: 0 auto;
-    margin-top: 2rem;
-    left: 2rem;
+    top:10rem;
+    
+    left: 10rem;
 }
 .dispatched{
    color:red;
@@ -150,17 +150,13 @@ height:15rem;
      padding: 1rem;   
      width:20%;
      display:inline-block;
-       margin: 0 auto !important;
+     margin: 0 auto !important;
 }
-#ticket-container{
-   
+#ticket-container{   
     width: 100%;
     text-align: center;
-    max-height: 100% ;
-   
-    margin: 0 auto;
-
-  
+    max-height: 100% ;   
+    margin: 0 auto;  
 }
 
 
@@ -168,4 +164,16 @@ height:15rem;
     margin: 0 auto !important;
     margin-top: 3rem !important;
 }
+
+ @media (max-width: 48em) {
+.prod-container{
+    max-height:100%;
+    width:60%;
+    text-align: none;
+     word-wrap: break-word;
+}
+.dispatched-container{
+    left:2rem;
+}
+ }
 `;

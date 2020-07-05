@@ -26,14 +26,15 @@ export default class PaymentForm extends React.Component {
             postalCode: '',
             isBank: false,
             totalConIntereses: this.props.location.state.total,
-            cart: this.props.location.state.cart
+            cart: this.props.location.state.cart,
+            paymentMethod: ''
         };
     }
 
 
-componentDidMount(){
-    scroll.scrollToTop();
-}
+    componentDidMount() {
+        scroll.scrollToTop();
+    }
 
     handleInputFocus = (e) => {
         this.setState({ focus: e.target.name });
@@ -101,10 +102,10 @@ componentDidMount(){
         console.log('Code : ' + this.state.cvc);
         console.log('Total : ' + this.state.total);
 
-        if (this.state.cuotas !== ''){
-          this.setState({ continueDisabled: false });  
+        if (this.state.cuotas !== '') {
+            this.setState({ continueDisabled: false });
         } else alert('Ingrese entidad de pago y cuotas');
-        
+
 
 
     }
@@ -116,7 +117,7 @@ componentDidMount(){
                 <div id="PaymentForm">
                     <div id="titulo">
                         <Title name="Pago con " title="Credito bancario" />
-                   
+
                     </div>
 
                     <form className="card-form" onSubmit={this.handleSubmit}>
@@ -269,16 +270,15 @@ componentDidMount(){
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses })}>Naranja (Plan Z)</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses })}>Naranja Visa</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses })}>Fava</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses })}>Fava Cabal</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses })}>Clipper Cabal</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses })}>Cencosud Mastercard</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: 24 })}>Naranja (Plan Z)</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: 24 })}>Naranja Visa</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: 103 })}>Fava</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: 103 })}>Fava Cabal</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: 0 })}>Clipper Cabal</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: 43 })}>Cencosud Mastercard</Dropdown.Item>
 
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses })}>Banco Frances</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses })}>Banco Provincia</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses })}>Otros bancos</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: 1 })}>Tarjeta de banco Visa</Dropdown.Item>
+
                                     </Dropdown.Menu>
                                 </Dropdown>
 
@@ -403,33 +403,26 @@ label{
      padding: 2rem;
 }
 .col{
-
-margin-top: 1rem;
-
+    margin-top: 1rem;
 }
 #btn-continue{
-    margin-top: 1rem;
-    
+    margin-top: 1rem;    
 }
+
  @media (max-width: 48em) {
-        #btn-col{       
-       
+    #btn-col{     
          padding: 0.5rem;
          width: 30%;
-
-        }
+    }
 #btn-row{
-  
-    text-align:center;
-    
-}
+    text-align:center;  
+    }
 .aceptar-btn{
      margin-right: 0rem;
-}
+    }
 #totales-col{
-  
     width:30%;
-}
+    }
 }
 ` ;
 

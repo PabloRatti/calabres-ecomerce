@@ -51,7 +51,7 @@ export default function CartItem({ item, value }) {
 const Wrapper = styled.div`
      @media (max-width: 48em) {
          #product-img{
-             border:2px solid red;
+            
             
          }
         

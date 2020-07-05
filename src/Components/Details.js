@@ -21,7 +21,7 @@ export default class Details extends Component {
                         let priceStriked = price + ((price * 20) / 100);
                         console.log('Price : '+price);
                        
-                        let totalTransferencia = price - ((price*20)/100);
+                        let totalTransferencia = price - ((price*15)/100);
                         console.log('Total en transferencia bancaria : '+totalTransferencia)
                         return (
                             <div className="container py-5">
@@ -45,7 +45,7 @@ export default class Details extends Component {
                                         <h2>&nbsp;{width}/{profile}/{rodado}</h2>
                                         <h2><strike id="striked">${priceStriked}</strike>&nbsp;&nbsp;${price}</h2>
                                         <h4 className="price-container">  12 cuotas sin interes de ${cuotas.toFixed(2)}</h4>
-                                        <h4 style={{color:'red'}} className="price-container">Transferencia bancaria -20% ${totalTransferencia.toFixed(2)}</h4>
+                                        <h4 style={{color:'red'}} className="price-container">Transferencia bancaria -15% ${totalTransferencia.toFixed(2)}</h4>
                                         <FichaTecnicaDetails className="ficha-tecnica" detailProduct={value.detailProduct} />
                                         {/**Buttons */}
                                         <div>

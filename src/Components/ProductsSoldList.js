@@ -130,6 +130,7 @@ min-height: 30rem;
 }
 .product-container{
     height:100%;
+    
   
 }
 #back{
@@ -151,6 +152,11 @@ min-height: 30rem;
 .title{
     margin-top: 10rem !important;
 }
+
+ @media (max-width: 48em) {
+
+
+ }
 `;
 
 

@@ -19,7 +19,7 @@ export default class Footer extends Component {
                             <p><span>Av.Colon 3825</span> Mar del Plata, Argentina</p>
                         </div>
 
-                        <div>
+                        <div className="phoneLabel">
                             <i class="fa fa-phone"></i>
                             <p>0223 473-2424</p>
                         </div>
@@ -241,6 +241,9 @@ const FooterContainer = styled.nav`
 
 	.footer-distributed .footer-center i{
 		margin-left: 0;
+	}
+	.phoneLabel{
+		margin-right:3rem;
 	}
 
 }

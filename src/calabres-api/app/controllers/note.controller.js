@@ -222,15 +222,17 @@ exports.saveVenta = (req, res) => {
         con.query(query, (err, response, campos) => {
             if (err) {
                 console.log('Error en query shippingTicket')
+                res.send(500);
             } else {
                 console.log('Ticket insertado! ID : ' + response.insertId);
                 saveSoldProducts(products, response.insertId);
-                res.redirect('http://localhost:3000/congrats');
+                res.send(200);
             }
         });
         con.end();
     } catch (e) {
         console.log('Error catched : ' + e);
+        res.send(500);
     }
 
 }
