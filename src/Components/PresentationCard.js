@@ -9,8 +9,6 @@ export default class PresentationCard extends Component {
         return (
             <CardContainer>
 
-
-
                 <div class="row">
                     <div class="col">
 
@@ -19,7 +17,6 @@ export default class PresentationCard extends Component {
                                 <img id="home-image" class="img-fluid" src={this.props.image} alt="home" />
 
                             </Link>
-
                         </div>
                     </div>
 
@@ -27,7 +24,7 @@ export default class PresentationCard extends Component {
                     <div class="col">
                         <div id="imgContainer">
                             <Link to="/llantas">
-                                <img id="home-image" class="img-fluid" src={this.props.image2} alt="home"/>
+                                <img id="home-image" class="img-fluid" src={this.props.image2} alt="home" />
 
                             </Link>
                         </div>
@@ -44,41 +41,43 @@ export default class PresentationCard extends Component {
 }
 
 const CardContainer = styled.div`   
-
-
-margin-bottom:2rem;
-margin-top:2rem;
-height :30rem;
-
-
-#home-image{
-    width:70% !important;   
-    height:95%;
-    margin-bottom:0rem !important;
-}
+height: 100%;
 #imgContainer{
     text-align:center;
     height:30rem;
- 
-    margin-top:1rem;
+    padding:2rem;
+  
+    width:100% !important;
+    height: 100% !important;
+   
 }
+
+#home-image{
+    min-width:100% !important;   
+    min-height:100% !important;
+    margin-top: 0rem !important;
+ 
+}
+
 
 #home-image:hover{
   filter: opacity(.5);
 }
 @media (max-width: 48em) {
- margin-top:0rem !important;
-    height :12rem !important;
 
+ padding: 0.5rem;
  #home-image{
      width:70% !important;   
      height:80% !important; 
-
      margin-top:1rem;
     }
     #imgContainer{
-        height:12rem;
+         height:12rem;
+         padding:0rem;
     }
+    .col{   
+          padding: 0 0;
+        }
 }
-   
+    
 `;

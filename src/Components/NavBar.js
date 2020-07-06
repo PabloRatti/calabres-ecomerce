@@ -7,47 +7,41 @@ import { ButtonContainer } from './Button';
 export default class NavBar extends Component {
     render() {
         return (
-            <NavWrapper className="navbar navbar-expand-sm  navbar-dark px-sm-5">
-                
-                <Link to='/'>
-                    <HomeIcon className="homeIcon" color="primary"/>
-                </Link>
-                <ul className="navbar-nav align-items-center">
-                    <li className="nav-item ml-5">
-                        <Link to="/llantas" className="nav-link">
-                            Tienda
+
+                <NavWrapper className="navbar navbar-expand-sm  navbar-dark px-sm-5">
+                     
+                    <Link to='/'>
+                        <HomeIcon className="homeIcon" color="primary" />
+                    </Link>
+                    <ul className="navbar-nav align-items-center">
+                        <li className="nav-item ml-5">
+                            <Link to="/llantas" className="nav-link">
+                                Tienda
                         </Link>
-                    </li>
+                        </li>
 
-                </ul>
+                    </ul>
 
-                <Link to="/cart" className="ml-auto">
+                    <Link to="/cart" className="ml-auto">
 
-                    <ButtonContainer>
-                        <span className="mr-2">
-                            <i className="fas fa-cart-plus" />
-                        </span>
+                        <ButtonContainer>
+                            <span className="mr-2">
+                                <i className="fas fa-cart-plus" />
+                            </span>
                        Carrito
                     </ButtonContainer>
-                </Link>
+                    </Link>
 
-            </NavWrapper>
+                </NavWrapper>
+          
         );
     }
 }
-
 const NavWrapper = styled.nav`
 background: var(--mainBlue);
 font-family: Trebuchet MS, sans-serif;
-
-
-
- position:fixed;
- z-index: 1;
+ 
  width: 100%;
-
-
-
 
 .icon{
     float: right ! important;
@@ -59,11 +53,10 @@ font-family: Trebuchet MS, sans-serif;
      height: 3.5rem;
 }
 .nav-link{
-    color: var(--mainWhite);
+    
     font-size: 1.3rem;
-    text-transform: capitalize;
-   
-    border-radius:2rem;
+    text-transform: capitalize;   
+    
 }
 .nav-link:hover{
      color: cyan !important;
@@ -72,10 +65,7 @@ font-family: Trebuchet MS, sans-serif;
     transition: color 500ms linear;
 }
 
-.navTitle{
-    margin-left: 10rem;
-    color: var(--mainWhite);
-}
+
 
 .homeIcon:hover{
      color: cyan !important;
@@ -84,8 +74,6 @@ font-family: Trebuchet MS, sans-serif;
     transition: color 500ms linear;
 }
 
-.titulo{
-    margin-left: 14rem !important;
-}
+
 
 `;

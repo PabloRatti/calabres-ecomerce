@@ -13,8 +13,8 @@ export default class PresentationCard extends Component {
                 <div class="row">
                     <div class="col">
 
-                        <div className="imgContainer">                  
-                                <img id="home-image" class="img-fluid" src={this.props.image} alt="home"/>                     
+                        <div className="imgContainer">
+                            <img id="home-image" class="img-fluid" src={this.props.image} alt="home" />
                         </div>
                     </div>
                     <div class="col">
@@ -38,36 +38,47 @@ const CardContainer = styled.div`
 
 margin-bottom:2rem;
 margin-top:2rem;
-height :30rem;
-
+height: 30rem;
 padding:1rem;
+
+.col{  
+    max-height:100% !important; 
+}
+
+.row{
+     height:100%;
+}
 #home-image{
-   height:100%;
-    margin-bottom:0rem !important;
+    height:100% !important;
+    margin:0 auto !important;
     border-radius:2rem;
+
 }
 .imgContainer{
     text-align:center;
-    height:30rem; 
-    margin-top:1rem;
+    height:100%;
+
+    margin: 0 auto;
 }
 
 #home-image:hover{
-    cursor:pointer;
-   
+    cursor:pointer;   
 }
 
 @media (max-width: 48em) {
- margin-top:0rem !important;
-    height :15rem !important;
+    padding: 0rem;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+    height : 10rem !important;
+ 
 
- #home-image{ 
 
-     margin-top:1rem;
-    }
-    .imgContainer{
-        height:12rem;
-    }
+.imgContainer{
+ 
+ padding: 0.5rem;
+   
+}
+
 }
    
 `;

@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavBar from './Components/NavBar';
 import Details from './Components/Details';
 import ProductList from './Components/ProductList';
 import Cart from './Components/Cart';
@@ -17,12 +16,16 @@ import PaymentConfirmation from './Components/PaymentConfirmation';
 import ProductsSoldList from './Components/ProductsSoldList';
 import Congrats from './Components/Congrats';
 import PaymentForm from './Components/PaymentForm';
-
+import FullNavBar from './Components/FullNavBar';
 function App() {
   return (
-    <React.Fragment>   
-      <NavBar/>     
-   
+    <React.Fragment>
+
+        
+      <FullNavBar />
+  
+
+
       <WhatsappIcon />
       <Switch>
         <Route exact path="/" component={HomePage} />
@@ -39,7 +42,7 @@ function App() {
 
       </Switch>
       <Modal />
-     
+
       <Footer />
 
     </React.Fragment>
