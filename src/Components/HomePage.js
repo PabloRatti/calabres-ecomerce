@@ -10,8 +10,8 @@ import PresentationCard2 from './PresentationCard2';
 export default class HomePage extends Component {
 
     componentDidMount = () => {
-       scroll.scrollToTop();
-  
+        scroll.scrollToTop();
+
     }
 
     render() {
@@ -24,11 +24,11 @@ export default class HomePage extends Component {
                 <PresentationCard image2={require("../calabres-api/images/static/llantas2.jpg")} image={require("../calabres-api/images/static/neumaticos.jpg")} />
 
 
-                <Image className="brands" src={require("../calabres-api/images/static/MarcasCalabres.png")} fluid/>
+                <Image className="brands" src={require("../calabres-api/images/static/MarcasCalabres.png")} fluid />
                 {/*<HorizontalGallery />*/}
                 <PresentationCard2 image2={require("../calabres-api/images/static/carretera2.jpg")} image={require("../calabres-api/images/static/pickupcalabres.jpg")} />
 
-             
+
                 <Image className="banner" src={require("../calabres-api/images/static/banner.png")} />
             </HomeContainer>
 

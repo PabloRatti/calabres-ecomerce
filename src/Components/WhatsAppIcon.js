@@ -74,6 +74,7 @@ cursor:pointer;
 .container{
     position:fixed;
     z-index: 1;
+  
 }
 .mySubmit{
  height: 5rem;
@@ -90,8 +91,8 @@ cursor:pointer;
 -ms-animation: fadein 2s; /* Internet Explorer */
 -o-animation: fadein 2s; /* Opera < 12.1 */
 animation: fadein 2s;
-right: -5rem !important;
-top: 8rem !important;
+right: -5rem;
+top: 28rem;
 @keyframes fadein {
 from { opacity: 0; }
 to   { opacity: 1; }
@@ -100,19 +101,17 @@ to   { opacity: 1; }
     position:absolute;
     height: 6rem;
     width: 25rem;
-    border-radius: 1rem;
-    position:absolute;
-    right: 3rem;
-    top: 5rem;
+    border-radius: 1rem;   
+    
 }
 
 .w-input{
     height: 5rem;
     width: 20rem;
     border-radius: 1rem 0 0 1rem;
-    
+ 
     right: 2rem;
-    top: 8rem;
+
 }
 
    .link{      
@@ -125,12 +124,12 @@ to   { opacity: 1; }
         position:fixed;  
         z-index: 1;
         right: 1rem;  
-        top: 8rem;
+        bottom: 2rem;
                
    }
 @media screen and (max-width: 300px) {
 #whatsapp-txt{
-display:none;
+    display:none;
 }
 
 }
