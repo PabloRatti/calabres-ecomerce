@@ -69,14 +69,14 @@ padding:1rem;
     padding: 0rem;
     margin-top: 1rem !important;
     margin-bottom: 1rem !important;
-    height : 10rem !important;
+    height : 8rem !important;
  
 
 
 .imgContainer{
  
  padding: 0.5rem;
-   
+   height:100%;
 }
 
 }

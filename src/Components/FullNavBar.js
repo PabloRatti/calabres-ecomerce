@@ -6,14 +6,17 @@ const FullNavBar = () => {
 
 
     return (
-        <FreeShippingContainer>
-            <div>
-                <img id="fire" src={require("../calabres-api/images/static/fire.png")} alt="home" />
-                <h5>Envios gratis a todo el pais y 20% off en tienda online</h5>
-                <img id="fire" src={require("../calabres-api/images/static/fire.png")} alt="home"/>
+        <FreeShippingContainer >
+          
 
-            </div>
-            <NavBar/>
+                <img id="fire" src={require("../calabres-api/images/static/fire.png")} alt="home" />
+                <h5>Envios gratis a todo el pais y 20% OFF en tienda online</h5>
+                <img id="fire" src={require("../calabres-api/images/static/fire.png")} alt="home" />
+
+
+           
+
+            <NavBar />
         </FreeShippingContainer>);
 }
 
@@ -26,16 +29,24 @@ position:fixed;
 width:100%;
 z-index: 1;
 text-align:center;
-padding: 1px;
+
 #fire{
-    height: 100%;
+    
     width: 2%;
     display:inline-block;
     margin-left:1rem;
     margin-right:1rem;
 }
-h5{
-    font-size: 1.00rem;
+h5{   
     display:inline-block;
 }
+
+ @media (max-width: 48em) {
+     #fire{
+        width: 5%;
+        }
+        h5{
+            font-size: .75em;
+        }
+ }
 `;

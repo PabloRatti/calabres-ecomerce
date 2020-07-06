@@ -39,21 +39,10 @@ export default class NavBar extends Component {
 }
 const NavWrapper = styled.nav`
 background: var(--mainBlue);
-font-family: Trebuchet MS, sans-serif;
- 
+font-family: Trebuchet MS, sans-serif; 
  width: 100%;
 
-.icon{
-    float: right ! important;
-}
-.ahora-logo{    
-    height: 4rem;      
-}
-.ahora-img{
-     height: 3.5rem;
-}
-.nav-link{
-    
+.nav-link{    
     font-size: 1.3rem;
     text-transform: capitalize;   
     
@@ -64,8 +53,6 @@ font-family: Trebuchet MS, sans-serif;
     -ms-transition: color 500ms linear;
     transition: color 500ms linear;
 }
-
-
 
 .homeIcon:hover{
      color: cyan !important;

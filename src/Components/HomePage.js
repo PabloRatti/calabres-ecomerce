@@ -55,7 +55,7 @@ const HomeContainer = styled.div`
 }
 
 .home-image{
-    margin-top:4rem !important;
+    margin-top:5.5rem !important;
     width:100%;
 }
 .brands{
