@@ -189,7 +189,8 @@ const FilterBarContainer = styled.div`
 -o-animation: fadein 2s; /* Opera < 12.1 */
 animation: fadein 2s;
 
-top: 5.8rem;
+top: 5.5rem;
+
 position:fixed;
  z-index: 1;
  width: 100%;
