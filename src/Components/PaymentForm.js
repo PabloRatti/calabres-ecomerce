@@ -28,6 +28,7 @@ export default class PaymentForm extends React.Component {
             totalConIntereses: this.props.location.state.total,
             cart: this.props.location.state.cart,
             paymentMethod: ''
+            
         };
     }
 
@@ -116,7 +117,7 @@ export default class PaymentForm extends React.Component {
             <PaymentFormContainer id="section1" title="section1" ref="test">
                 <div id="PaymentForm">
                     <div id="titulo">
-                        <Title name="Pago con " title="Credito bancario" />
+                        <Title name="Pago con " title="tarjeta" />
 
                     </div>
 
@@ -270,14 +271,14 @@ export default class PaymentForm extends React.Component {
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: 24 })}>Naranja (Plan Z)</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: 24 })}>Naranja Visa</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: 103 })}>Fava</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: 103 })}>Fava Cabal</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: 0 })}>Clipper Cabal</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: 43 })}>Cencosud Mastercard</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '24' })}>Naranja (Plan Z)</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '24' })}>Naranja Visa</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '103' })}>Fava</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '103' })}>Fava Cabal</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '0' })}>Clipper Cabal</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '43' })}>Cencosud Mastercard</Dropdown.Item>
 
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: 1 })}>Tarjeta de banco Visa</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '1' })}>Tarjeta de banco Visa</Dropdown.Item>
 
                                     </Dropdown.Menu>
                                 </Dropdown>
@@ -333,7 +334,8 @@ export default class PaymentForm extends React.Component {
                                 <br />
                                 Pagos : {this.state.cuotas}
                                 <br />
-
+                                Metodo de pago : {this.state.paymentMethod}
+                                <br />
                                 Valor de la cuota : ${this.state.valorCuota !== '' ? this.state.valorCuota.toFixed(2) : null}
                                 <br />
                                 <div id="btn-continue">
@@ -352,7 +354,8 @@ export default class PaymentForm extends React.Component {
                                             dir_Remitente: this.state.dir_Remitente,
                                             userEmail: this.state.userEmail,
                                             postalCode: this.state.postalCode,
-                                            identity_number: this.state.identity_number
+                                            identity_number: this.state.identity_number,
+                                            paymentMethodId: this.state.paymentMethod
                                         }
                                     }} >
                                         <Button disabled={this.state.continueDisabled} variant="success">Continuar</Button>
@@ -386,7 +389,7 @@ margin: 0 auto;
 }
 
 #titulo{
-    margin-top:4rem;
+    margin-top:6rem !important;
     height:5rem;
 }
 p{

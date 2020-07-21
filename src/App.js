@@ -17,15 +17,13 @@ import ProductsSoldList from './Components/ProductsSoldList';
 import Congrats from './Components/Congrats';
 import PaymentForm from './Components/PaymentForm';
 import FullNavBar from './Components/FullNavBar';
+
 function App() {
   return (
     <React.Fragment>
 
-        
+     
       <FullNavBar />
-  
-
-
       <WhatsappIcon />
       <Switch>
         <Route exact path="/" component={HomePage} />

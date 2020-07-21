@@ -11,6 +11,12 @@ export default class Details extends Component {
         scroll.scrollToTop();
     }
 
+    transferenciaHandler = () =>{
+        console.log('Transferencia handler activated');
+        console.log("Submited Mobile");
+        let wspLink = 'https://api.whatsapp.com/send?phone=542235911061';
+        window.location = wspLink;
+    }
     render() {
         return (
             <DetailsWraper>
@@ -45,7 +51,7 @@ export default class Details extends Component {
                                         <h2>&nbsp;{width}/{profile}/{rodado}</h2>
                                         <h2><strike id="striked">${priceStriked}</strike>&nbsp;&nbsp;${price}</h2>
                                         <h4 className="price-container">  12 cuotas sin interes de ${cuotas.toFixed(2)}</h4>
-                                        <h4 style={{color:'red'}} className="price-container">Transferencia bancaria -15% ${totalTransferencia.toFixed(2)}</h4>
+                                        <h4 onClick={this.transferenciaHandler} id="transferencia" style={{color:'green'}} className="price-container">Transferencia bancaria -15% ${totalTransferencia.toFixed(2)}</h4>
                                         <FichaTecnicaDetails className="ficha-tecnica" detailProduct={value.detailProduct} />
                                         {/**Buttons */}
                                         <div>
@@ -78,7 +84,10 @@ export default class Details extends Component {
 const DetailsWraper = styled.div`
 
 text-align: center;
-
+#transferencia:hover{
+    cursor: pointer;
+    color: red !important;
+}
 .price-container{
     color:blue;
 }

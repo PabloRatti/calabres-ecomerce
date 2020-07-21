@@ -126,32 +126,32 @@ export default class LoginForm extends Component {
 
 
 const FormPageContainer = styled.nav`
-    padding: 3rem;
-    
 
-    .input-container{
+padding: 3rem;   
+
+.input-container{
         margin-top: 1rem;
     }
-    .form-title{
+.form-title{
         margin-top:2rem;
     }
 .loginImg{
     max-height: 30rem;
+    margin-top: 2rem;
      border: 5px solid var(--mainBlue);
-    border-radius: 2rem;
-    
+    border-radius: 2rem;    
 }
    
 .form-container{
     
-     box-shadow: 5px 10px #888888;
-
+    box-shadow: 5px 10px #888888;
     border: 5px solid var(--mainBlue);
     border-radius: 2rem;
     height: 20rem;
     width: 50%;
     max-width: 50%;   
     text-align:center;
+    margin-top: 2rem;
 }
 
 @media (max-width: 48em) {

@@ -5,8 +5,7 @@ import { animateScroll as scroll } from 'react-scroll';
 export default class Congrats extends React.Component {
 
     
-    componentDidMount = () => {
-       
+    componentDidMount = () => {       
         scroll.scrollToTop();
     }
     render() {
@@ -35,7 +34,7 @@ border: 2px solid transparent;
 .text-container{
    
     margin: 0 auto;
-    margin-top: 5rem !important;
+    margin-top: 9rem !important;
     border: 2px solid var(--mainBlue); 
     margin-bottom: 2rem;
     font-family: monospace;
@@ -50,12 +49,18 @@ h1{
 }
 .brands{
     max-width:100%;
+    height:4rem;
         
 }
 
 @media (max-width: 48em) {
 .text-container{
     width: 90%;
+}
+.brands{
+    max-width:100%;
+    height:2rem;
+        
 }
 }
 `;

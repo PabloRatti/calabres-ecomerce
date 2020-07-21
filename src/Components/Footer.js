@@ -55,11 +55,6 @@ const FooterContainer = styled.nav`
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,500,300,700);
 
-* {
-  font-family: Open Sans;
-	
-}
-
 
 
 .footer-distributed{
@@ -90,7 +85,7 @@ const FooterContainer = styled.nav`
 
 .footer-distributed h3{
 	color:  #ffffff;
-	font: normal 36px 'Open Sans', cursive;
+	font: normal 36px 'Georgia', cursive;
 	margin: 0;
 }
 
@@ -109,7 +104,7 @@ const FooterContainer = styled.nav`
 .footer-distributed .footer-links a{
 	display:inline-block;
 	line-height: 1.8;
-  font-weight:400;
+    font-weight:400;
 	text-decoration: none;
 	color:  inherit;
 }
@@ -148,7 +143,7 @@ const FooterContainer = styled.nav`
 .footer-distributed .footer-center p{
 	display: inline-block;
 	color: #ffffff;
-  font-weight:400;
+    font-weight:400;
 	vertical-align: middle;
 	margin:0;
 }

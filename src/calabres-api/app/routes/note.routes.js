@@ -1,5 +1,6 @@
 
 var multer = require('multer')
+
 //This appends de extension to file
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -39,7 +40,8 @@ module.exports = (app) => {
 
     //Delete a picture
     app.post('/notes/deletePicture/:notePath', notes.deletePicture);
-    
+    //Procesar pago
+    app.post('/ejecutarPago', notes.ejecutarPago);
     //Login
     app.post('/notes/adminLogin', notes.logAdmin);
 

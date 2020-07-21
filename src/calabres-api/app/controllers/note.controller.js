@@ -1,5 +1,10 @@
 
 const mysql = require('mysql');
+var paymentMod = require('../../sdk-nodejs-v2/lib/payment');
+var PaymentDataModulo = require('../../sdk-nodejs-v2/lib/payment_data.js');
+var sdkModulo = require('../../sdk-nodejs-v2/lib/sdk');
+var Promise = require('promise');
+
 
 // Create and Save a new Note
 exports.create = (req, res) => {
@@ -11,7 +16,7 @@ exports.create = (req, res) => {
     });
 
     con.connect();
-    let query = 'INSERT INTO product (title,img,price,company,info,inCart,count,total,type,width,profile,rodado) values("' + req.body.title + '","img/' + req.file.filename + '",' + req.body.price + ',"' + req.body.company + '","' + req.body.info + '",' + false + ',' + 0 + ',' + 0 + ',"' + req.body.type + '","' + req.body.width + '","' + req.body.profile + '","'+req.body.rodado+'");';
+    let query = 'INSERT INTO product (title,img,price,company,info,inCart,count,total,type,width,profile,rodado) values("' + req.body.title + '","img/' + req.file.filename + '",' + req.body.price + ',"' + req.body.company + '","' + req.body.info + '",' + false + ',' + 0 + ',' + 0 + ',"' + req.body.type + '","' + req.body.width + '","' + req.body.profile + '","' + req.body.rodado + '");';
     console.log(query);
     con.query(query,
         (err, response, campos) => {
@@ -181,7 +186,7 @@ saveSoldProducts = (products, sellId) => {
         try {
             let productCant = item.count;
             if (productCant < 1) productCant = 1;
-            let query = 'INSERT INTO productSold (company,title,width,profile,cant,sellId,rodado) values("' + item.company + '","' + item.title + '","' + item.width + '","' + item.profile + '",' + productCant + ',' + sellId + ',"'+item.rodado+'");';
+            let query = 'INSERT INTO productSold (company,title,width,profile,cant,sellId,rodado) values("' + item.company + '","' + item.title + '","' + item.width + '","' + item.profile + '",' + productCant + ',' + sellId + ',"' + item.rodado + '");';
             console.log(query);
 
             con.query(query, (err, response, campos) => {
@@ -190,7 +195,6 @@ saveSoldProducts = (products, sellId) => {
                     console.log(err);
                 } else {
                     console.log('Item Inserted !')
-
                 }
             });
 
@@ -203,6 +207,64 @@ saveSoldProducts = (products, sellId) => {
     con.end();
 
 }
+
+generatePaymentRequest = (req, apiKey) => {
+    let token = req.token;
+    console.log('Token captured in BE : ' + token);
+    console.log('Request from front captured : ');
+    console.log(req);
+    
+    var date = new Date().getTime();
+    args = {
+        site_transaction_id: "id_" + date+",Name:"+req.name,
+        token: token,
+        user_id: req.name,
+        payment_method_id: req.paymentMethodId,
+        bin: req.bin,
+        amount: req.amount,
+        currency: "ARS",
+        installments: req.installments,
+        description: "Llantas y neumaticos el calabres",
+        payment_type: "single",
+        sub_payments: [],
+        apiKey: apiKey,
+        'Content-Type': "application/json"
+    };
+
+    return args;
+}
+
+exports.ejecutarPago = (req, res) => {
+    let body = req.body;
+    var publicKey = "96e7f0d36a0648fb9a8dcb50ac06d260";
+    var privateKey = "1b19bb47507c4a259ca22c12f78e881f";
+
+    var sdk = new sdkModulo.sdk('developer', publicKey, privateKey);
+    let request = generatePaymentRequest(body, privateKey);
+    
+
+    var paymentData = new PaymentDataModulo.paymentData(request);
+    var args = paymentData.getJSON();
+    console.log(args);
+
+    sdk.payment(args, function (result, err) {
+        console.log('Returning response to FE');
+        console.log(result);
+        console.log('Errors : ');
+        console.log(err);
+        if (err.validation_errors) {
+            console.log(err);
+            res.send(err);
+        } else {
+            console.log(result);
+            
+            res.send(result);
+        }
+
+    });
+
+}
+
 
 exports.saveVenta = (req, res) => {
 

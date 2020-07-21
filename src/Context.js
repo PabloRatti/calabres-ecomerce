@@ -21,7 +21,7 @@ class ProductProvider extends Component {
     }
 
     componentDidMount() {
-        
+
         fetch('http://localhost:4000/notes/')
             .then(response => response.json())
             .then(json => {
@@ -150,7 +150,7 @@ class ProductProvider extends Component {
 
 
     clearCart = () => {
-      
+
         this.setState(() => {
             return { cart: [] };
         }, () => {
@@ -176,7 +176,7 @@ class ProductProvider extends Component {
 
     creditPay = (e) => {
         let obj = e;
-        console.log('Trying to pay with credit card an amount of : '+obj);
+        console.log('Trying to pay with credit card an amount of : ' + obj);
         console.log(obj.target.value);
     }
     render() {
@@ -194,6 +194,7 @@ class ProductProvider extends Component {
                 clearCart: this.clearCart
 
             }}>
+               
                 {this.props.children}
             </ProductContext.Provider>
         );

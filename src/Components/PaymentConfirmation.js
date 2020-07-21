@@ -6,26 +6,25 @@ import { Link } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll';
 import Loader from 'react-loader-spinner';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
 export default class PaymentConfirmation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: this.props.location.state.name,
-            total: this.props.location.state.total,
-            products: this.props.location.state.products,
             token: '',
-            tokenRequestKeySandbox: '41cbc74acc604a109157bb8394561d27',
-            tokenForPaymentSandbox: '1fb6dc55c0a1489db411a8ee8f9c9707',
-            tokenForConfirmacionPagoSandbox: '1fb6dc55c0a1489db411a8ee8f9c9707',
+            tokenRequestKeySandbox: '96e7f0d36a0648fb9a8dcb50ac06d260',
+            tokenForPaymentSandbox: '',
+            tokenForConfirmacionPagoSandbox: '',
             loadingTransaction: false,
             paymentId: '',
             displayMsg: false,
             message: '',
             paymentAproved: false,
             buttonDisabled: false,
-            paymentMethodId: '',
-            error: ''
-           
+            paymentMethodId: this.props.location.state.paymentMethodId,
+            error: '',
+            installments : this.props.location.state.cuotas
+
         }
 
     }
@@ -35,13 +34,13 @@ export default class PaymentConfirmation extends React.Component {
         //scroll.scrollTo(800)
     }
 
-    guardarVenta = () => {
+    crearVenta = () => {
         const { name, phone,
             cuotas, total, products,
             userEmail, dir_Remitente,
             localidad, postalCode, identity_number } = this.props.location.state;
 
-        let fetchData = {
+        let venta = {
             method: "POST",
             headers: {
                 "mode": 'cors',
@@ -58,13 +57,18 @@ export default class PaymentConfirmation extends React.Component {
                 postalCode: postalCode,
                 phone: phone,
                 products: products,
-                identity_number: identity_number,
+                identity_number: identity_number
+                
 
 
             })
         }
+        return venta;
+    }
+    guardarVenta = (venta) => {
+
         //Hacer el update
-        fetch('http://localhost:4000/notes/guardarVenta', fetchData)
+        fetch('http://localhost:4000/notes/guardarVenta', venta)
             .then(response => {
                 console.log(response.status);
                 return response;
@@ -79,247 +83,129 @@ export default class PaymentConfirmation extends React.Component {
                 };
                 return json;
             });
-
-
     }
 
 
+    submitHandler = (e) => {
+        e.preventDefault();
+        console.log('Submit handler triggered')
+        console.log(e.target);
+        let form = e.target;
+        try {
+            const publicApiKey = "96e7f0d36a0648fb9a8dcb50ac06d260";
+            const urlSandbox = "https://developers.decidir.com/api/v2";
+            //Para el ambiente de desarrollo
+            let decidir = new window.Decidir(urlSandbox);
+            //Se indica la public API Key
+            decidir.setPublishableKey(publicApiKey);
+            decidir.setTimeout(5000);//timeout de 5 segundos    
+            decidir.createToken(form, this.sdkResponseHandler);
 
-    generarTokenRequest = () => {
-        const { name, identity_number,  expiry, cvc } = this.props.location.state;
-
-        this.setState({ loadingTransaction: true })
-        let expirationMonth = expiry.slice(0, 2);
-        let expirationYear = expiry.slice(2, 4);
-
-        console.log('Expitation : ' + expiry);
-        console.log('Expiration month : ' + expirationMonth);
-        console.log('Expiration year : ' + expirationYear);
-        let cardHolderId = {
-            type: "dni",
-            number: identity_number
+        } catch (e) {
+            console.log('Error')
+            console.log(e);
         }
-        let fetchData = {
+    }
+    paymentRequest = (response) => {
+        const {total,name,paymentMethodId} = this.props.location.state;
+
+        console.log('Response for build request');
+        console.log(response);
+        let req = {
             mode: 'cors',
             method: "POST",
             headers: {
                 "apiKey": this.state.tokenRequestKeySandbox,
                 "Content-Type": "application/json",
                 "Cache-Control": "no-cache",
-            },
+            },                        
             body: JSON.stringify({
-
-                card_number: '4507990000004905',
-                card_expiration_month: expirationMonth,
-                card_expiration_year: expirationYear,
-                security_code: cvc,
-                card_holder_name: name,
-                card_holder_identification: cardHolderId
-            })
+                token: response.id,
+                bin: response.bin,
+                card_expiration_month: response.expiration_month,
+                card_expiration_year: response.expiration_year,         
+                cardholder: response.cardholder,
+                amount: total,
+                name: name,
+                installments: parseInt(this.state.installments),
+                paymentMethodId: parseInt(paymentMethodId)
+            })  
         }
 
-        return fetchData;
+        return req;
     }
-    solicitarToken = (callback) => {
-
-
-        let tokenRequest = this.generarTokenRequest();
-        console.log('Request generated for request token ');
-        console.log(tokenRequest);
-        let tokenId = '';
-        //Hacer el update
-        fetch('https://developers.decidir.com/api/v2/tokens', tokenRequest)
-            .then(function (res) {
-                console.log('Loading /token.....')
-                return res.json()
+    ejecutarPago = (req) => {
+        console.log('Ejecutando pago request para el backend: ');
+        console.log(req);
+        fetch('http://localhost:4000/ejecutarPago', req)
+            .then(response => {
+                return response.json();
             })
-            .then((data) => {
-                if (data.status === 'active') {
-                    tokenId = data.id;
-                    this.setState({ token: tokenId });
-                    console.log('Token recuperado: ' + this.state.token)
-                    callback();
-                } else {
-                    throw data;
-                }
-            }).catch((err) => {
-                console.log('Lanzando desde /tokens');
-                this.errorHandler(err);
-                throw err;
-            })
-
+            .then(json => {
+                console.log('payment response')
+                console.log(json)
+                console.log(json.status);
+                this.paymentResponseHandler(json);
+            });
     }
 
-    generarPaymentRequest = () => {
-        const { cuotas, total } = this.props.location.state;
-        let totalAmount = parseInt(total);
-        //let bin = number.slice(0, 6);
-
-        let transactionId = Math.floor(Math.random() * (99999999 - 1) + 1);
-        let request = {
-            mode: 'cors',
-            method: "POST",
-            headers: {
-                "apiKey": this.state.tokenForPaymentSandbox,
-                "Content-Type": "application/json",
-                "Cache-Control": "no-cache",
-            },
-            body: JSON.stringify({
-                site_transaction_id: transactionId.toString(), //Cambiar esto por id del ticket, desarrollar
-                token: this.state.token,
-                payment_method_id: 1,
-                bin: '450799', //-------------------------->
-                amount: totalAmount, //La API espera un numero 
-                currency: "ARS",
-                installments: parseInt(cuotas), //La API espera un numero no string
-                description: "",
-                payment_type: "single",
-                sub_payments: []
-            })
+    paymentResponseHandler = (resp) => {
+        console.log('Final response (catching from BE)');
+        if (resp.status == 'approved') {
+            console.log('Aprovada!');
+            this.setState({ message: 'Pago exitoso', displayMsg: true })
+            window.location.replace('http://localhost:3000/Congrats');
         }
-        return request;
-
-    }
-
-    ejecucionPreAutorizacion = (callback) => {
-        let paymentId = '';
-        let paymentRequest = this.generarPaymentRequest();
-        fetch('https://developers.decidir.com/api/v2/payments', paymentRequest)
-            .then(function (res) {
-                console.log('Loading /payments.....');
-                return res.json()
-            })
-            .then((data) => {
-                console.log(data);
-                if (data.status !== 'pre_approved') {
-                    let error = data.status_details.error.reason.description;
-                    throw error;
-                } else {
-                    paymentId = data.id;
-                    console.log('Payment Id obtenido de la preAutorizacion : ' + paymentId);
-                    this.setState({ paymentId: paymentId })
-                    callback();
-                    return data;
-                }
-
-            }).catch((err) => {
-                console.log('Lanzando desde preAutorizacion')
-                this.errorHandler(err);
-                throw err;
-            })
-
-
-
-    }
-
-    finalPaymentRequestGenerator = () => {
-        const { total } = this.props.location.state;
-        let totalAmount = parseInt(total);
-        let paymentConfirmationRequest = {
-            mode: 'cors',
-            method: "PUT",
-            headers: {
-                "apiKey": this.state.tokenForConfirmacionPagoSandbox,
-                "Content-Type": "application/json",
-                "Cache-Control": "no-cache",
-            },
-            body: JSON.stringify({
-                amount: totalAmount
-            })
+        if (resp.status == 'rejected'){
+            console.log('Rechazada!');
+            let error = resp.status_details.error.reason.description;
+            this.setState({ message: error, displayMsg: true })
         }
-        return paymentConfirmationRequest;
+
+        if (resp.error) {
+            let error = resp.error.get(0);
+            switch (error.param) {
+                case 'expiry_date':
+                    this.setState({ message: 'Fecha de vencimiento incorrecta', displayMsg: true });
+                    break;
+            }
+        }
+
     }
 
-    ejecutarPago = () => {
-        let paymentConfirmationRequest = this.finalPaymentRequestGenerator();
-
-        console.log('Final payment request');
-        console.log(paymentConfirmationRequest);
-        console.log('Payment id for final confirmation : ' + this.state.paymentId);
-        setTimeout(() => {
-            fetch('https://developers.decidir.com/api/v2/payments/' + this.state.paymentId, paymentConfirmationRequest)
-                .then(function (res) {
-
-                    console.log('Procesando pago final....')
-                    console.log(res);
-                    return res.json()
-                })
-                .then((data) => {
-                    if (data.status === 'approved') {
-                        console.log('Data del pago final:');
-                        console.log(data)
-                        console.log('Pago realizado con exito')
-                        this.setState({ loadingTransaction: false, paymentAproved: true, displayMsg: true, message: 'Pago realizado exitosamente!', buttonDisabled: true })
-                    } else {
-                        throw data;
+    sdkResponseHandler = (status, response) => {
+        console.log('In response handler , status : ' + status)
+        console.log(response);
+        let message = '';
+        if (status !== 200 && status !== 201) {
+            if (status == 503) {
+                message = 'Servidor no disponible, intente en unos minutos';
+            } else {
+                if (response.error !== null) {
+                    console.log('Response error captured');
+                    let error = response.error[0];
+                    console.log(error);
+                    switch (error.error.message) {
+                        case 'Expiry date is invalid':
+                            message = 'Vencimiento incorrecto';
+                            break;
                     }
+                }
+            }
 
-                }).catch((err) => {
-                    console.log('Pago fallido, lanzando desde pago final : ');
-                    this.errorHandler(err);
-                    throw err;
-                })
-        }, 3000);
-
-    }
-
-    translateError = (error) => {
-        let translatedError = error;
-        switch (error) {
-            case 'card_expiration_month':
-                translatedError = 'Verifique mes de vencimiento';
-                break;
-            case 'expired card':
-                translatedError = 'Tarjeta vencida';
-                break;
-            default:
-                return null;
+            this.setState({ displayMsg: true, message: message });
+        } else {
+            let token = response.id;
+            console.log('Token capturado : ' + token);
+            let paymentRequest = this.paymentRequest(response);
+            setTimeout(() => this.ejecutarPago(paymentRequest), 2000)
         }
-        this.setState({ error: translatedError })
-        return translatedError;
-    }
-
-    errorHandler = (error) => {
-        let auxError = error;
-        console.log('Handling error')
-        if (error.error_type === 'invalid_request_error') {
-            let errorDescription = error.validation_errors[0].param;
-            let spanishError = this.translateError(errorDescription);
-            console.log('Error por datos inválidos : ' + spanishError);
-            auxError = spanishError;
-
-        }
-        if (error.error_type === 'not_found_error') {
-            console.log('Payment id expiro');
-            auxError = 'Payment id expiro';
-        }
-        if (error.status) {
-            error.status = 504 ? this.setState({ error: 'Verifique su conexion a internet' }) : null;
-        }
-        console.log(auxError)
-
-        this.setState({ displayMsg: true, message: 'Error : ' + auxError })
-        this.setState({ loadingTransaction: false })
-    }
-
-
-    submitHandler = () => {
-        scroll.scrollToTop();
-       
-        //this.guardarVenta();
-
-        this.solicitarToken(() => {
-            this.ejecucionPreAutorizacion(() => this.ejecutarPago());
-        });
-
-
-
-        //guardarVenta();//Guarda el ticket en el BE para luego despacharlo
-
     }
 
     render() {
-        const { number, expiry, name, phone, cuotas, total, products, userEmail, dir_Remitente, localidad, postalCode, identity_number } = this.props.location.state;
+        const { number, cvc, expiry, name, phone, cuotas, total, products, userEmail, dir_Remitente, localidad, postalCode, identity_number,paymentMethodId } = this.props.location.state;
+        let expiryMonth = 10//expiry.substr(0, 2);
+        let expiryYear = 23//expiry.substr(2, 2);
         return (
             <PaymentConfirmationContainer>
 
@@ -330,37 +216,47 @@ export default class PaymentConfirmation extends React.Component {
                         <div class="product-container">
                             <div id="card-container" >
 
-                                <h3>Datos de la compra</h3>
-                                <div>Numero de tarjeta : {number}</div>
-                                <div>Vencimiento : {expiry}</div>
-                                <div>Titular : {name}</div>
-                                <div>DNI : {identity_number}</div>
+                                <h3>Datos de la compra</h3> 
+                                <div>Numero de tarjeta :    {number}</div>
+                                <div>Vencimiento :          {expiry}</div>
+                                <div>Titular :              {name}</div>
+                                <div>DNI :                  {identity_number}</div>
                                 <div>Contacto del titular : {phone}</div>
-                                <div>Email del titular : {userEmail}</div>
-                                <div>Localidad : {localidad}</div>
-                                <div>Codigo postal : {postalCode}</div>
-                                <div>Sucursal a recibir : {dir_Remitente}</div>
-                                <div>Cuotas : {cuotas}</div>
-                                <div>Total : ${total}</div>
+                                <div>Email del titular :    {userEmail}</div>
+                                <div>Localidad :            {localidad}</div>
+                                <div>Codigo postal :        {postalCode}</div>
+                                <div>Sucursal a recibir :   {dir_Remitente}</div>
+                                <div>Cuotas :               {cuotas}</div>
+                                <div>Total : $              {total}</div>
                                 {this.state.displayMsg ? <h5 className="msg" >{this.state.message}&nbsp;{this.state.error}</h5> : null}
 
                                 <div id="submit-btn-container" class="container">
-
-                                    <button disabled={this.state.buttonDisabled} type="submit" className="submit-btn" class="btn-primary mr-2 mt-3" onClick={() => this.submitHandler()}>Aceptar</button>
-
+                                    <form id="formulario" method="post" action="" onSubmit={this.submitHandler}>
+                                        <fieldset>
+                                            <input hidden="true" type="text" data-decidir="card_holder_name" placeholder="TITULAR" value={name} />
+                                            <input hidden="true" type="text" data-decidir="card_number" placeholder="XXXXXXXXXXXXXXXX" value={number} />
+                                            <input hidden="true" type="text" data-decidir="security_code" placeholder="XXX" value={cvc} />
+                                            <input hidden="true" type="text" data-decidir="card_expiration_month" placeholder="MM" value={expiryMonth} />
+                                            <input hidden="true" type="text" data-decidir="card_expiration_year" placeholder="AA" value={expiryYear} />
+                                            <input hidden="true" type="text" data-decidir="card_holder_doc_type" placeholder="AA" value="dni" />
+                                            <input hidden="true" type="text" data-decidir="card_holder_doc_number" placeholder="XXXXXXXXXX" value={identity_number} />
+                                            <input disabled={this.state.buttonDisabled} type="submit" value="Aceptar" id="submit-btn" class="btn-primary mr-2 mt-3" />
+                                        </fieldset>
+                                    </form>
                                     {this.state.paymentAproved ?
                                         <Link to="/">
-                                            <button type="submit" className="submit-btn" class="btn-danger mr-2 mt-3 ">Finalizar</button>
+                                            <button type="submit" id="submit-btn" class="btn-danger mr-2 mt-3 ">Finalizar</button>
                                         </Link>
                                         :
                                         <Link to="/cart">
-                                            <button type="submit" className="submit-btn" class="btn-danger mr-2 mt-3 ">Volver</button>
+                                            <button type="submit" id="back-btn" class="btn-danger mr-2 mt-3 ">Volver</button>
                                         </Link>
                                     }
 
 
 
                                 </div>
+
                             </div>
 
 
@@ -406,7 +302,7 @@ const PaymentConfirmationContainer = styled.div`
 
 width: 100%;
 text-align:center;
-height: 100%;
+height: 40rem;
 
 .msg{   
     color:red;
@@ -415,20 +311,44 @@ height: 100%;
    border:2px solid white;
    height:25rem;
 }
-#loader{
-   
+#loader{   
     margin-top:10rem;
 }
 #submit-btn-container{
     margin-bottom: 1rem !important;
     text-align: center;    
     margin:0 auto;
+    height: 100%;
+   
+    max-height: 20% !important;  
+}
+
+#submit-btn{
+   
+    
+}
+#back-btn{
+    
+    margin: 0 auto;
+    margin-left:1rem;
+}
+fieldset{
+
+    max-width: 4.5rem;
+}
+
+#formulario{
+    
+    max-width: 4.5rem;
+    margin: 0 auto;
+    display: inline-block;
+    
 }
 #card-container{
     border: 5px solid var(--mainBlue) !important;
     width: 20rem;
-
-    margin-top: 3rem;
+    height: 30%;
+    margin-top: 5rem !important;
     border-radius: 2rem ;
     box-shadow: 5px 10px #888888;
     float:left;
@@ -446,15 +366,16 @@ height: 100%;
 }
 #my-card{
     border:2px solid white;
+
     margin-left: 1rem !important;
     min-height: 50%;
-    max-height: 50%;  
-    margin-top: 4rem !important;
+    max-height: 100%;  
+    margin-top: 5rem !important;
       
 }
 #card-img{     
-     max-height:13rem;
-     min-height:13rem;
+     max-height:50%;
+     min-height:50%;
 }
 #card-body{
      border: 2px solid white;
@@ -463,6 +384,7 @@ height: 100%;
 }
 @media (max-width: 48em) {
    height:100%;
+   
     #my-card{
         margin-top: 3rem !important;
         margin-left: 0rem !important;
@@ -470,7 +392,13 @@ height: 100%;
         max-width: 50%;  
     }
     #card-container{
-        margin-left: 0.7rem;
+        float: none;
+        margin-top: 7rem !important;
+                   
+    }
+    .product-container{
+        padding: 0 !important;
+        
     }
 }
  }
