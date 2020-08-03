@@ -12,7 +12,7 @@ export default class PaymentConfirmation extends React.Component {
         super(props);
         this.state = {
             token: '',
-            tokenRequestKeySandbox: '96e7f0d36a0648fb9a8dcb50ac06d260',
+            //tokenRequestKeySandbox: '96e7f0d36a0648fb9a8dcb50ac06d260',
             tokenForPaymentSandbox: '',
             tokenForConfirmacionPagoSandbox: '',
             loadingTransaction: false,
@@ -23,7 +23,8 @@ export default class PaymentConfirmation extends React.Component {
             buttonDisabled: false,
             paymentMethodId: this.props.location.state.paymentMethodId,
             error: '',
-            installments : this.props.location.state.cuotas
+            installments: this.props.location.state.cuotas,
+            paymentDoneId: ''
 
         }
 
@@ -58,11 +59,9 @@ export default class PaymentConfirmation extends React.Component {
                 phone: phone,
                 products: products,
                 identity_number: identity_number
-                
-
-
             })
         }
+        this.guardarVenta(venta);
         return venta;
     }
     guardarVenta = (venta) => {
@@ -92,6 +91,8 @@ export default class PaymentConfirmation extends React.Component {
         console.log(e.target);
         let form = e.target;
         try {
+            scroll.scrollToTop();
+            this.setState({ loadingTransaction: true });
             const publicApiKey = "96e7f0d36a0648fb9a8dcb50ac06d260";
             const urlSandbox = "https://developers.decidir.com/api/v2";
             //Para el ambiente de desarrollo
@@ -107,7 +108,7 @@ export default class PaymentConfirmation extends React.Component {
         }
     }
     paymentRequest = (response) => {
-        const {total,name,paymentMethodId} = this.props.location.state;
+        const { total, name, paymentMethodId } = this.props.location.state;
 
         console.log('Response for build request');
         console.log(response);
@@ -115,23 +116,23 @@ export default class PaymentConfirmation extends React.Component {
             mode: 'cors',
             method: "POST",
             headers: {
-                "apiKey": this.state.tokenRequestKeySandbox,
                 "Content-Type": "application/json",
                 "Cache-Control": "no-cache",
-            },                        
+            },
             body: JSON.stringify({
                 token: response.id,
                 bin: response.bin,
                 card_expiration_month: response.expiration_month,
-                card_expiration_year: response.expiration_year,         
+                card_expiration_year: response.expiration_year,
                 cardholder: response.cardholder,
-                amount: total,
+                amount: parseInt(total + '00'),
                 name: name,
                 installments: parseInt(this.state.installments),
                 paymentMethodId: parseInt(paymentMethodId)
-            })  
+            })
         }
-
+        console.log('Request generado para pagar : ');
+        console.log(req);
         return req;
     }
     ejecutarPago = (req) => {
@@ -139,6 +140,8 @@ export default class PaymentConfirmation extends React.Component {
         console.log(req);
         fetch('http://localhost:4000/ejecutarPago', req)
             .then(response => {
+                console.log('First response from server');
+                console.log(response);
                 return response.json();
             })
             .then(json => {
@@ -151,25 +154,50 @@ export default class PaymentConfirmation extends React.Component {
 
     paymentResponseHandler = (resp) => {
         console.log('Final response (catching from BE)');
-        if (resp.status == 'approved') {
+        console.log(resp);
+        if (resp.status === 'approved') {
             console.log('Aprovada!');
-            this.setState({ message: 'Pago exitoso', displayMsg: true })
-            window.location.replace('http://localhost:3000/Congrats');
+            this.setState({ message: 'Pago exitoso', displayMsg: true, paymentDoneId: resp.id })
+            // this.crearVenta();
+            // setTimeout(() => window.location.replace('http://localhost:3000/Congrats'),2000)            
+
         }
-        if (resp.status == 'rejected'){
+        if (resp.status === 'rejected') {
             console.log('Rechazada!');
             let error = resp.status_details.error.reason.description;
             this.setState({ message: error, displayMsg: true })
         }
 
         if (resp.error) {
+            console.log('Tiene errores')
             let error = resp.error.get(0);
             switch (error.param) {
                 case 'expiry_date':
                     this.setState({ message: 'Fecha de vencimiento incorrecta', displayMsg: true });
                     break;
+                case 'empty_card_number':
+                    this.setState({ message: 'Ingrese el numero de tarjeta', displayMsg: true });
+                    break;
+                default:
+                    return null;
+
             }
         }
+
+        if (resp.validation_errors) {
+            console.log('Validation errors');
+            let error = resp.validation_errors[0];
+            switch (error.param) {
+                case 'bin':
+                    this.setState({ message: 'El numero de tarjeta no corresponde a la entidad seleccionada', displayMsg: true });
+                    break;
+                default:
+                    return null;
+
+            }
+        }
+        setTimeout(() => this.setState({ loadingTransaction: false }), 3000);
+
 
     }
 
@@ -178,7 +206,7 @@ export default class PaymentConfirmation extends React.Component {
         console.log(response);
         let message = '';
         if (status !== 200 && status !== 201) {
-            if (status == 503) {
+            if (status === 503) {
                 message = 'Servidor no disponible, intente en unos minutos';
             } else {
                 if (response.error !== null) {
@@ -189,6 +217,8 @@ export default class PaymentConfirmation extends React.Component {
                         case 'Expiry date is invalid':
                             message = 'Vencimiento incorrecto';
                             break;
+                        default:
+                            return null;
                     }
                 }
             }
@@ -202,10 +232,12 @@ export default class PaymentConfirmation extends React.Component {
         }
     }
 
+
+
     render() {
-        const { number, cvc, expiry, name, phone, cuotas, total, products, userEmail, dir_Remitente, localidad, postalCode, identity_number,paymentMethodId } = this.props.location.state;
-        let expiryMonth = 10//expiry.substr(0, 2);
-        let expiryYear = 23//expiry.substr(2, 2);
+        const { number, cvc, expiry, name, phone, cuotas, total, products, userEmail, dir_Remitente, localidad, postalCode, identity_number } = this.props.location.state;
+        let expiryMonth = expiry.substr(0, 2);
+        let expiryYear = expiry.substr(2, 2);
         return (
             <PaymentConfirmationContainer>
 
@@ -216,7 +248,7 @@ export default class PaymentConfirmation extends React.Component {
                         <div class="product-container">
                             <div id="card-container" >
 
-                                <h3>Datos de la compra</h3> 
+                                <h3>Datos de la compra</h3>
                                 <div>Numero de tarjeta :    {number}</div>
                                 <div>Vencimiento :          {expiry}</div>
                                 <div>Titular :              {name}</div>
@@ -240,9 +272,12 @@ export default class PaymentConfirmation extends React.Component {
                                             <input hidden="true" type="text" data-decidir="card_expiration_year" placeholder="AA" value={expiryYear} />
                                             <input hidden="true" type="text" data-decidir="card_holder_doc_type" placeholder="AA" value="dni" />
                                             <input hidden="true" type="text" data-decidir="card_holder_doc_number" placeholder="XXXXXXXXXX" value={identity_number} />
+
+
                                             <input disabled={this.state.buttonDisabled} type="submit" value="Aceptar" id="submit-btn" class="btn-primary mr-2 mt-3" />
                                         </fieldset>
                                     </form>
+
                                     {this.state.paymentAproved ?
                                         <Link to="/">
                                             <button type="submit" id="submit-btn" class="btn-danger mr-2 mt-3 ">Finalizar</button>
@@ -286,6 +321,7 @@ export default class PaymentConfirmation extends React.Component {
                                 timeout={0}
 
                             />
+                            <h5 style={{ margin: '0 auto', 'margin-top': '3rem' }}>Procesando pago, aguarde por favor</h5>
                         </div>
 
                     </div>

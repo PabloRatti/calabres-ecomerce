@@ -50,10 +50,10 @@ export default class AdminProductsView extends Component {
                 this.getProducts();
                 return json;
             });
-            }
+    }
 
     updatePublication = (id, aux) => {
-    
+
         let fetchData = {
             method: "PUT",
             headers: {
@@ -64,7 +64,7 @@ export default class AdminProductsView extends Component {
                 price: aux
             })
         }
-      //Hacer el update
+        //Hacer el update
         fetch('http://localhost:4000/notes/update/' + id, fetchData)
             .then(response => {
                 return response;
@@ -95,10 +95,12 @@ export default class AdminProductsView extends Component {
         let products = this.state.products;
         return (
             <AdminProductsViewContainer>
-                <Title name="Controlador de " title="productos" />
+                <div className="title">
+                    <Title name="Controlador de " title="productos" />
+                </div>
 
                 {products.map((item) => {
-                    return <AdminProductRow key={item.id}  id={item.id} handleOperation={this.handleOperation} handleFilter={this.handleFilter} item={item} />
+                    return <AdminProductRow key={item.id} id={item.id} handleOperation={this.handleOperation} handleFilter={this.handleFilter} item={item} />
                 })}
 
             </AdminProductsViewContainer>
@@ -109,5 +111,10 @@ export default class AdminProductsView extends Component {
 const AdminProductsViewContainer = styled.nav`
 height: 100%;
 margin-bottom: 2rem;
-
+border: 1px solid white;
+.title{
+  
+    margin-top: 6rem !important;
+    height: 8rem;
+}
 `;

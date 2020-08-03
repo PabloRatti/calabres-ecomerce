@@ -28,7 +28,7 @@ export default class PaymentForm extends React.Component {
             totalConIntereses: this.props.location.state.total,
             cart: this.props.location.state.cart,
             paymentMethod: ''
-            
+
         };
     }
 
@@ -88,10 +88,29 @@ export default class PaymentForm extends React.Component {
                     valor = '';
             }
         }
+
         this.setState({ valorCuota: valor, totalConIntereses: totalConIntereses })
 
     }
 
+    detectarPlanSinInteres = () => {
+        let tipoPago = this.state.paymentMethod;
+        let cuotas = this.state.cuotas;
+        console.log('Detectando plan--> cuotas : ' + cuotas + ' tipoDePago : ' + tipoPago);
+        if (tipoPago === '1' || tipoPago === '63' || tipoPago === '104') {
+            switch (cuotas) {
+                case '3':
+                    this.setState({ paymentMethod: '13' });
+                    break;
+                case '12':
+                    this.setState({ paymentMethod: '7' });
+                    break;
+                default:
+                    return null;
+
+            }
+        }
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -106,9 +125,6 @@ export default class PaymentForm extends React.Component {
         if (this.state.cuotas !== '') {
             this.setState({ continueDisabled: false });
         } else alert('Ingrese entidad de pago y cuotas');
-
-
-
     }
 
     render() {
@@ -267,7 +283,7 @@ export default class PaymentForm extends React.Component {
                             <div id="btn-col" class="col">
                                 <Dropdown className="dropdown-container">
                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                        Entidades
+                                        Tarjeta
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
@@ -279,6 +295,15 @@ export default class PaymentForm extends React.Component {
                                         <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '43' })}>Cencosud Mastercard</Dropdown.Item>
 
                                         <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '1' })}>Tarjeta de banco Visa</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '104' })}>Tarjeta de banco Mastercard</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '63' })}>Tarjeta de banco Cabal</Dropdown.Item>
+
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '31' })}>Debito Visa</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '105' })}>Debito Mastercard</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '108' })}>Debito Cabal</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '106' })}>Debito Maestro</Dropdown.Item>
+
+
 
                                     </Dropdown.Menu>
                                 </Dropdown>
@@ -320,7 +345,7 @@ export default class PaymentForm extends React.Component {
 
 
                             <div id="btn-col" class="col">
-                                <Button type="submit" variant="success">Validar datos</Button>
+                                <Button type="submit" onClick={this.detectarPlanSinInteres} variant="success">Validar</Button>
                             </div>
 
 

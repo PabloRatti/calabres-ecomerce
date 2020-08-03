@@ -20,10 +20,10 @@ export default function EmptyCart() {
 
 const EmptyCartContainer = styled.div`  
     
-    height: 30rem;
+    height: 25rem;
     text-align:center;
     marign: 0 auto;
-    border:2px solid blue;
+    border:2px solid white;
    .link-back{
        font-family: Courier;       
    }
@@ -32,20 +32,21 @@ const EmptyCartContainer = styled.div`
        border: 2px solid var(--mainBlue);
        border-radius: 2rem;
        padding: 2rem;
-       margin: 0 auto;
+ 
        text-align:center;
-       margin-top: 8rem;
+       top: 8rem;
+     
        position:relative;
-      box-shadow: 10px 5px 5px black;
+       box-shadow: 10px 5px 5px black;
    }
   #mensajeVacio{     
         font-family: Courier;
   }
 
   @media (max-width: 48em) {
+          height: 35rem;
      #container{
-         margin-top: 2rem;
-         
+         top: 5rem;         
      }
 }
 `;

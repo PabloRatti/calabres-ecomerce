@@ -32,15 +32,14 @@ export default class WhatsAppIcon extends Component {
         let wspLink = 'https://api.whatsapp.com/send?phone=2235911061&text=' + msg;
         //Agregar validacion para mobile
         window.location = wspLink;
-
     }
 
     handleSubmitMobile(e) {
-
         console.log("Submited Mobile");
         let wspLink = 'https://api.whatsapp.com/send?phone=542235911061';
         window.location = wspLink;
     }
+
     render() {
         let mustOpen = this.state.modalOpen;
 
@@ -92,7 +91,7 @@ cursor:pointer;
 -o-animation: fadein 2s; /* Opera < 12.1 */
 animation: fadein 2s;
 right: -5rem;
-top: 28rem;
+top: 31rem;
 @keyframes fadein {
 from { opacity: 0; }
 to   { opacity: 1; }

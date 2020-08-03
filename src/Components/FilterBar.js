@@ -43,8 +43,7 @@ constructor(){
                             <NavDropdown disabled={this.state.inactive} className="drop" title="Marca" id="collasible-nav-dropdown">
 
                                 <NavDropdown.Item className="item" onClick={() => {
-                                    return handleFilter('marcas', 'pirelli');
-                                }}>
+                                    return handleFilter('marcas', 'pirelli'); }}>
                                     Pirelli
                                     </NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
@@ -71,7 +70,6 @@ constructor(){
                                 <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('marcas', 'nexen');
                                 }}>Nexen</NavDropdown.Item>
-
 
                             </NavDropdown>
 

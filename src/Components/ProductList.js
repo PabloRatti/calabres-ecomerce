@@ -20,7 +20,7 @@ export default class ProductList extends Component {
             rodado: ''
         }
     }
-    componentDidUpdate(){
+    componentDidUpdate() {
         scroll.scrollToTop();
     }
     componentDidMount() {
@@ -96,7 +96,7 @@ export default class ProductList extends Component {
     }
 
     resetFilters = () => {
-        this.setState({ brandFilter: '', widthFilter: '', priceFilter: '', productType: '', profile: '',rodado:'' })
+        this.setState({ brandFilter: '', widthFilter: '', priceFilter: '', productType: '', profile: '', rodado: '' })
     }
 
     handleFilter = (tipo, valor) => {
@@ -137,20 +137,23 @@ export default class ProductList extends Component {
 
                     <div className="py-5">
                         <div className="container">
-                            <Title name={this.state.productType} title={this.state.brandFilter} width={this.state.widthFilter} profile={this.state.profile} rodado={this.state.rodado} renderLogo="true"/>
+                            <div className="title-container">
+                                <Title name={this.state.productType} title={this.state.brandFilter} width={this.state.widthFilter} profile={this.state.profile} rodado={this.state.rodado} renderLogo="true" />
+
+                            </div>
                             <div className="row">
-                               
+
                                 <ProductConsumer>
                                     {(value) => {
 
                                         let products = this.applyFilters(value.products);
 
                                         return products.map(product => {
-                                            return <Product key={product.id} product={product} />      
+                                            return <Product key={product.id} product={product} />
                                         })
                                     }}
                                 </ProductConsumer>
-                             
+
                             </div>
                         </div>
                     </div>
@@ -162,7 +165,7 @@ export default class ProductList extends Component {
 
 const ProductListContainer = styled.div`
 .container{ 
-    margin-top: 5rem !important;
+    margin-top: 7rem !important;
 }
 
 `;

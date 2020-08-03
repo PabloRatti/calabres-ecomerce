@@ -122,24 +122,23 @@ export default class ProductsSoldList extends React.Component {
 }
 const ProductsSoldListContainer = styled.div`
 padding:2rem;
-min-height: 30rem;
+min-height: 35rem;
 
 .warning{
     margin: 0 auto;
     text-align:Center;   
 }
 .product-container{
-    height:100%;
-    
-  
+    height:100%;   
 }
 #back{
     margin-top: 3rem;
 }
 .loading{
     margin: 0 auto;
-    margin-top: 5rem;
+ 
     text-align: center;
+
    
 }
 .spinner{ 

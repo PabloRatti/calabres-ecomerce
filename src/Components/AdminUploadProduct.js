@@ -287,6 +287,7 @@ margin-bottom: 2rem;
     height: 7rem;
     width: 60%;
     margin: 0 auto;
+
 }
 
 .btn-container{    
