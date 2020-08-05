@@ -61,10 +61,6 @@ padding:1rem;
     margin: 0 auto;
 }
 
-#home-image:hover{
-    cursor:pointer;   
-}
-
 @media (max-width: 48em) {
     padding: 0rem;
     margin-top: 1rem !important;

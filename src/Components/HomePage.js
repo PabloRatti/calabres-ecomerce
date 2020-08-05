@@ -2,16 +2,14 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PresentationCard from './PresentationCard';
 import Carousel from './HomeCarousel';
-
 import { Image } from 'react-bootstrap';
 import { animateScroll as scroll } from 'react-scroll';
-
 import PresentationCard2 from './PresentationCard2';
+
 export default class HomePage extends Component {
 
     componentDidMount = () => {
         scroll.scrollToTop();
-
     }
 
     render() {
@@ -94,15 +92,3 @@ const HomeContainer = styled.div`
 
 
 
-
-/*
-
-
-
-   <Image className="home-image" src={require("../calabres-api/images/static/calabres_portada.jpg")} fluid />
-                <Carousel className="carousel" />
-                <Image className="brands" src={require("../calabres-api/images/static/banner.png")} />
-                <ThreeCards className="cardsContainer" />
-                <Image className="brands" src={require("../calabres-api/images/static/MarcasCalabres.png")} />
-                <PresentationCard image2={require("../calabres-api/images/static/ahora12Imagen.png")} image={require("../calabres-api/images/static/IMG-20200519-WA0003.jpg")} title="Title" description="descasda" />
-*/

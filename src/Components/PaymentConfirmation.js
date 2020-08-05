@@ -24,7 +24,7 @@ export default class PaymentConfirmation extends React.Component {
             paymentMethodId: this.props.location.state.paymentMethodId,
             error: '',
             installments: this.props.location.state.cuotas,
-            paymentDoneId: ''
+       
 
         }
 
@@ -32,7 +32,6 @@ export default class PaymentConfirmation extends React.Component {
 
     componentDidMount = () => {
         scroll.scrollToTop();
-        //scroll.scrollTo(800)
     }
 
     crearVenta = () => {
@@ -86,9 +85,7 @@ export default class PaymentConfirmation extends React.Component {
 
 
     submitHandler = (e) => {
-        e.preventDefault();
-        console.log('Submit handler triggered')
-        console.log(e.target);
+        e.preventDefault();      
         let form = e.target;
         try {
             scroll.scrollToTop();
@@ -103,15 +100,11 @@ export default class PaymentConfirmation extends React.Component {
             decidir.createToken(form, this.sdkResponseHandler);
 
         } catch (e) {
-            console.log('Error')
-            console.log(e);
+            this.setState({ message: 'Error en el servicio, intente en unos minutos...', displayMsg: true })
         }
     }
     paymentRequest = (response) => {
         const { total, name, paymentMethodId } = this.props.location.state;
-
-        console.log('Response for build request');
-        console.log(response);
         let req = {
             mode: 'cors',
             method: "POST",
@@ -130,46 +123,31 @@ export default class PaymentConfirmation extends React.Component {
                 installments: parseInt(this.state.installments),
                 paymentMethodId: parseInt(paymentMethodId)
             })
-        }
-        console.log('Request generado para pagar : ');
-        console.log(req);
+        }        
         return req;
     }
-    ejecutarPago = (req) => {
-        console.log('Ejecutando pago request para el backend: ');
-        console.log(req);
+    ejecutarPago = (req) => {        
         fetch('http://localhost:4000/ejecutarPago', req)
-            .then(response => {
-                console.log('First response from server');
-                console.log(response);
+            .then(response => {               
                 return response.json();
             })
-            .then(json => {
-                console.log('payment response')
-                console.log(json)
-                console.log(json.status);
+            .then(json => {             
                 this.paymentResponseHandler(json);
             });
     }
 
     paymentResponseHandler = (resp) => {
-        console.log('Final response (catching from BE)');
-        console.log(resp);
         if (resp.status === 'approved') {
-            console.log('Aprovada!');
-            this.setState({ message: 'Pago exitoso', displayMsg: true, paymentDoneId: resp.id })
-            // this.crearVenta();
-            // setTimeout(() => window.location.replace('http://localhost:3000/Congrats'),2000)            
-
+            this.setState({ message: 'Pago exitoso', displayMsg: true, paymentDoneId: resp.id, loadingTransaction: false })
+            this.crearVenta();
+            setTimeout(() => window.location.replace('http://localhost:3000/Congrats'), 2000)
         }
         if (resp.status === 'rejected') {
-            console.log('Rechazada!');
             let error = resp.status_details.error.reason.description;
             this.setState({ message: error, displayMsg: true })
         }
 
         if (resp.error) {
-            console.log('Tiene errores')
             let error = resp.error.get(0);
             switch (error.param) {
                 case 'expiry_date':
@@ -180,16 +158,17 @@ export default class PaymentConfirmation extends React.Component {
                     break;
                 default:
                     return null;
-
             }
         }
 
         if (resp.validation_errors) {
-            console.log('Validation errors');
             let error = resp.validation_errors[0];
             switch (error.param) {
                 case 'bin':
                     this.setState({ message: 'El numero de tarjeta no corresponde a la entidad seleccionada', displayMsg: true });
+                    break;
+                case 'payment_method_id':
+                    this.setState({ message: 'Numero de tarjeta invalido', displayMsg: true });
                     break;
                 default:
                     return null;
@@ -197,8 +176,6 @@ export default class PaymentConfirmation extends React.Component {
             }
         }
         setTimeout(() => this.setState({ loadingTransaction: false }), 3000);
-
-
     }
 
     sdkResponseHandler = (status, response) => {
@@ -210,9 +187,7 @@ export default class PaymentConfirmation extends React.Component {
                 message = 'Servidor no disponible, intente en unos minutos';
             } else {
                 if (response.error !== null) {
-                    console.log('Response error captured');
                     let error = response.error[0];
-                    console.log(error);
                     switch (error.error.message) {
                         case 'Expiry date is invalid':
                             message = 'Vencimiento incorrecto';
@@ -265,14 +240,13 @@ export default class PaymentConfirmation extends React.Component {
                                 <div id="submit-btn-container" class="container">
                                     <form id="formulario" method="post" action="" onSubmit={this.submitHandler}>
                                         <fieldset>
-                                            <input hidden="true" type="text" data-decidir="card_holder_name" placeholder="TITULAR" value={name} />
-                                            <input hidden="true" type="text" data-decidir="card_number" placeholder="XXXXXXXXXXXXXXXX" value={number} />
-                                            <input hidden="true" type="text" data-decidir="security_code" placeholder="XXX" value={cvc} />
-                                            <input hidden="true" type="text" data-decidir="card_expiration_month" placeholder="MM" value={expiryMonth} />
-                                            <input hidden="true" type="text" data-decidir="card_expiration_year" placeholder="AA" value={expiryYear} />
-                                            <input hidden="true" type="text" data-decidir="card_holder_doc_type" placeholder="AA" value="dni" />
-                                            <input hidden="true" type="text" data-decidir="card_holder_doc_number" placeholder="XXXXXXXXXX" value={identity_number} />
-
+                                            <input hidden="true" type="text" data-decidir="card_holder_name"        value={name} />
+                                            <input hidden="true" type="text" data-decidir="card_number"             value={number} />
+                                            <input hidden="true" type="text" data-decidir="security_code"           value={cvc} />
+                                            <input hidden="true" type="text" data-decidir="card_expiration_month"   value={expiryMonth} />
+                                            <input hidden="true" type="text" data-decidir="card_expiration_year"    value={expiryYear} />
+                                            <input hidden="true" type="text" data-decidir="card_holder_doc_type"    value="dni" />
+                                            <input hidden="true" type="text" data-decidir="card_holder_doc_number"  value={identity_number} />
 
                                             <input disabled={this.state.buttonDisabled} type="submit" value="Aceptar" id="submit-btn" class="btn-primary mr-2 mt-3" />
                                         </fieldset>
@@ -287,13 +261,8 @@ export default class PaymentConfirmation extends React.Component {
                                             <button type="submit" id="back-btn" class="btn-danger mr-2 mt-3 ">Volver</button>
                                         </Link>
                                     }
-
-
-
                                 </div>
-
                             </div>
-
 
                             {products.map((item) => {
                                 return (

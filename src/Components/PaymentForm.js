@@ -98,16 +98,8 @@ export default class PaymentForm extends React.Component {
         let cuotas = this.state.cuotas;
         console.log('Detectando plan--> cuotas : ' + cuotas + ' tipoDePago : ' + tipoPago);
         if (tipoPago === '1' || tipoPago === '63' || tipoPago === '104') {
-            switch (cuotas) {
-                case '3':
-                    this.setState({ paymentMethod: '13' });
-                    break;
-                case '12':
-                    this.setState({ paymentMethod: '7' });
-                    break;
-                default:
-                    return null;
-
+            if (cuotas === '12') {
+                this.setState({ paymentMethod: '7' });
             }
         }
     }
@@ -139,7 +131,8 @@ export default class PaymentForm extends React.Component {
 
                     <form className="card-form" onSubmit={this.handleSubmit}>
 
-                        <Cards acceptedCards={this.state.aceptedCards}
+                        <Cards className="credit-card"
+                            acceptedCards={this.state.aceptedCards}
                             cvc={this.state.cvc}
                             expiry={this.state.expiry}
                             focused={this.state.focus}
@@ -287,9 +280,7 @@ export default class PaymentForm extends React.Component {
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '24' })}>Naranja (Plan Z)</Dropdown.Item>
                                         <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '24' })}>Naranja Visa</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '103' })}>Fava</Dropdown.Item>
                                         <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '103' })}>Fava Cabal</Dropdown.Item>
                                         <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '0' })}>Clipper Cabal</Dropdown.Item>
                                         <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '43' })}>Cencosud Mastercard</Dropdown.Item>
@@ -408,6 +399,9 @@ margin: 0 auto;
 #PaymentForm{
     border: 2px solid white;
     height:100%;
+}
+.credit-card{
+    border: 2px solid red !important;
 }
 .aceptar-btn{
     margin-right: 2rem;

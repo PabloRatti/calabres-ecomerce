@@ -21,8 +21,6 @@ import FullNavBar from './Components/FullNavBar';
 function App() {
   return (
     <React.Fragment>
-
-     
       <FullNavBar />
       <WhatsappIcon />
       <Switch>

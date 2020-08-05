@@ -72,8 +72,7 @@ cursor:pointer;
 
 .container{
     position:fixed;
-    z-index: 1;
-  
+    z-index: 1;  
 }
 .mySubmit{
  height: 5rem;
