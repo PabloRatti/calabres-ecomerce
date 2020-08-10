@@ -14,7 +14,7 @@ export default class Details extends Component {
     transferenciaHandler = () =>{
         console.log('Transferencia handler activated');
         console.log("Submited Mobile");
-        let wspLink = 'https://api.whatsapp.com/send?phone=542235911061';
+        let wspLink = 'https://api.whatsapp.com/send?phone=542233129785';
         window.location = wspLink;
     }
     render() {

@@ -9,34 +9,31 @@ export default class Footer extends Component {
 
                     <div class="footer-left">
 
-                        <h3>El calabres neumaticos</h3>
+                        <h3>El Calabres neumáticos</h3>
                     </div>
 
                     <div class="footer-center">
 
                         <div>
                             <i class="fa fa-map-marker"></i>
-                            <p><span>Av.Colon 3825</span> Mar del Plata, Argentina</p>
+                            <p><span>Av.Colon 3825/3902</span> Mar del Plata, Argentina</p>
                         </div>
 
                         <div className="phoneLabel">
                             <i class="fa fa-phone"></i>
-                            <p>0223 473-2424</p>
+                            <p>0223 -473-2424/4721298</p>
                         </div>
 
                         <div>
-                            <i class="fa fa-envelope " aria-hidden="true"></i>
-                            <p><a href="mailto:support@company.com">elCalabres@gmail.com</a></p>
+                            <i class="fa fa-envelope " ></i>
+                            <p><a href="mailto:support@company.com">gomeriaelcalabres@hotmail.com</a></p>
                         </div>
 
                     </div>
 
                     <div class="footer-right">
 
-                        <p class="footer-company-about">
-                            <span>Sobre nosotros</span>
-					Brindando nuestros servicios desde 1970 a todo los argentinos. Especialistas en tren delantero y rodados.
-				</p>
+                       
 
                         <div class="footer-icons">
                             <a href="https://www.facebook.com/ElCalabresNeumaticos"><i class="fa fa-facebook"></i></a>
@@ -238,7 +235,7 @@ const FooterContainer = styled.nav`
 		margin-left: 0;
 	}
 	.phoneLabel{
-		margin-right:3rem;
+		
 	}
 
 }

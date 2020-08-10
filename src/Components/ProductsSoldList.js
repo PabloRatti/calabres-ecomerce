@@ -14,7 +14,7 @@ export default class ProductsSoldList extends React.Component {
             products: [],
             fullTickets: [],
             loading: true,
-            isEmpty : true
+            isEmpty: true
         }
     }
 
@@ -66,7 +66,7 @@ export default class ProductsSoldList extends React.Component {
             return null;
 
         });
-        this.setState({ fullTickets: fullTickets,isEmpty : false });
+        this.setState({ fullTickets: fullTickets, isEmpty: false });
         console.log(this.state.fullTickets[0]);
     }
 
@@ -82,8 +82,9 @@ export default class ProductsSoldList extends React.Component {
     render() {
         return (
             <ProductsSoldListContainer>
-                <br /><br />
-                <Title className="title" name="Despacho de" title="productos" />
+                <div id="main-title">
+                    <Title name="Despacho de" title="productos" />
+                </div>
                 <br />
                 <br />
 
@@ -95,7 +96,7 @@ export default class ProductsSoldList extends React.Component {
                             color="#00BFFF"
                             height={100}
                             width={100}
-                            timeout={0} 
+                            timeout={0}
                         />
                     </div>
 
@@ -105,7 +106,7 @@ export default class ProductsSoldList extends React.Component {
                         return <div className="product-container"><ProductsSold key={item.id} ticket={item.ticket} products={item.products} /></div>
                     })}
                     <div className="warning">
-                       
+
                         <Link to="/adminHome">
                             <button class="btn-primary" id="back">Volver</button>
                         </Link>
@@ -113,7 +114,7 @@ export default class ProductsSoldList extends React.Component {
                     </div>
 
                 </div>
-            
+
             </ProductsSoldListContainer>
 
 
@@ -130,6 +131,9 @@ min-height: 35rem;
 }
 .product-container{
     height:100%;   
+}
+#main-title{
+    margin-top: 5rem;
 }
 #back{
     margin-top: 3rem;

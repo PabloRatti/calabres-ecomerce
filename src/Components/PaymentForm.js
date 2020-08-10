@@ -93,13 +93,13 @@ export default class PaymentForm extends React.Component {
 
     }
 
-    detectarPlanSinInteres = () => {
+    detectarAhoraDoce = () => {
         let tipoPago = this.state.paymentMethod;
         let cuotas = this.state.cuotas;
         console.log('Detectando plan--> cuotas : ' + cuotas + ' tipoDePago : ' + tipoPago);
         if (tipoPago === '1' || tipoPago === '63' || tipoPago === '104') {
             if (cuotas === '12') {
-                this.setState({ paymentMethod: '7' });
+                this.setState({ installments: '7' });
             }
         }
     }
@@ -336,7 +336,7 @@ export default class PaymentForm extends React.Component {
 
 
                             <div id="btn-col" class="col">
-                                <Button type="submit" onClick={this.detectarPlanSinInteres} variant="success">Validar</Button>
+                                <Button type="submit" onClick={this.detectarAhoraDoce} variant="success">Validar</Button>
                             </div>
 
 
@@ -348,7 +348,7 @@ export default class PaymentForm extends React.Component {
                                 <br />
                                 Total : ${this.state.totalConIntereses}
                                 <br />
-                                Pagos : {this.state.cuotas}
+                                Pagos : {this.state.cuotas === '7' ? '12' : this.state.cuotas}
                                 <br />
                                 Metodo de pago : {this.state.paymentMethod}
                                 <br />

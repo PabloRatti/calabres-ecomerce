@@ -97,18 +97,18 @@ export default class LoginForm extends Component {
                                 </div>
                             </div>
                             <div class="col-sm">
-                                <div class="imgContainer col-sm">
+                                <div class="col-sm">
                                     <form className="form-container" onSubmit={this.handleSubmit}>
                                         <h3 className="form-title">Login</h3>
 
                                         <label className="input-container">
                                             Usuario  <br />
-                                            <input type="text" value={this.state.user} onChange={this.userHandler} />
+                                            <input id="inpt" type="text" value={this.state.user} onChange={this.userHandler} />
                                         </label>
                                         <br />
                                         <label className="input-container">
                                             Contraseña  <br />
-                                            <input type="password" value={this.state.password} onChange={this.passwordHandler} />
+                                            <input id="inpt" type="password" value={this.state.password} onChange={this.passwordHandler} />
                                         </label>
                                         <br /><br />
                                         <input type="submit" value="Submit" />
@@ -131,7 +131,14 @@ padding: 3rem;
 
 .input-container{
         margin-top: 1rem;
+        max-width: 100%;
+    
     }
+
+#inpt{
+ 
+    max-width: 100%;
+}
 .form-title{
         margin-top:2rem;
     }
@@ -160,15 +167,16 @@ padding: 3rem;
         display: none;
     }
    .form-container{
-     max-width: 70%;
-     width: 70%;
+    
+     min-width: 100%;
      margin: 0 auto;
      margin-top: 2rem;
 
    }
+  
 
    
-    }
+    
 
    
 }
