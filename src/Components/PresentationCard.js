@@ -13,9 +13,13 @@ export default class PresentationCard extends Component {
                     <div class="col">
 
                         <div id="imgContainer">
-                            <Link to="/llantas">
+                            <Link to={{
+                                pathname : '/llantas',
+                                state :  {
+                                    productType : 'neumatico'
+                                }
+                            }}>
                                 <img id="home-image" class="img-fluid" src={this.props.image} alt="home" />
-
                             </Link>
                         </div>
                     </div>
@@ -23,9 +27,13 @@ export default class PresentationCard extends Component {
 
                     <div class="col">
                         <div id="imgContainer">
-                            <Link to="/llantas">
+                            <Link to={{
+                                pathname: '/llantas',
+                                state: {
+                                    productType: 'llantas'
+                                }
+                            }}>
                                 <img id="home-image" class="img-fluid" src={this.props.image2} alt="home" />
-
                             </Link>
                         </div>
                     </div>

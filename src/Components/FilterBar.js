@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 export default class FilterBar extends Component {
-constructor(){
-    super();
-    this.state ={
-        inactive : false
+    constructor(props) {
+        super(props);
+        this.state = {
+            inactive: this.props.productType === 'llantas' ? true : false
+        }
     }
-}
 
     render() {
         const { handleFilter } = this.props;
@@ -18,7 +18,7 @@ constructor(){
             <FilterBarContainer>
                 <Navbar collapseOnSelect expand="lg" variant="dark">
                     <Navbar.Brand className="nav-reset" onClick={() => {
-                        this.setState({inactive: false})
+                        this.setState({ inactive: false })
                         return handleFilter('reset', 'all');
                     }}>Reset </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -33,19 +33,23 @@ constructor(){
                                     Neumáticos
                                     </NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
-                                    this.setState({inactive : true})
+                                    this.setState({ inactive: true })
                                     return handleFilter('productos', 'llantas');
                                 }}> Llantas</NavDropdown.Item>
 
 
                             </NavDropdown>
-                          
+
                             <NavDropdown disabled={this.state.inactive} className="drop" title="Marca" id="collasible-nav-dropdown">
 
                                 <NavDropdown.Item className="item" onClick={() => {
-                                    return handleFilter('marcas', 'pirelli'); }}>
+                                    return handleFilter('marcas', 'pirelli');
+                                }}>
                                     Pirelli
                                     </NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('marcas', 'formula energy');
+                                }}> Fórmula energy</NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('marcas', 'firestone');
                                 }}> Firestone</NavDropdown.Item>
@@ -56,58 +60,67 @@ constructor(){
                                     return handleFilter('marcas', 'westlake');
                                 }}>Westlake</NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('marcas', 'tango');
+                                }}>Tango</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('marcas', 'windforce');
                                 }}>Windforce</NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('marcas', 'fate');
-                                }}>Fate O</NavDropdown.Item>
+                                }}>Fate</NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
-                                    return handleFilter('marcas', 'bridgetstone');
-                                }}>Bridgetstone</NavDropdown.Item>
+                                    return handleFilter('marcas', 'bridgestone');
+                                }}>Bridgestone</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('marcas', 'continental');
+                                }}>Continental</NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('marcas', 'goodyear');
                                 }}>Goodyear</NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('marcas', 'nexen');
                                 }}>Nexen</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('marcas', 'cooper');
+                                }}>Cooper</NavDropdown.Item>
 
                             </NavDropdown>
 
                             <NavDropdown disabled={this.state.inactive} className="drop" title="Ancho" id="collasible-nav-dropdown">
-                                <NavDropdown.Item className="item" onClick={()=>{
-                                    return handleFilter('ancho','31');
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('ancho', '31');
                                 }}>31</NavDropdown.Item>
-                                <NavDropdown.Item className="item"  onClick={() => {
+                                <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('ancho', '165');
                                 }}>165</NavDropdown.Item>
-                                <NavDropdown.Item className="item"  onClick={() => {
+                                <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('ancho', '175');
                                 }}>175</NavDropdown.Item>
-                                <NavDropdown.Item className="item"  onClick={() => {
+                                <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('ancho', '185');
                                 }}>185</NavDropdown.Item>
-                                <NavDropdown.Item className="item"  onClick={() => {
+                                <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('ancho', '195');
                                 }}>195</NavDropdown.Item>
-                                <NavDropdown.Item className="item"  onClick={() => {
+                                <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('ancho', '205');
                                 }}>205</NavDropdown.Item>
-                                <NavDropdown.Item className="item"  onClick={() => {
+                                <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('ancho', '215');
                                 }}>215</NavDropdown.Item>
-                                <NavDropdown.Item className="item"  onClick={() => {
+                                <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('ancho', '225');
                                 }}>225</NavDropdown.Item>
-                                <NavDropdown.Item className="item"  onClick={() => {
+                                <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('ancho', '235');
                                 }}>235</NavDropdown.Item>
-                                <NavDropdown.Item className="item"  onClick={() => {
+                                <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('ancho', '245');
                                 }}>245</NavDropdown.Item>
-                                <NavDropdown.Item className="item"  onClick={() => {
+                                <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('ancho', '255');
                                 }}>255</NavDropdown.Item>
-                                <NavDropdown.Item className="item"  onClick={() => {
+                                <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('ancho', '265');
                                 }}>265</NavDropdown.Item>
                             </NavDropdown>
@@ -144,8 +157,11 @@ constructor(){
                                 }}>80</NavDropdown.Item>
 
                             </NavDropdown>
-                            <NavDropdown disabled={this.state.inactive} className="drop" title="Rodado" id="collasible-nav-dropdown">
-                                <NavDropdown.Item className="item" onClick={() => { 
+                            <NavDropdown className="drop" title="Rodado" id="collasible-nav-dropdown">
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('rodado', '12');
+                                }}>12</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('rodado', '13');
                                 }}>13</NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
@@ -155,20 +171,20 @@ constructor(){
                                     return handleFilter('rodado', '15');
                                 }}>15</NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
-                                    return handleFilter('rodado', '15C');
-                                }}>15C</NavDropdown.Item>
-                                <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('rodado', '16');
                                 }}>16</NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
-                                    return handleFilter('rodado', '16C');
-                                }}>16C</NavDropdown.Item>
-                                <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('rodado', '17');
-                                }}>17C</NavDropdown.Item>
+                                }}>17</NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('rodado', '18');
-                                }}>18C</NavDropdown.Item>
+                                }}>18</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('rodado', '19');
+                                }}>19</NavDropdown.Item>
+                                <NavDropdown.Item className="item" onClick={() => {
+                                    return handleFilter('rodado', '20');
+                                }}>20</NavDropdown.Item>
 
                             </NavDropdown>
                         </Nav>

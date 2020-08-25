@@ -5,6 +5,8 @@ import { ProductConsumer } from '../Context';
 import FilterBar from './FilterBar';
 import styled from 'styled-components';
 import { animateScroll as scroll } from 'react-scroll';
+import Loader from 'react-loader-spinner';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 export default class ProductList extends Component {
     constructor(props) {
@@ -15,23 +17,34 @@ export default class ProductList extends Component {
             widthFilter: '',
             brandFilter: '',
             title: '',
-            productType: '',
+            productType: this.props.location.state ? this.props.location.state.productType : '',
             profile: '',
-            rodado: ''
+            rodado: '',
+            isLoading: true
         }
     }
     componentDidUpdate() {
         scroll.scrollToTop();
     }
     componentDidMount() {
+        console.log('Tipo de productos : '+this.state.productType)
         scroll.scrollToTop();
-        fetch('http://localhost:4000/notes/')
+        let req = {
+            method: "GET",
+            headers: {
+                "mode": 'cors',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }
+        fetch('https://elcalabres.com.ar/notes/', req)
             .then(response => response.json())
             .then(json => {
                 this.setState({ products: json });
                 console.log(this.state.products)
                 return json;
-            });
+            })
+            .then(resp => this.setState({ isLoading: false }));
     }
 
     filterByProduct = (products, type) => {
@@ -132,32 +145,44 @@ export default class ProductList extends Component {
 
         return (
             <ProductListContainer>
-                <React.Fragment>
-                    <FilterBar handleFilter={this.handleFilter} />
+                {this.state.isLoading ? <div className="spinner">
+                    <div id="loader">
+                        <Loader
+                            type="Puff"
+                            color="#00BFFF"
+                            height={200}
+                            width={200}
+                            timeout={0}
+                        />
+                    </div>
 
-                    <div className="py-5">
-                        <div className="container">
-                            <div className="title-container">
-                                <Title name={this.state.productType} title={this.state.brandFilter} width={this.state.widthFilter} profile={this.state.profile} rodado={this.state.rodado} renderLogo="true" />
+                </div> :
+                    <React.Fragment>
+                        <FilterBar productType={this.state.productType} handleFilter={this.handleFilter} />
 
-                            </div>
-                            <div className="row">
+                        <div className="py-5">
+                            <div className="container">
+                                <div className="title-container">
+                                    <Title name={this.state.productType} title={this.state.brandFilter} width={this.state.widthFilter} profile={this.state.profile} rodado={this.state.rodado} renderLogo="true" />
 
-                                <ProductConsumer>
-                                    {(value) => {
+                                </div>
+                                <div className="row">
 
-                                        let products = this.applyFilters(value.products);
+                                    <ProductConsumer>
+                                        {(value) => {
 
-                                        return products.map(product => {
-                                            return <Product key={product.id} product={product} />
-                                        })
-                                    }}
-                                </ProductConsumer>
+                                            let products = this.applyFilters(value.products);
 
+                                            return products.map(product => {
+                                                return <Product key={product.id} product={product} />
+                                            })
+                                        }}
+                                    </ProductConsumer>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </React.Fragment>
+                    </React.Fragment>}
             </ProductListContainer>
         );
     }
@@ -168,4 +193,26 @@ const ProductListContainer = styled.div`
     margin-top: 7rem !important;
 }
 
+.spinner{
+border: 2px solid white;
+height: 25rem;
+}
+
+#loader{
+width: 13%;
+margin: 0 auto;
+margin-top: 8rem;
+}
+
+ @media (max-width: 48em) {
+.spinner{
+border: 2px solid white;
+}
+
+
+#loader{
+
+width: 50%;
+text-aling:center;
+}
 `;

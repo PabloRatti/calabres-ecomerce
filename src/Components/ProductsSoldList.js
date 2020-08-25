@@ -20,31 +20,43 @@ export default class ProductsSoldList extends React.Component {
 
     componentDidMount() {
         this.getTickets();
-        this.getProductsRelatedToTickets();
+        //this.getProductsRelatedToTickets();
+        // this.generateFullTickets(); 
         setTimeout(() => {
-            this.generateFullTickets();
-            this.setState({ loading: false, })
+            this.setState({ loading: false });
         }, 3000);
+
         scroll.scrollToTop();
     }
 
     getTickets = () => {
-        fetch('http://localhost:4000/notes/getTickets/getAll')
+        fetch('https://elcalabres.com.ar/notes/getTickets/getAll')
             .then(response => response.json())
             .then(json => {
                 this.setState({ tickets: json });
-
+                console.log(json);
+                this.getProductsRelatedToTickets();
                 return json;
             });
     }
 
+    getProductsRelatedToTickets = () => {
+        fetch('https://elcalabres.com.ar/notes/getTicketsProducts/getAll')
+            .then(response => response.json())
+            .then(json => {
+                this.setState({ products: json });
+                this.generateFullTickets();
+                return json;
+            });
+    }
     //Generate a full ticket with products related
     generateFullTickets = () => {
         console.log('In generate full tickets');
         let tickets = this.state.tickets;
         let products = this.state.products;
         let fullTickets = [];
-
+        console.log(tickets);
+        debugger;
         tickets.map((ticket) => {
             //console.log('Generando ticket N : ' + ticket.id);
             let ticketProducts = [];
@@ -66,19 +78,11 @@ export default class ProductsSoldList extends React.Component {
             return null;
 
         });
-        this.setState({ fullTickets: fullTickets, isEmpty: false });
+        this.setState({ fullTickets: fullTickets, isEmpty: false, loading: false });
         console.log(this.state.fullTickets[0]);
     }
 
-    getProductsRelatedToTickets = () => {
-        fetch('http://localhost:4000/notes/getTicketsProducts/getAll')
-            .then(response => response.json())
-            .then(json => {
-                this.setState({ products: json });
 
-                return json;
-            });
-    }
     render() {
         return (
             <ProductsSoldListContainer>
@@ -92,7 +96,7 @@ export default class ProductsSoldList extends React.Component {
                 <div className="loading" hidden={!this.state.loading}>
                     <div className="spinner">
                         <Loader
-                            type="Grid"
+                            type="Puff"
                             color="#00BFFF"
                             height={100}
                             width={100}

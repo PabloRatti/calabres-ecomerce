@@ -21,7 +21,7 @@ export default class ProductSold extends React.Component {
 
     deleteTicket = (id) => {
         //Eliminar Ticket
-        fetch('http://localhost:4000/notes/deleteTicket/' + id, { method: 'DELETE', })
+        fetch('https://elcalabres.com.ar/notes/deleteTicket/' + id, { method: 'DELETE', })
             .then(response => response.json())
             .then(json => {
 
@@ -31,7 +31,7 @@ export default class ProductSold extends React.Component {
 
     deleteProductsFromTicket = (ticketId) => {
         //Eliminar productos
-        fetch('http://localhost:4000/notes/deleteProductsFromTicket/' + ticketId, { method: 'DELETE', })
+        fetch('https://elcalabres.com.ar/notes/deleteProductsFromTicket/' + ticketId, { method: 'DELETE', })
             .then(response => response.json())
             .then(json => {
 
@@ -39,7 +39,7 @@ export default class ProductSold extends React.Component {
             });
     }
     render() {
-        const { name, phone, localidad, postalCode, id, total, identity_number, dir_Remitente } = this.props.ticket;
+        const { name, userEmail,phone, localidad, postalCode, id, total, identity_number, dir_Remitente } = this.props.ticket;
         let count = 0;
         return (
             <ProductSoldContainer>
@@ -56,6 +56,7 @@ export default class ProductSold extends React.Component {
                             Titular : {name} <br />
                             DNI : {identity_number} <br />
                             Ticket Id : {id} <br />
+                            Email : {userEmail} <br/>
                             Telefono : {phone} <br />
                             Localidad : {localidad} <br />
                             Sucursal destino : {dir_Remitente} <br />

@@ -7,7 +7,10 @@ import { animateScroll as scroll } from 'react-scroll';
 import PresentationCard2 from './PresentationCard2';
 
 export default class HomePage extends Component {
-
+    constructor(props) {
+        super(props);
+        this.myFile = React.createRef();
+    }
     componentDidMount = () => {
         scroll.scrollToTop();
     }
@@ -15,19 +18,18 @@ export default class HomePage extends Component {
     render() {
         return (
             <HomeContainer>
-                <Image className="home-image" src={require("../calabres-api/images/static/yellowCar.jpg")} fluid />
+                <Image className="home-image" src={require("../img/yellowCar.jpg")} fluid />
                 <Carousel className="carousel" />
 
+                <PresentationCard image2={require("../img/llantas2.jpg")} image={require("../img/neumaticos.jpg")} />
 
-                <PresentationCard image2={require("../calabres-api/images/static/llantas2.jpg")} image={require("../calabres-api/images/static/neumaticos.jpg")} />
 
-
-                <Image className="brands" src={require("../calabres-api/images/static/MarcasCalabres.png")} fluid />
+                <Image className="brands" src={require("../img/MarcasCalabres.png")} fluid />
                 {/*<HorizontalGallery />*/}
-                <PresentationCard2 image2={require("../calabres-api/images/static/carretera2.jpg")} image={require("../calabres-api/images/static/pickupcalabres.jpg")} />
+                <PresentationCard2 image2={require("../img/carretera2.jpg")} image={require("../img/pickupcalabres.jpg")} />
 
 
-                <Image className="banner" src={require("../calabres-api/images/static/banner.png")} />
+                <Image className="banner" src={require("../img/banner.png")} />
             </HomeContainer>
 
         );

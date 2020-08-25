@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { storeProducts } from './data';
-
 
 const ProductContext = React.createContext();
 //Provider
@@ -21,27 +19,25 @@ class ProductProvider extends Component {
     }
 
     componentDidMount() {
-
-        fetch('http://localhost:4000/notes/')
+        let req = {
+            method: "GET",
+            headers: {
+                "mode": 'CORS',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                
+            }
+        }
+        console.log(req);
+      
+        fetch('https://elcalabres.com.ar/notes/', req)
             .then(response => response.json())
             .then(json => {
                 this.setState({ products: json });
-
                 return json;
             });
-
     }
-    //Esto es para tener valores y no referencias
-    setProducts = () => {
-        let tempProducts = [];
-        storeProducts.forEach(item => {
-            const singleItem = { ...item };
-            tempProducts = [...tempProducts, singleItem];
-        })
-        this.setState(() => {
-            return { products: tempProducts }
-        });
-    };
+
 
     getItem = (id) => {
         const product = this.state.products.find(item =>
@@ -194,7 +190,7 @@ class ProductProvider extends Component {
                 clearCart: this.clearCart
 
             }}>
-               
+
                 {this.props.children}
             </ProductContext.Provider>
         );

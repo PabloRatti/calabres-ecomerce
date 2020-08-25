@@ -9,7 +9,7 @@ export default class Footer extends Component {
 
                     <div class="footer-left">
 
-                        <h3>El Calabres neumáticos</h3>
+                        <h3>El Calabrés neumáticos</h3>
                     </div>
 
                     <div class="footer-center">
@@ -21,7 +21,7 @@ export default class Footer extends Component {
 
                         <div className="phoneLabel">
                             <i class="fa fa-phone"></i>
-                            <p>0223 -473-2424/4721298</p>
+                            <p>0223 4732424/4721298</p>
                         </div>
 
                         <div>

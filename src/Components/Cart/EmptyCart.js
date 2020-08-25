@@ -9,7 +9,7 @@ export default function EmptyCart() {
                 <div className="row">
                     <div id="container" className="col-10 mx-auto text-center text-title">
                         <h1 id="mensajeVacio" className="text-capitalize font-weight-bold">Su carrito se encuentra vacio</h1>
-                        <Link className="link-back" to="/llantas">Volver a la tienda</Link>
+                        <Link className="link-back" to="/home">Volver a la tienda</Link>
                     </div>
 
                 </div>

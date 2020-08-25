@@ -27,7 +27,8 @@ export default class PaymentForm extends React.Component {
             isBank: false,
             totalConIntereses: this.props.location.state.total,
             cart: this.props.location.state.cart,
-            paymentMethod: ''
+            paymentMethod: '',
+            hiddeCuotas: ''
 
         };
     }
@@ -237,7 +238,7 @@ export default class PaymentForm extends React.Component {
                                     type="tel"
                                     name="dir_Remitente"
                                     class="form-control"
-                                    placeholder="Direccion de sucursal OCA en la que retira"
+                                    placeholder="Sucursal OCA en la que retira"
                                     onChange={this.handleInputChange}
                                     onFocus={this.handleInputFocus}
                                     required
@@ -280,19 +281,19 @@ export default class PaymentForm extends React.Component {
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '24' })}>Naranja Visa</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '103' })}>Fava Cabal</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '0' })}>Clipper Cabal</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '43' })}>Cencosud Mastercard</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '24',     hiddeCuotas: false })}>Naranja Visa</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '103',    hiddeCuotas: false })}>Fava Cabal</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '0',      hiddeCuotas: false })}>Clipper Cabal</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: false, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '43',     hiddeCuotas: false })}>Cencosud Mastercard</Dropdown.Item>
 
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '1' })}>Tarjeta de banco Visa</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '104' })}>Tarjeta de banco Mastercard</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '63' })}>Tarjeta de banco Cabal</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '1',       hiddeCuotas: false })}>Tarjeta de banco Visa</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '104',     hiddeCuotas: false })}>Tarjeta de banco Mastercard</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '63',      hiddeCuotas: false })}>Tarjeta de banco Cabal</Dropdown.Item>
 
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '31' })}>Debito Visa</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '105' })}>Debito Mastercard</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '108' })}>Debito Cabal</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '', totalConIntereses: totalSinIntereses, paymentMethod: '106' })}>Debito Maestro</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '1', totalConIntereses: totalSinIntereses, paymentMethod: '31'  ,   hiddeCuotas: true})}>Debito Visa</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '1', totalConIntereses: totalSinIntereses, paymentMethod: '105' ,   hiddeCuotas: true})}>Debito Mastercard</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '1', totalConIntereses: totalSinIntereses, paymentMethod: '108' ,   hiddeCuotas: true})}>Debito Cabal</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.setState({ isBank: true, valorCuota: '', cuotas: '1', totalConIntereses: totalSinIntereses, paymentMethod: '106' ,   hiddeCuotas: true})}>Debito Maestro</Dropdown.Item>
 
 
 
@@ -302,28 +303,32 @@ export default class PaymentForm extends React.Component {
                             </div>
                             <div id="btn-col" class="col">
 
-                                <Dropdown className="dropdown-container">
+                                <Dropdown className="dropdown-container" hidden={this.state.hiddeCuotas}>
                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                                         Cuotas
                                     </Dropdown.Toggle>
                                     {this.state.isBank ?
                                         <Dropdown.Menu>
-                                            <Dropdown.Item onClick={() => this.setState({ cuotas: '3', totalConIntereses: totalSinIntereses, valorCuota: totalSinIntereses / 3 })}>3 Sin interes</Dropdown.Item>
+                                            <Dropdown.Item onClick={() => this.setState({ cuotas: '1', totalConIntereses: totalSinIntereses, valorCuota: totalSinIntereses })}>1 pago</Dropdown.Item>
+                                            <Dropdown.Item onClick={() => this.setState({ cuotas: '3', totalConIntereses: totalSinIntereses, valorCuota: totalSinIntereses / 3 })}>3 Sin interés</Dropdown.Item>
                                             <Dropdown.Item onClick={() => {
                                                 let intereses = (totalSinIntereses * 18) / 100;
                                                 let totalConIntereses = parseFloat(totalSinIntereses) + parseFloat(intereses);
                                                 console.log('Total con intereses : ' + totalConIntereses);
                                                 this.setState({ cuotas: '6', totalConIntereses: totalConIntereses, valorCuota: totalConIntereses / 6 });
                                             }}>6 Cuotas fijas</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => this.setState({ cuotas: '12', totalConIntereses: totalSinIntereses, valorCuota: totalSinIntereses / 12 })}>12 Sin interes</Dropdown.Item>
+                                            <Dropdown.Item onClick={() => this.setState({ cuotas: '12', totalConIntereses: totalSinIntereses, valorCuota: totalSinIntereses / 12 })}>Ahora 12</Dropdown.Item>
+                                           
+
                                         </Dropdown.Menu>
                                         :
-                                        <Dropdown.Menu>
+                                        <Dropdown.Menu hidden={this.state.hiddeCuotas}>
+                                            <Dropdown.Item onClick={() => this.setState({ cuotas: '1', totalConIntereses: totalSinIntereses, valorCuota: totalSinIntereses })}>1 pago</Dropdown.Item>
                                             <Dropdown.Item onClick={() => {
-                                                let intereses = (totalSinIntereses * 25) / 100;
-                                                let totalConIntereses = parseFloat(totalSinIntereses) + parseFloat(intereses);
-                                                this.setState({ cuotas: '3', totalConIntereses: totalConIntereses, valorCuota: totalConIntereses / 3 })
-                                            }}>3 (Cuotas fijas)</Dropdown.Item>
+                                                //let intereses = (totalSinIntereses * 25) / 100;
+                                               // let totalConIntereses = parseFloat(totalSinIntereses) + parseFloat(intereses);
+                                                this.setState({ cuotas: '3', totalConIntereses: totalSinIntereses, valorCuota: totalSinIntereses / 3 })
+                                            }}>3 (Cuotas sin interes)</Dropdown.Item>
                                             <Dropdown.Item onClick={() => {
                                                 let intereses = (totalSinIntereses * 45) / 100;
                                                 let totalConIntereses = parseFloat(totalSinIntereses) + parseFloat(intereses);
@@ -349,8 +354,6 @@ export default class PaymentForm extends React.Component {
                                 Total : ${this.state.totalConIntereses}
                                 <br />
                                 Pagos : {this.state.cuotas === '7' ? '12' : this.state.cuotas}
-                                <br />
-                                Metodo de pago : {this.state.paymentMethod}
                                 <br />
                                 Valor de la cuota : ${this.state.valorCuota !== '' ? this.state.valorCuota.toFixed(2) : null}
                                 <br />

@@ -46,10 +46,9 @@ export default class LoginForm extends Component {
             })
         }
         //Hacer el update
-        fetch('http://localhost:4000/notes/adminLogin/', fetchData)
+        fetch('https://elcalabres.com.ar/notes/adminLogin/', fetchData)
             .then(response => {
-                console.log(response.status);
-                
+                console.log(response.status);                
                 return response;
             })
             .then(json => {
@@ -93,7 +92,7 @@ export default class LoginForm extends Component {
                         <div className="row">
                             <div class="col-sm offset-md-1">
                                 <div class="col-sm">
-                                    <Image fluid className="loginImg mr-auto" src={require("../calabres-api/images/static/IMG-20200514-WA0072.jpg")} />
+                                    <Image fluid className="loginImg mr-auto" src={require("../img/loginImage.jpg")} />
                                 </div>
                             </div>
                             <div class="col-sm">

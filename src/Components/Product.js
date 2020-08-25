@@ -48,7 +48,7 @@ export default class Product extends Component {
                     </div>
 
                     <div className="cuotas text-blue font-italic">
-                                    <p className="title align-self-center ">12 cuotas sin interes de ${cuotas.toFixed()}</p>
+                                    <p className="title align-self-center ">12 cuotas sin interés de ${cuotas.toFixed()}</p>
 
                     </div> 
                 </div>
@@ -78,7 +78,7 @@ color: var(--mainBlue);
 }
 .price{
     margin-left: 3rem;
-   color: green; 
+   color: red; 
    height: 25%;
 }
 

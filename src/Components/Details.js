@@ -47,11 +47,12 @@ export default class Details extends Component {
                                     {/**Product txt */}
                                     <div id="description" className="col-10 mx-auto col-md-6 my-3 text-capitalize">
 
-                                        <h1 id="title">{type} &nbsp;{company}&nbsp;{title}</h1>
-                                        <h2>&nbsp;{width}/{profile}/{rodado}</h2>
+                                        <h1 id="title">{company}&nbsp;{title}</h1>
+                                        {type !== 'llantas' ? <h2>&nbsp;{width}/{profile}/{rodado}</h2> : null}
+                                        
                                         <h2><strike id="striked">${priceStriked}</strike>&nbsp;&nbsp;${price}</h2>
                                         <h4 className="price-container">  12 cuotas sin interes de ${cuotas.toFixed(2)}</h4>
-                                        <h4 onClick={this.transferenciaHandler} id="transferencia" style={{color:'green'}} className="price-container">Transferencia bancaria -15% ${totalTransferencia.toFixed(2)}</h4>
+                                        <h4 onClick={this.transferenciaHandler} id="transferencia" style={{color:'red'}} className="price-container">Transferencia bancaria -15% ${totalTransferencia.toFixed(2)} Click aqui!</h4>
                                         <FichaTecnicaDetails className="ficha-tecnica" detailProduct={value.detailProduct} />
                                         {/**Buttons */}
                                         <div>
@@ -86,10 +87,12 @@ const DetailsWraper = styled.div`
 text-align: center;
 #transferencia:hover{
     cursor: pointer;
-    color: red !important;
+    color: green !important;
+    
 }
 .price-container{
-    color:blue;
+    color:red;
+    font-size: 1rem;
 }
 .ficha-tecnica{
      margin : 0 auto;

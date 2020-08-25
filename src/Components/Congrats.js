@@ -15,11 +15,11 @@ export default class Congrats extends React.Component {
                     <h1>Su pedido a sido registrado</h1>
                     <br /><br />
                     <h4>Al hacerse efectivo el pago se le enviara el numero de seguimiento OCA</h4>
-                    <br />
+                    <br/>
                     <h5>Muchas gracias por su compra!</h5>
                 </div>
 
-                <Image className="brands" src={require("../calabres-api/images/static/MarcasCalabres.png")} />
+                <Image className="brands" src={require("../img/MarcasCalabres.png")} />
             </CongratsContainer>
         );
     }

@@ -12,7 +12,6 @@ export default class WhatsAppIcon extends Component {
         this.changeHandler = this.changeHandler.bind(this);
         this.openModal = this.openModal.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-
     }
 
     openModal() {
@@ -29,7 +28,7 @@ export default class WhatsAppIcon extends Component {
         e.preventDefault()
         console.log("Submited");
         let msg = this.state.W_input;
-        let wspLink = 'https://api.whatsapp.com/send?phone=2235911061&text=' + msg;
+        let wspLink = 'https://api.whatsapp.com/send?phone=542233129785&text=' + msg;
         //Agregar validacion para mobile
         window.location = wspLink;
     }
@@ -45,9 +44,9 @@ export default class WhatsAppIcon extends Component {
 
         return (
             <WhatsAppContainer  >
-                {isMobile ? <img alt="icon" onClick={() => this.handleSubmitMobile()} className="icon" id="icon" src={require("../calabres-api/images/static/whatsApp.png")} /> :
+                {isMobile ? <img alt="icon" onClick={() => this.handleSubmitMobile()} className="icon" id="icon" src={require("../img/whatsApp.png")} /> :
                     <div className="container">
-                        <img alt="icon" onClick={() => this.openModal()} className="icon" id="icon" src={require("../calabres-api/images/static/whatsApp.png")} />
+                        <img alt="icon" onClick={() => this.openModal()} className="icon" id="icon" src={require("../img/whatsApp.png")} />
                         {mustOpen ?
                             <form onSubmit={this.handleSubmit} id="whatsapp-txt">
 
@@ -58,9 +57,6 @@ export default class WhatsAppIcon extends Component {
                     </div>
 
                 }
-
-
-
             </WhatsAppContainer>
         );
     }

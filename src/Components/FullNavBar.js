@@ -9,9 +9,9 @@ const FullNavBar = () => {
         <FreeShippingContainer >
 
             <div style={{top: '1rem'}}>
-                <img id="fire" src={require("../calabres-api/images/static/fire.png")} alt="home" />
+                <img id="fire" src={require("../img/fire.png")} alt="home" />
                 <h5>Envios gratis a todo el pais y 20% OFF en tienda online</h5>
-                <img id="fire" src={require("../calabres-api/images/static/fire.png")} alt="home" />
+                <img id="fire" src={require("../img/fire.png")} alt="home" />
 
             </div>
 

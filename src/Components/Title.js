@@ -12,7 +12,7 @@ export default function Title({ name, title,renderLogo,width,profile,rodado }) {
                     </h1>
                     {renderLogo ? 
                     <div className="img-container col-10 mx-auto my-2 text-center text.title">
-                            <img alt="ahora-logo" className="ahora-logo" src={require("../calabres-api/images/static/ahora12.png")} />
+                            <img alt="ahora-logo" className="ahora-logo" src={require("../img/ahora12.png")} />
                     </div>
                     : null}
                 </div>

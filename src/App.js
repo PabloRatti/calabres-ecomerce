@@ -24,7 +24,9 @@ function App() {
       <FullNavBar />
       <WhatsappIcon />
       <Switch>
-        <Route exact path="/" component={HomePage} />
+
+        <Route exact path="/" component={HomePage} />        
+        <Route path="/home" component={HomePage} />         
         <Route path="/productsSoldList" component={ProductsSoldList} />
         <Route path="/llantas" component={ProductList} />
         <Route path="/details" component={Details} />

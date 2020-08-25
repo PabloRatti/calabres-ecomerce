@@ -12,28 +12,28 @@ export default class HomeCarousel extends Component {
                     <Carousel.Item id="firs-slide">
                         <img                           
                             className="carouselImg d-block w-100"
-                            src={require("../calabres-api/images/static/ahora12Cover.jpeg")}
+                            src={require("../img/ahora12Cover.jpeg")}
                             alt="First slide"
                         />
                     </Carousel.Item>
                     <Carousel.Item>
                         <img
                             className="carouselImg d-block w-100"
-                            src={require("../calabres-api/images/static/EnviosAtodos.jpeg")}
+                            src={require("../img/EnviosAtodos.jpeg")}
                             alt="Second slide"
                         />
                     </Carousel.Item>
                     <Carousel.Item>
                         <img
                             className="carouselImg d-block w-100"
-                            src={require("../calabres-api/images/static/coverGomas.jpeg")}
+                            src={require("../img/coverGomas.jpeg")}
                             alt="Second slide"
                         />
                     </Carousel.Item>
                     <Carousel.Item>
                         <img
                             className="carouselImg d-block w-100 img-fluid"
-                            src={require("../calabres-api/images/static/coverCalabres.jpeg")} alt="Third slide"
+                            src={require("../img/coverCalabres.jpeg")} alt="Third slide"
                         />
                     </Carousel.Item>
                 </Carousel>
