@@ -9,10 +9,11 @@ Credit cards to test payments:
 Al the routes in fetch methods are the original URLs so to test in local must change them for localhost.
 
 Development: 
+
+
 	- React.js: Bootstrap 4, React Strap, Styled Components, React Context, React Router, React scroll, React Loader.
 	
-	- Node.js: API developed with Node, Express and MySQL. 
-		(I know! MongoDB is better to work with React and Node, but the client wanted SQL).
+	
 	
 	
 
