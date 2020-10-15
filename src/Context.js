@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import ReactPixel from "react-facebook-pixel";
 const ProductContext = React.createContext();
 //Provider
 //Consumer
@@ -19,6 +19,7 @@ class ProductProvider extends Component {
     }
 
     componentDidMount() {
+    
         let req = {
             method: "GET",
             headers: {
@@ -53,6 +54,7 @@ class ProductProvider extends Component {
     }
 
     addToCart = (id) => {
+        ReactPixel.track('AddToCart');
         let tempProducts = [...this.state.products];
         const index = tempProducts.indexOf(this.getItem(id));
         const product = tempProducts[index];

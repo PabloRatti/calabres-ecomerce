@@ -5,7 +5,7 @@ import { ProductConsumer } from '../Context';
 import PropTypes from 'prop-types';
 export default class Product extends Component {
     render() {
-        const { id, title, img, price, inCart, company } = this.props.product;
+        const { id, title, img, price, inCart, company,profile,width,rodado,type } = this.props.product;
         const cuotas = price/12;
         return (
             <ProductWrapper className="col-10 col-xs-5 col-sm-3 mx-auto col-md-5 col-lg-3 my-3">
@@ -42,8 +42,9 @@ export default class Product extends Component {
                         </p>
 
                         <div className="price text-blue font-italic">
-                            <p className="title align-self-center ">${price}</p>
-                            
+                            <p className="title align-self-center">${price}</p>
+                           { type === 'llantas' ? <p className="text-blue font-italic">R{rodado}</p>
+                           : <p className="text-blue font-italic">{profile}/{width}/{rodado}</p>} 
                         </div>                 
                     </div>
 

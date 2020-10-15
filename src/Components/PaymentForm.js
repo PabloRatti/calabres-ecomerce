@@ -6,6 +6,7 @@ import 'react-credit-cards/es/styles-compiled.css';
 import { Link } from 'react-router-dom';
 import { Dropdown, Button } from 'react-bootstrap';
 import { animateScroll as scroll } from 'react-scroll';
+import ReactPixel from "react-facebook-pixel";
 export default class PaymentForm extends React.Component {
     constructor(props) {
         super(props);
@@ -36,6 +37,13 @@ export default class PaymentForm extends React.Component {
 
     componentDidMount() {
         scroll.scrollToTop();
+        const advancedMatching = { em: "some@email.com" }; // optional, more info: https://developers.facebook.com/docs/facebook-pixel/pixel-with-ads/conversion-tracking#advanced_match
+        const options = {
+          autoConfig: true, // set pixel's autoConfig
+          debug: false, // enable logs
+        };
+        ReactPixel.init("1143009419162712", advancedMatching, options);
+        ReactPixel.track('InitiateCheckout');
     }
 
     handleInputFocus = (e) => {
@@ -107,7 +115,6 @@ export default class PaymentForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-
         console.log('Credit Card Request: ')
         console.log('Name : ' + this.state.name);
         console.log('Number : ' + this.state.number);

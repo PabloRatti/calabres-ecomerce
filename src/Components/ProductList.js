@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { animateScroll as scroll } from 'react-scroll';
 import Loader from 'react-loader-spinner';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-
+import ReactPixel from "react-facebook-pixel";
 export default class ProductList extends Component {
     constructor(props) {
         super(props);
@@ -27,6 +27,12 @@ export default class ProductList extends Component {
         scroll.scrollToTop();
     }
     componentDidMount() {
+        const advancedMatching = { em: "some@email.com" }; // optional, more info: https://developers.facebook.com/docs/facebook-pixel/pixel-with-ads/conversion-tracking#advanced_match
+        const options = {
+          autoConfig: true, // set pixel's autoConfig
+          debug: false, // enable logs
+        };
+        ReactPixel.init("1143009419162712", advancedMatching, options);
         console.log('Tipo de productos : '+this.state.productType)
         scroll.scrollToTop();
         let req = {
@@ -113,6 +119,7 @@ export default class ProductList extends Component {
     }
 
     handleFilter = (tipo, valor) => {
+        ReactPixel.track('Search');
         console.log('HandleFilter : ' + tipo + 'Valor: ' + valor)
         let products = this.state.products;
         console.log('Tenemos sin filtrar' + products);
