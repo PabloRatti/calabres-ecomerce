@@ -44,7 +44,7 @@ export default class Product extends Component {
                         <div className="price text-blue font-italic">
                             <p className="title align-self-center">${price}</p>
                            { type === 'llantas' ? <p className="text-blue font-italic">R{rodado}</p>
-                           : <p className="text-blue font-italic">{profile}/{width}/{rodado}</p>} 
+                           : <p className="text-blue font-italic">{width}/{profile}/{rodado}</p>} 
                         </div>                 
                     </div>
 
