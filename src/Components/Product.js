@@ -16,7 +16,7 @@ export default class Product extends Component {
                                 value.handleDetail(id)
                             }
                             }>
-                                <Link to="/details">
+                                <Link to={"/details/"+id}>
                                     <img src={img} alt="product" id="cardImg" className="card-img-top" />
                                 </Link>
                                 <button className="cart-btn" disabled={inCart ? true : false} onClick={() => {
@@ -40,11 +40,11 @@ export default class Product extends Component {
                         <p id="company" className="title align-self-center ">
                             {company.toUpperCase()} {title}
                         </p>
-
+                        { type === 'llantas' ? <p className="text-blue font-italic">R{rodado}</p>
+                           : <p className="text-blue font-italic">{width}/{profile}/{rodado}</p>} 
                         <div className="price text-blue font-italic">
                             <p className="title align-self-center">${price}</p>
-                           { type === 'llantas' ? <p className="text-blue font-italic">R{rodado}</p>
-                           : <p className="text-blue font-italic">{width}/{profile}/{rodado}</p>} 
+                          
                         </div>                 
                     </div>
 
@@ -80,6 +80,7 @@ color: var(--mainBlue);
 .price{
     margin-left: 3rem;
    color: red; 
+   
    height: 25%;
 }
 
@@ -94,8 +95,7 @@ color: var(--mainBlue);
     height: 100%
    
 }
-#company{
-   
+#company{  
     width: 100%;
 }
 .card-footer{

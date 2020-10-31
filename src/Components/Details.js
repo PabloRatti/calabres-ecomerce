@@ -1,136 +1,235 @@
-import React, { Component } from 'react';
-import { ProductConsumer } from '../Context';
-import { Link } from 'react-router-dom';
-import { ButtonContainer } from './Button';
-import styled from 'styled-components';
-import { animateScroll as scroll } from 'react-scroll';
-import FichaTecnicaDetails from './FichaTecnicaDetails';
+import React, { Component } from "react";
+import { ProductConsumer } from "../Context";
+import { Link } from "react-router-dom";
+import { ButtonContainer } from "./Button";
+import styled from "styled-components";
+import { animateScroll as scroll } from "react-scroll";
+import FichaTecnicaDetails from "./FichaTecnicaDetails";
+import Loader from 'react-loader-spinner';
 export default class Details extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      product: null,
+      isLoading: true,
+    };
+  }
+  componentDidMount = () => {
+    scroll.scrollToTop();
+    console.log("This props location search  :");
+    this.getProduct();
+  };
 
-    componentDidMount = () => {
-        scroll.scrollToTop();
-    }
+  getProduct = () => {
+    const url = this.props.location.pathname;
+    const productID = url.slice(9);
+    console.log("Product ID : " + productID);
+    let req = {
+      method: "GET",
+      headers: {
+        mode: "cors",
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+    fetch("https://elcalabres.com.ar/notes/" + productID, req)
+      .then((response) => response.json())
+      .then((json) => {
+        return json;
+      })
+      .then((resp) => {
+        this.setState({ product: resp[0], isLoading: false });
+        console.log(this.state.product);
+      });
+  };
 
-    transferenciaHandler = () =>{
-        console.log('Transferencia handler activated');
-        console.log("Submited Mobile");
-        let wspLink = 'https://api.whatsapp.com/send?phone=542233129785';
-        window.location = wspLink;
-    }
-    render() {
-        return (
-            <DetailsWraper>
-                <ProductConsumer>
-                    {value => {
-                        const { id, type, company, img, title, inCart, price, width, profile,  rodado } = value.detailProduct;
-                        let cuotas = price / 12;
-                        let priceStriked = price + ((price * 20) / 100);
-                        console.log('Price : '+price);
-                       
-                        let totalTransferencia = price - ((price*15)/100);
-                        console.log('Total en transferencia bancaria : '+totalTransferencia)
-                        return (
-                            <div className="container py-5">
-                                {/**Title start */}
-                                <div className="row">
-                                    <div className="col-10 mx-auto text-center text-slanted text-blue my-5">
-                                        {/* <h1>{title}</h1>*/}
-                                    </div>
-                                </div>
-                                {/**Title end */}
-                                {/**Product Info */}
-                                <div className="row">
-                                    {/**Product img */}
-                                    <div id="img-container" className="col-10 mx-10 col-md-6 my-3">
-                                        <img id="detail-img" src={img} className="img-fluid" alt="product" />
-                                    </div>
-                                    {/**Product txt */}
-                                    <div id="description" className="col-10 mx-auto col-md-6 my-3 text-capitalize">
+  transferenciaHandler = () => {
+    console.log("Transferencia handler activated");
+    console.log("Submited Mobile");
+    let wspLink = "https://api.whatsapp.com/send?phone=542233129785";
+    window.location = wspLink;
+  };
+  render() {
+    return (
+      <DetailsWraper>
+        {!this.state.isLoading ? (
+          <ProductConsumer>
+            {(value) => {
+              const price = this.state.product.price;
+              let cuotas = price / 12;
+              let priceStriked = price + (price * 20) / 100;
+              let totalTransferencia = price - (price * 15) / 100;
+              return (
+                <div className="container py-5">
+                  {/**Title start */}
+                  <div className="row">
+                    <div className="col-10 mx-auto text-center text-slanted text-blue my-5">
+                      {/* <h1>{title}</h1>*/}
+                    </div>
+                  </div>
+                  {/**Title end */}
+                  {/**Product Info */}
+                  <div className="row">
+                    {/**Product img */}
+                    <div
+                      id="img-container"
+                      className="col-10 mx-10 col-md-6 my-3"
+                    >
+                      <img
+                        id="detail-img"
+                        src={this.state.product.img}
+                        className="img-fluid"
+                        alt="product"
+                      />
+                    </div>
+                    {/**Product txt */}
+                    <div
+                      id="description"
+                      className="col-10 mx-auto col-md-6 my-3 text-capitalize"
+                    >
+                      <h1 id="title">
+                        {this.state.product.company}&nbsp;
+                        {this.state.product.title}
+                      </h1>
+                      {this.state.product.type !== "llantas" ? (
+                        <h2>
+                          &nbsp;{this.state.product.width}/
+                          {this.state.product.profile}/
+                          {this.state.product.rodado}
+                        </h2>
+                      ) : null}
 
-                                        <h1 id="title">{company}&nbsp;{title}</h1>
-                                        {type !== 'llantas' ? <h2>&nbsp;{width}/{profile}/{rodado}</h2> : null}
-                                        
-                                        <h2><strike id="striked">${priceStriked}</strike>&nbsp;&nbsp;${price}</h2>
-                                        <h4 className="price-container">  12 cuotas sin interes de ${cuotas.toFixed(2)}</h4>
-                                        <h4 onClick={this.transferenciaHandler} id="transferencia" style={{color:'red'}} className="price-container">Transferencia bancaria -15% ${totalTransferencia.toFixed(2)} Click aqui!</h4>
-                                        <FichaTecnicaDetails className="ficha-tecnica" detailProduct={value.detailProduct} />
-                                        {/**Buttons */}
-                                        <div>
-                                            <Link to="/llantas">
-                                                <ButtonContainer>
-                                                    tienda
-                                            </ButtonContainer >
-                                            </Link>
-                                            <ButtonContainer cart disabled={inCart ? true : false} onClick={() => {
-                                                value.addToCart(id);
-                                                value.openModal(id);
-                                            }}>
-                                                {inCart ? "En carrito" : "Agregar al carrito"}
-                                            </ButtonContainer>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        );
-                    }}
-                </ProductConsumer>
-            </DetailsWraper>
-        );
-    }
+                      <h2>
+                        <strike id="striked">${priceStriked}</strike>
+                        &nbsp;&nbsp;$
+                        {price}
+                      </h2>
+                      <h4 className="price-container">
+                        {" "}
+                        12 cuotas sin interes de ${cuotas.toFixed(2)}
+                      </h4>
+                      <h4
+                        onClick={this.transferenciaHandler}
+                        id="transferencia"
+                        style={{ color: "red" }}
+                        className="price-container"
+                      >
+                        Transferencia bancaria -15% $
+                        {totalTransferencia.toFixed(2)} Click aqui!
+                      </h4>
+                      <FichaTecnicaDetails
+                        className="ficha-tecnica"
+                        detailProduct={value.detailProduct}
+                      />
+                      {/**Buttons */}
+                      <div>
+                        <Link to="/llantas">
+                          <ButtonContainer>tienda</ButtonContainer>
+                        </Link>
+                        <ButtonContainer
+                          cart
+                          disabled={this.state.product.inCart ? true : false}
+                          onClick={() => {
+                            value.addToCart(this.state.product.id);
+                            value.openModal(this.state.product.id);
+                          }}
+                        >
+                          {this.state.product.inCart
+                            ? "En carrito"
+                            : "Agregar al carrito"}
+                        </ButtonContainer>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }}
+          </ProductConsumer>
+        ) : (
+          <div className="spinner">
+            <div id="loader">
+              <Loader
+                type="Puff"
+                color="#00BFFF"
+                height={200}
+                width={200}
+                timeout={0}
+              />
+            </div>
+          </div>
+        )}
+      </DetailsWraper>
+    );
+  }
 }
-
-
 
 const DetailsWraper = styled.div`
-
-text-align: center;
-#transferencia:hover{
+  text-align: center;
+  #transferencia:hover {
     cursor: pointer;
     color: green !important;
-    
-}
-.price-container{
-    color:red;
+  }
+  .price-container {
+    color: red;
     font-size: 1rem;
-}
-.ficha-tecnica{
-     margin : 0 auto;
-}
-#striked{
-    color:gray;
-}
-#detail-img{           
-     max-height: 25rem;
-     margin-left: 2rem !important;  
-}
-#list-wraper{
-       margin-top: 2rem; 
-}
-.ul{
-       list-style: none;
-}
-#img-container{
-    max-height: 80%;    
-}
-#title{
-    font-size: 2rem !important;   
+  }
+  .ficha-tecnica {
+    margin: 0 auto;
+  }
+  #striked {
+    color: gray;
+  }
+  #detail-img {
+    max-height: 25rem;
+    margin-left: 2rem !important;
+  }
+  #list-wraper {
+    margin-top: 2rem;
+  }
+  .ul {
+    list-style: none;
+  }
+  #img-container {
+    max-height: 80%;
+  }
+  #title {
+    font-size: 2rem !important;
     color: var(--mainBlue);
-    
+
     line-height: 28px;
     font-weight: 800;
-}
-#numbers{
-     font-weight: 600;
-     font-family: 'Futura Bold';
-     line-height: 28px;
-}
+  }
+  #numbers {
+    font-weight: 600;
+    font-family: "Futura Bold";
+    line-height: 28px;
+  }
+
+  .spinner{
+    border: 2px solid white;
+    height: 25rem;
+    }
     
-@media (max-width: 48em) {
-    #detail-img{    
-        max-height: 100%        
-    }   
+    #loader{
+    width: 13%;
+    margin: 0 auto;
+    margin-top: 8rem;
+    }
     
-}
-  
+
+  @media (max-width: 48em) {
+    #detail-img {
+      max-height: 100%;
+    }
+    .spinner{
+        border: 2px solid white;
+        }
+        
+        
+        #loader{
+        
+        width: 50%;
+        text-aling:center;
+        }
+  }
 `;

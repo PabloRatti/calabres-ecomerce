@@ -25,17 +25,17 @@ function App() {
       <WhatsappIcon />
       <Switch>
 
-        <Route exact path="/" component={HomePage} />        
-        <Route path="/home" component={HomePage} />         
-        <Route path="/productsSoldList" component={ProductsSoldList} />
-        <Route path="/llantas" component={ProductList} />
-        <Route path="/details" component={Details} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/login" component={LoginForm} />
-        <Route path="/adminHome" component={AdminHomePage} />
+        <Route exact path="/"              component={HomePage} />        
+        <Route path="/home"                component={HomePage} />         
+        <Route path="/productsSoldList"    component={ProductsSoldList} />
+        <Route path="/llantas"             component={ProductList} />
+        <Route path="/details/:id"         component={Details} />
+        <Route path="/cart"                component={Cart} />
+        <Route path="/login"               component={LoginForm} />
+        <Route path="/adminHome"           component={AdminHomePage} />
         <Route path="/paymentConfirmation" component={PaymentConfirmation} />
-        <Route path="/paymentForm" component={PaymentForm} />
-        <Route path="/congrats" component={Congrats} />
+        <Route path="/paymentForm"         component={PaymentForm} />
+        <Route path="/congrats"            component={Congrats} />
         <Route component={Default} />
 
       </Switch>
