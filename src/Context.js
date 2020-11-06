@@ -29,7 +29,7 @@ class ProductProvider extends Component {
                 
             }
         }
-        console.log(req);
+      
       
         fetch('https://elcalabres.com.ar/notes/', req)
             .then(response => response.json())

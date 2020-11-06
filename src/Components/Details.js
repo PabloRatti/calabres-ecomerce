@@ -6,9 +6,11 @@ import styled from "styled-components";
 import { animateScroll as scroll } from "react-scroll";
 import FichaTecnicaDetails from "./FichaTecnicaDetails";
 import Loader from 'react-loader-spinner';
+
+
 export default class Details extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       product: null,
       isLoading: true,
@@ -16,8 +18,9 @@ export default class Details extends Component {
   }
   componentDidMount = () => {
     scroll.scrollToTop();
-    console.log("This props location search  :");
+    console.log('Detail page mounting......');
     this.getProduct();
+    console.log("Product getted ");
   };
 
   getProduct = () => {
@@ -38,8 +41,13 @@ export default class Details extends Component {
         return json;
       })
       .then((resp) => {
-        this.setState({ product: resp[0], isLoading: false });
-        console.log(this.state.product);
+        if (resp.length > 0 ){
+           this.setState({ product: resp[0], isLoading: false});
+            console.log(this.state.product);  
+        } else {
+            this.props.history.push("/llantas");
+        }
+       
       });
   };
 
@@ -119,7 +127,7 @@ export default class Details extends Component {
                       </h4>
                       <FichaTecnicaDetails
                         className="ficha-tecnica"
-                        detailProduct={value.detailProduct}
+                        detailProduct={this.state.product}
                       />
                       {/**Buttons */}
                       <div>
@@ -165,6 +173,7 @@ export default class Details extends Component {
 
 const DetailsWraper = styled.div`
   text-align: center;
+  min-height: 30rem;
   #transferencia:hover {
     cursor: pointer;
     color: green !important;

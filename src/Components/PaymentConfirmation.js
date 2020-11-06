@@ -101,9 +101,9 @@ export default class PaymentConfirmation extends React.Component {
       scroll.scrollToTop();
       this.setState({ loadingTransaction: true });
       const publicApiKey = "7b9372c4617643f8956863442ae28378";
-      const privateApiKey = "8d2d4458c38d4e2cb563e2d4eb5c43dc";
+      //const privateApiKey = "8d2d4458c38d4e2cb563e2d4eb5c43dc";
 
-      const urlSandbox = "https://developers.decidir.com/api/v2";
+      //const urlSandbox = "https://developers.decidir.com/api/v2";
       const urlProd = "https://live.decidir.com/api/v2";
       //Para el ambiente de desarrollo
       let decidir = new window.Decidir(urlProd);

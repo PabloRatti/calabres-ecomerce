@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ProductConsumer } from '../Context';
-import PropTypes from 'prop-types';
+
 export default class Product extends Component {
     render() {
         const { id, title, img, price, inCart, company,profile,width,rodado,type } = this.props.product;
@@ -16,7 +16,7 @@ export default class Product extends Component {
                                 value.handleDetail(id)
                             }
                             }>
-                                <Link to={"/details/"+id}>
+                                <Link to={"/details/"+id} rel="stylesheet">
                                     <img src={img} alt="product" id="cardImg" className="card-img-top" />
                                 </Link>
                                 <button className="cart-btn" disabled={inCart ? true : false} onClick={() => {
@@ -49,7 +49,7 @@ export default class Product extends Component {
                     </div>
 
                     <div className="cuotas text-blue font-italic">
-                                    <p className="title align-self-center ">12 cuotas sin interés de ${cuotas.toFixed()}</p>
+                      <p className="title align-self-center ">12 cuotas sin interés de ${cuotas.toFixed()}</p>
 
                     </div> 
                 </div>
@@ -58,15 +58,6 @@ export default class Product extends Component {
     }
 }
 
-Product.propTypes = {
-    product: PropTypes.shape({
-        id: PropTypes.number,
-        img: PropTypes.string,
-        title: PropTypes.string,
-        price: PropTypes.number,
-        inCart: PropTypes.bool
-    }).isRequired
-};
 
 const ProductWrapper = styled.div`
 

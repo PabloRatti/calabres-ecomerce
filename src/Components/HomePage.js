@@ -72,7 +72,6 @@ const HomeContainer = styled.div`
     width: 100%;
     margin-bottom: 2rem;
   }
-
   .home-image {
     margin-top: 5.5rem !important;
     width: 100%;
@@ -80,7 +79,6 @@ const HomeContainer = styled.div`
   .brands {
     margin-top: 3rem !important;
   }
-
   .carousel {
     max-height: 21rem;
     position: relative;
@@ -92,7 +90,6 @@ const HomeContainer = styled.div`
     max-width: 100%;
     margin-top: 2rem;
   }
-
   @media (max-width: 48em) {
     .brands {
       margin-top: 2rem !important;

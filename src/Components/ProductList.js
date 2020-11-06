@@ -196,6 +196,7 @@ export default class ProductList extends Component {
 }
 
 const ProductListContainer = styled.div`
+min-height: 30rem;
 .container{ 
     margin-top: 7rem !important;
 }

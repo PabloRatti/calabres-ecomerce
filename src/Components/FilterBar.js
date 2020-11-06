@@ -150,7 +150,7 @@ export default class FilterBar extends Component {
                                     return handleFilter('perfil', '70');
                                 }}>70</NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
-                                    return handleFilter('perfil', '265');
+                                    return handleFilter('perfil', '75');
                                 }}>75</NavDropdown.Item>
                                 <NavDropdown.Item className="item" onClick={() => {
                                     return handleFilter('perfil', '80');
