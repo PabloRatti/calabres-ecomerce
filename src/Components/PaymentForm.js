@@ -246,7 +246,7 @@ export default class PaymentForm extends React.Component {
                                     type="tel"
                                     name="dir_Remitente"
                                     class="form-control"
-                                    placeholder="Sucursal OCA en la que retira"
+                                    placeholder="Dirección particular / Sucursal OCA"
                                     onChange={this.handleInputChange}
                                     onFocus={this.handleInputFocus}
                                     required
