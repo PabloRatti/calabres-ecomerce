@@ -20,7 +20,7 @@ export default function EmptyCart() {
 
 const EmptyCartContainer = styled.div`  
     
-    height: 25rem;
+    height: 30rem;
     text-align:center;
     marign: 0 auto;
     border:2px solid white;

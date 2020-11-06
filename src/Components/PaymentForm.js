@@ -181,7 +181,8 @@ export default class PaymentForm extends React.Component {
                                     class="form-control"
                                     type="tel"
                                     name="expiry"
-                                    placeholder="Fecha de vencimiento"
+                                    placeholder="Vencimiento de tarjeta  ej: 09/23"
+                                    maxlength="5" size="5"
                                     onChange={this.handleInputChange}
                                     onFocus={this.handleInputFocus}
                                     required
@@ -368,6 +369,7 @@ export default class PaymentForm extends React.Component {
                                     <Link to={{
                                         pathname: '/paymentConfirmation',
                                         state: {
+                                            cart: this.state.cart,
                                             cvc: this.state.cvc,
                                             expiry: this.state.expiry,
                                             name: this.state.name,

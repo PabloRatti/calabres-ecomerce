@@ -16,7 +16,7 @@ export default class Cart extends Component {
             <section>
                 <ProductConsumer>
                     {value => {
-                        const { cart } = value;
+                        const { cart } = value ? value : this.props.location.state.cart;
                         if (cart.length > 0) {
                             return (
                                 <React.Fragment>

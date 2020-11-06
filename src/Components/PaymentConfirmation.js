@@ -24,6 +24,7 @@ export default class PaymentConfirmation extends React.Component {
       paymentMethodId: this.props.location.state.paymentMethodId,
       error: "",
       installments: this.props.location.state.cuotas,
+      cart: this.props.location.state.cart
     };
   }
 
@@ -34,7 +35,8 @@ export default class PaymentConfirmation extends React.Component {
       autoConfig: true, // set pixel's autoConfig
       debug: false, // enable logs
     };
-    ReactPixel.init("1143009419162712", advancedMatching, options);    
+    ReactPixel.init("1143009419162712", advancedMatching, options);
+    
   };
 
   crearVenta = () => {
@@ -109,15 +111,14 @@ export default class PaymentConfirmation extends React.Component {
       let decidir = new window.Decidir(urlProd);
       //Se indica la public API Key
       decidir.setPublishableKey(publicApiKey);
-      
+
       decidir.setTimeout(5000); //timeout de 5 segundos
       decidir.createToken(form, this.sdkResponseHandler);
     } catch (e) {
-        
       this.setState({
         message: "Error en el servicio, intente en unos minutos...",
         displayMsg: true,
-        loadingTransaction: false
+        loadingTransaction: false,
       });
     }
   };
@@ -130,8 +131,7 @@ export default class PaymentConfirmation extends React.Component {
         "Content-Type": "application/json",
         "Cache-Control": "no-cache",
         "Access-Control-Allow-Origin": "http://live.decidir.com/api/v2",
-        "access-control-allow-credentials" : "true"
-        
+        "access-control-allow-credentials": "true",
       },
       body: JSON.stringify({
         token: response.id,
@@ -158,7 +158,7 @@ export default class PaymentConfirmation extends React.Component {
       })
       .then((json) => {
         console.log(json);
-        debugger;
+
         this.paymentResponseHandler(json);
       });
   };
@@ -175,7 +175,7 @@ export default class PaymentConfirmation extends React.Component {
         loadingTransaction: false,
       });
       this.crearVenta();
-      ReactPixel.track('Purchase');
+      ReactPixel.track("Purchase");
     }
     if (resp.status === "rejected") {
       let error = resp.status_details.error.reason.description;
@@ -241,8 +241,6 @@ export default class PaymentConfirmation extends React.Component {
       let token = response.id;
       console.log("Token capturado : " + token);
       let paymentRequest = this.paymentRequest(response);
-      console.log(paymentRequest);
-      console.log(paymentRequest);
       setTimeout(() => this.ejecutarPago(paymentRequest), 1000);
     } else {
       if (status === 403) {
@@ -250,17 +248,20 @@ export default class PaymentConfirmation extends React.Component {
       } else if (status === 503) {
         message = "Servidor no disponible, intente en unos minutos";
       } else {
-
         if (response) {
-          let error = response.error[0];
-          console.log("Error : ");
-          console.log(error);
-          switch (error.error.message) {
-            case "Expiry date is invalid":
-              message = "Vencimiento incorrecto";
-              break;
-            default:
-              return null;
+          console.log(response);
+          let error;
+          if (response.error) {
+            error = response.error[0];
+            console.log("Error : ");
+            console.log(error);
+            switch (error.error.message) {
+              case "Expiry date is invalid":
+                message = "Vencimiento incorrecto";
+                break;
+              default:
+                return null;
+            }
           }
         }
         console.log("Error en datos ! sdk");
@@ -290,8 +291,11 @@ export default class PaymentConfirmation extends React.Component {
       postalCode,
       identity_number,
     } = this.props.location.state;
-    let expiryMonth = expiry.substr(0, 2);
-    let expiryYear = expiry.substr(2, 2);
+    console.log("Vencimiento recibido : " + expiry);
+    let vencimiento = expiry; //09/23
+    console.log("Vencimiento transformado : " + vencimiento);
+    let expiryMonth = vencimiento.substr(0, 2);
+    let expiryYear = vencimiento.substr(3, 2);
     return (
       <PaymentConfirmationContainer>
         {!this.state.loadingTransaction ? (
@@ -325,7 +329,7 @@ export default class PaymentConfirmation extends React.Component {
                     action=""
                     onSubmit={this.submitHandler}
                   >
-                    <fieldset>
+                    
                       <input
                         hidden="true"
                         type="text"
@@ -376,30 +380,37 @@ export default class PaymentConfirmation extends React.Component {
                         id="submit-btn"
                         class="btn-primary mr-2 mt-3"
                       />
-                    </fieldset>
-                  </form>
+                   
 
-                  {this.state.paymentAproved ? (
-                    <Link to="/Congrats">
-                      <button
-                        type="submit"
-                        id="submit-btn"
-                        class="btn-danger mr-2 mt-3 "
+                    {this.state.paymentAproved ? (
+                      <Link to="/Congrats">
+                        <button
+                          type="submit"
+                          id="submit-btn"
+                          class="btn-danger mr-2 mt-3 "
+                        >
+                          Finalizar
+                        </button>
+                      </Link>
+                    ) : (
+                      <Link to={{
+                        pathname: '/cart',
+                        state:{
+                          cart: this.props.location.state.cart
+                        }
+                      }} 
+
                       >
-                        Finalizar
-                      </button>
-                    </Link>
-                  ) : (
-                    <Link to="/cart">
-                      <button
-                        type="submit"
-                        id="back-btn"
-                        class="btn-danger mr-2 mt-3 "
-                      >
-                        Volver
-                      </button>
-                    </Link>
-                  )}
+                        <button
+                          type="submit"
+                          id="back-btn"
+                          class="btn-danger mr-2 mt-3 "
+                        >
+                          Volver
+                        </button>
+                      </Link>
+                    )}
+                  </form>
                 </div>
               </div>
 
@@ -467,30 +478,26 @@ height: 40rem;
     margin-bottom: 1rem !important;
     text-align: center;    
     margin:0 auto;
-    height: 100%;
-   
+    height: 100%;   
     max-height: 20% !important;  
+    
 }
 
 #submit-btn{
    
     
 }
-#back-btn{
-    
-    margin: 0 auto;
-    margin-left:1rem;
+#back-btn{    
+   
+ 
 }
-fieldset{
 
-    max-width: 4.5rem;
-}
 
 #formulario{
-    
-    max-width: 4.5rem;
+   
     margin: 0 auto;
-    display: inline-block;
+    width: 100%;
+    text-align: center;
     
 }
 #card-container{
