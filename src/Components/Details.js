@@ -216,13 +216,13 @@ const DetailsWraper = styled.div`
 
   .spinner{
     border: 2px solid white;
-    height: 25rem;
+    height: 35rem;
     }
     
     #loader{
     width: 13%;
     margin: 0 auto;
-    margin-top: 8rem;
+    margin-top: 13rem;
     }
     
 

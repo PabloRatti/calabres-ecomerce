@@ -106,7 +106,7 @@ export default class AdminHomePage extends Component {
 }
 
 const AdminHomePageContainer = styled.nav`
-height: 100%;
+min-height: 35rem;
 
 .container{
 text-align:center;
@@ -124,13 +124,14 @@ margin: 0 auto;
 
 .spinner{
 border: 2px solid white;
-height: 25rem;
+height: 35rem;
+
 }
 
 #loader{
 width: 13%;
 margin: 0 auto;
-margin-top: 8rem;
+margin-top: 13rem;
 }
 
  @media (max-width: 48em) {

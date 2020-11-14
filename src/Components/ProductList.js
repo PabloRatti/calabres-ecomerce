@@ -203,13 +203,13 @@ min-height: 30rem;
 
 .spinner{
 border: 2px solid white;
-height: 25rem;
+height: 35rem;
 }
 
 #loader{
 width: 13%;
 margin: 0 auto;
-margin-top: 8rem;
+margin-top: 13rem;
 }
 
  @media (max-width: 48em) {

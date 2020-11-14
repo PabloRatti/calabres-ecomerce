@@ -54,8 +54,7 @@ export default class Modal extends Component {
 const ModalContainer = styled.div`
 
 
-    position: fixed;
- 
+    position: fixed; 
     padding: 1rem;
     max-height: 100%;
     left:0;
@@ -64,9 +63,11 @@ const ModalContainer = styled.div`
     bottom: 0;
     z-index : 1;
     background: rgba(0,0,0,0.3);
-     width: 100%;
+    width: 100%;
     align-items:center;
     justify-content:center;
+    
+    
 .img-fluid{
     max-height: 15rem;
 }
@@ -76,19 +77,21 @@ const ModalContainer = styled.div`
    
     
      .container{    
-        
+       
        width: 100%;
        max-height: 35rem;
            
     }
     #modal{
         background: var(--mainWhite);
-        margin-top: 2.5rem;
+        border-radius: 2rem;
+        margin-top: 6rem;
         width: 80%;      
     }
 @media (max-width: 48em) {
      #modal{
-    margin-top: 4rem;
+        margin-top: 9rem;
+        width: 100%;
      }
 }
    

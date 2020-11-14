@@ -130,15 +130,16 @@ export default class AdminProductsView extends Component {
 }
 
 const AdminProductsViewContainer = styled.nav`
-height: 100%;
 margin-bottom: 2rem;
 border: 1px solid white;
+height: 100%;
+
 .title{  
     margin-top: 6rem !important;
     height: 8rem;
 }
 .spinner{  
-   height:25rem;
+   border: 10px solid green;
 }
 
 #loader{    
