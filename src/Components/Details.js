@@ -66,7 +66,7 @@ export default class Details extends Component {
               const price = this.state.product.price;
               let cuotas = price / 12;
               let priceStriked = price + (price * 20) / 100;
-              let totalTransferencia = price - (price * 15) / 100;
+              let totalTransferencia = price - (price * 20) / 100;
               return (
                 <div className="container py-5">
                   {/**Title start */}
@@ -122,7 +122,7 @@ export default class Details extends Component {
                         style={{ color: "red" }}
                         className="price-container"
                       >
-                        Transferencia bancaria -15% $
+                        Transferencia bancaria -20% $
                         {totalTransferencia.toFixed(2)} Click aqui!
                       </h4>
                       <FichaTecnicaDetails
