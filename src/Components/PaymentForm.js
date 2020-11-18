@@ -152,7 +152,7 @@ export default class PaymentForm extends React.Component {
                                 <input
                                     className="form-input"
                                     class="form-control"
-                                    type="tel"
+                                    type="text"
                                     name="name"
                                     placeholder="Nombre y apellido"
                                     onChange={this.handleInputChange}
@@ -165,7 +165,7 @@ export default class PaymentForm extends React.Component {
                                 <input
                                     className="form-input"
                                     class="form-control"
-                                    type="tel"
+                                    type="text"
                                     name="number"
                                     placeholder="Numero de tarjeta"
                                     onChange={this.handleInputChange}
@@ -179,7 +179,7 @@ export default class PaymentForm extends React.Component {
                                 <input
                                     className="form-input"
                                     class="form-control"
-                                    type="tel"
+                                    type="text"
                                     name="expiry"
                                     placeholder="Vencimiento de tarjeta  ej: 09/23"
                                     maxlength="5" size="5"
@@ -192,7 +192,7 @@ export default class PaymentForm extends React.Component {
                                 <input
                                     className="form-input"
                                     class="form-control"
-                                    type="tel"
+                                    type="text"
                                     name="cvc"
                                     placeholder="Codigo de seguridad"
                                     onChange={this.handleInputChange}
@@ -217,7 +217,7 @@ export default class PaymentForm extends React.Component {
                             <div class="col">
                                 <input
                                     className="form-input"
-                                    type="tel"
+                                    type="text"
                                     name="userEmail"
                                     class="form-control"
                                     placeholder="Email"
@@ -231,7 +231,7 @@ export default class PaymentForm extends React.Component {
                             <div class="col">
                                 <input
                                     className="form-input"
-                                    type="tel"
+                                    type="text"
                                     name="localidad"
                                     class="form-control"
                                     placeholder="Provincia / Ciudad"
@@ -243,7 +243,7 @@ export default class PaymentForm extends React.Component {
                             <div class="col">
                                 <input
                                     className="form-input"
-                                    type="tel"
+                                    type="text"
                                     name="dir_Remitente"
                                     class="form-control"
                                     placeholder="Dirección particular / Sucursal OCA"
@@ -257,7 +257,7 @@ export default class PaymentForm extends React.Component {
                             <div class="col">
                                 <input
                                     className="form-input"
-                                    type="tel"
+                                    type="text"
                                     name="postalCode"
                                     class="form-control"
                                     placeholder="Codigo Postal"
