@@ -36,6 +36,8 @@ export default class PaymentConfirmation extends React.Component {
       debug: false, // enable logs
     };
     ReactPixel.init("1143009419162712", advancedMatching, options);
+
+    console.log("Iniciando proceso de pago {Codigo : 7} {plan : A12}: "+this.state.installments);
     
   };
 
@@ -241,7 +243,9 @@ export default class PaymentConfirmation extends React.Component {
       let token = response.id;
       console.log("Token capturado : " + token);
       let paymentRequest = this.paymentRequest(response);
-      setTimeout(() => this.ejecutarPago(paymentRequest), 1000);
+      console.log('Payment request: ');
+      console.log(paymentRequest);
+     //setTimeout(() => this.ejecutarPago(paymentRequest), 1000);
     } else {
       if (status === 403) {
         message = response.message;
@@ -314,7 +318,7 @@ export default class PaymentConfirmation extends React.Component {
                 <div>Localidad : {localidad}</div>
                 <div>Codigo postal : {postalCode}</div>
                 <div>Sucursal a recibir : {dir_Remitente}</div>
-                <div>Cuotas : {cuotas}</div>
+                <div>Cuotas : {cuotas === '7' ? '12' : cuotas}</div>
                 <div>Total : $ {total}</div>
                 {this.state.displayMsg ? (
                   <h5 className="msg">

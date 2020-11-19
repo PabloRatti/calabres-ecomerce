@@ -107,10 +107,14 @@ export default class PaymentForm extends React.Component {
         let cuotas = this.state.cuotas;
         console.log('Detectando plan--> cuotas : ' + cuotas + ' tipoDePago : ' + tipoPago);
         if (tipoPago === '1' || tipoPago === '63' || tipoPago === '104') {
+            console.log('Tipo de pago admitido para ahora 12');
             if (cuotas === '12') {
                 this.setState({ installments: '7' });
+                console.log('Codigo para ahora 12 activado : 7 ');
+                
             }
         }
+       
     }
 
     handleSubmit = (e) => {
@@ -120,7 +124,7 @@ export default class PaymentForm extends React.Component {
         console.log('Number : ' + this.state.number);
         console.log('Expiry : ' + this.state.expiry);
         console.log('Code : ' + this.state.cvc);
-        console.log('Total : ' + this.state.total);
+        console.log('Total : ' + this.state.totalConIntereses);
 
         if (this.state.cuotas !== '') {
             this.setState({ continueDisabled: false });
@@ -325,6 +329,7 @@ export default class PaymentForm extends React.Component {
                                                 console.log('Total con intereses : ' + totalConIntereses);
                                                 this.setState({ cuotas: '6', totalConIntereses: totalConIntereses, valorCuota: totalConIntereses / 6 });
                                             }}>6 Cuotas fijas</Dropdown.Item>
+
                                             <Dropdown.Item onClick={() => this.setState({ cuotas: '12', totalConIntereses: totalSinIntereses, valorCuota: totalSinIntereses / 12 })}>Ahora 12</Dropdown.Item>
                                            
 
@@ -375,7 +380,7 @@ export default class PaymentForm extends React.Component {
                                             name: this.state.name,
                                             number: this.state.number,
                                             phone: this.state.phone,
-                                            cuotas: this.state.cuotas,
+                                            cuotas: this.state.installments,
                                             total: this.state.totalConIntereses,
                                             products: this.state.cart,
                                             localidad: this.state.localidad,
