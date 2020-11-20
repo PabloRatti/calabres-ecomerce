@@ -248,7 +248,7 @@ export default class PaymentConfirmation extends React.Component {
       let paymentRequest = this.paymentRequest(response);
       console.log('Payment request: ');
       console.log(paymentRequest);
-     //setTimeout(() => this.ejecutarPago(paymentRequest), 1000);
+      setTimeout(() => this.ejecutarPago(paymentRequest), 1000);
     } else {
       if (status === 403) {
         message = response.message;
