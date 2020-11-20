@@ -150,6 +150,7 @@ export default class PaymentConfirmation extends React.Component {
 
     return req;
   };
+
   ejecutarPago = (req) => {
     console.log("Sending payment request with installments: ");
     console.log(req);
@@ -167,6 +168,8 @@ export default class PaymentConfirmation extends React.Component {
 
   paymentResponseHandler = (resp) => {
     console.log("Payment response handler: ");
+    console.log(resp);
+    debugger;
     if (resp.status === "approved") {
       this.setState({
         message: "Pago exitoso",

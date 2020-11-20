@@ -110,8 +110,10 @@ export default class PaymentForm extends React.Component {
             console.log('Tipo de pago admitido para ahora 12');
             if (cuotas === '12') {
                 this.setState({ installments: '7' });
-                console.log('Codigo para ahora 12 activado : 7 ');
-                
+                console.log('Codigo para ahora 12 activado : 7 ');                
+            } else {
+                this.setState({ installments: cuotas });
+                console.log('Cuotas a facturar : '+cuotas);        
             }
         }
        
@@ -380,7 +382,7 @@ export default class PaymentForm extends React.Component {
                                             name: this.state.name,
                                             number: this.state.number,
                                             phone: this.state.phone,
-                                            cuotas: this.state.installments,
+                                            cuotas: this.state.installments ? this.state.installments : this.state.cuotas,
                                             total: this.state.totalConIntereses,
                                             products: this.state.cart,
                                             localidad: this.state.localidad,
