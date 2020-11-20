@@ -24,7 +24,7 @@ export default class PaymentConfirmation extends React.Component {
       paymentMethodId: this.props.location.state.paymentMethodId,
       error: "",
       installments: this.props.location.state.cuotas,
-      cart: this.props.location.state.cart
+      cart: this.props.location.state.cart,
     };
   }
 
@@ -37,8 +37,10 @@ export default class PaymentConfirmation extends React.Component {
     };
     ReactPixel.init("1143009419162712", advancedMatching, options);
 
-    console.log("Iniciando proceso de pago {Codigo : 7} {plan : A12}: "+this.state.installments);
-    
+    console.log(
+      "Iniciando proceso de pago {Codigo : 7} {plan : A12}: " +
+        this.state.installments
+    );
   };
 
   crearVenta = () => {
@@ -226,7 +228,14 @@ export default class PaymentConfirmation extends React.Component {
           break;
         case "payment_method_id":
           this.setState({
-            message: "Numero de tarjeta invalido",
+            message: "Tipo de pago incorrecto",
+            displayMsg: true,
+            loadingTransaction: false,
+          });
+          break;
+        case "card_number":
+          this.setState({
+            message: "Numero de tarjeta incorrecto",
             displayMsg: true,
             loadingTransaction: false,
           });
@@ -246,7 +255,7 @@ export default class PaymentConfirmation extends React.Component {
       let token = response.id;
       console.log("Token capturado : " + token);
       let paymentRequest = this.paymentRequest(response);
-      console.log('Payment request: ');
+      console.log("Payment request: ");
       console.log(paymentRequest);
       setTimeout(() => this.ejecutarPago(paymentRequest), 1000);
     } else {
@@ -321,7 +330,7 @@ export default class PaymentConfirmation extends React.Component {
                 <div>Localidad : {localidad}</div>
                 <div>Codigo postal : {postalCode}</div>
                 <div>Sucursal a recibir : {dir_Remitente}</div>
-                <div>Cuotas : {cuotas === '7' ? '12' : cuotas}</div>
+                <div>Cuotas : {cuotas === "7" ? "12" : cuotas}</div>
                 <div>Total : $ {total}</div>
                 {this.state.displayMsg ? (
                   <h5 className="msg">
@@ -336,58 +345,56 @@ export default class PaymentConfirmation extends React.Component {
                     action=""
                     onSubmit={this.submitHandler}
                   >
-                    
-                      <input
-                        hidden="true"
-                        type="text"
-                        data-decidir="card_holder_name"
-                        value={name}
-                      />
-                      <input
-                        hidden="true"
-                        type="text"
-                        data-decidir="card_number"
-                        value={number}
-                      />
-                      <input
-                        hidden="true"
-                        type="text"
-                        data-decidir="security_code"
-                        value={cvc}
-                      />
-                      <input
-                        hidden="true"
-                        type="text"
-                        data-decidir="card_expiration_month"
-                        value={expiryMonth}
-                      />
-                      <input
-                        hidden="true"
-                        type="text"
-                        data-decidir="card_expiration_year"
-                        value={expiryYear}
-                      />
-                      <input
-                        hidden="true"
-                        type="text"
-                        data-decidir="card_holder_doc_type"
-                        value="dni"
-                      />
-                      <input
-                        hidden="true"
-                        type="text"
-                        data-decidir="card_holder_doc_number"
-                        value={identity_number}
-                      />
+                    <input
+                      hidden="true"
+                      type="text"
+                      data-decidir="card_holder_name"
+                      value={name}
+                    />
+                    <input
+                      hidden="true"
+                      type="text"
+                      data-decidir="card_number"
+                      value={number}
+                    />
+                    <input
+                      hidden="true"
+                      type="text"
+                      data-decidir="security_code"
+                      value={cvc}
+                    />
+                    <input
+                      hidden="true"
+                      type="text"
+                      data-decidir="card_expiration_month"
+                      value={expiryMonth}
+                    />
+                    <input
+                      hidden="true"
+                      type="text"
+                      data-decidir="card_expiration_year"
+                      value={expiryYear}
+                    />
+                    <input
+                      hidden="true"
+                      type="text"
+                      data-decidir="card_holder_doc_type"
+                      value="dni"
+                    />
+                    <input
+                      hidden="true"
+                      type="text"
+                      data-decidir="card_holder_doc_number"
+                      value={identity_number}
+                    />
 
-                      <input
-                        disabled={this.state.buttonDisabled}
-                        type="submit"
-                        value="Aceptar"
-                        id="submit-btn"
-                        class="btn-primary mr-2 mt-3"
-                      />
-                   
+                    <input
+                      disabled={this.state.buttonDisabled}
+                      type="submit"
+                      value="Aceptar"
+                      id="submit-btn"
+                      class="btn-primary mr-2 mt-3"
+                    />
 
                     {this.state.paymentAproved ? (
                       <Link to="/Congrats">
@@ -400,13 +407,13 @@ export default class PaymentConfirmation extends React.Component {
                         </button>
                       </Link>
                     ) : (
-                      <Link to={{
-                        pathname: '/cart',
-                        state:{
-                          cart: this.props.location.state.cart
-                        }
-                      }} 
-
+                      <Link
+                        to={{
+                          pathname: "/cart",
+                          state: {
+                            cart: this.props.location.state.cart,
+                          },
+                        }}
                       >
                         <button
                           type="submit"
