@@ -15,7 +15,7 @@ export default class Default extends Component {
                                 {this.props.location.pathname}
                             </span>
                             {" "}
-                         inexistente
+                         inexistente...
                         </h3>
                     </div>
                 </div>
