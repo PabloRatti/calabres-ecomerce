@@ -171,7 +171,7 @@ export default class PaymentConfirmation extends React.Component {
   paymentResponseHandler = (resp) => {
     console.log("Payment response handler: ");
     console.log(resp);
-    debugger;
+    const {total} = this.props.location.state;
     if (resp.status === "approved") {
       this.setState({
         message: "Pago exitoso",
@@ -182,7 +182,10 @@ export default class PaymentConfirmation extends React.Component {
         loadingTransaction: false,
       });
       this.crearVenta();
-      ReactPixel.track("Purchase");
+      ReactPixel.track("Purchase", {
+        value: parseFloat(total),
+        currency: "ARS",
+      });
     }
     if (resp.status === "rejected") {
       let error = resp.status_details.error.reason.description;
